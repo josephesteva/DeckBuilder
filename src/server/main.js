@@ -1,5 +1,6 @@
 const express = require("express"); 
-const ViteExpress = require ("vite-express")
+const ViteExpress = require ("vite-express");
+require("dotenv").config();
 
 const app = express();
 

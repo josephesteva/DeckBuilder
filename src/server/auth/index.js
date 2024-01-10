@@ -5,13 +5,6 @@ const bcrypt = require('bcrypt')
 const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient()
 
-
-
-
-router.get('/test', (req, res, next) => {
-	res.send('Test Auth Endpoint')
-})
-
 // POST 
 // registers a new user
 router.post('/register', async (req, res, next) => {
@@ -19,15 +12,17 @@ router.post('/register', async (req, res, next) => {
 	const SALT_ROUNDS = 5;
 	const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS)
 	try {
-		const newUser = await prisma.user.create({
+		const user = await prisma.user.create({
 			data: {
 				username,
 				email,
 				password: hashedPassword,
 				isAdmin: false
 			}
-		})
-		res.status(201).send(newUser)
+		});
+		const token = jwt.sign({id: user.id, username: user.username, isAdmin: user.isAdmin},
+			process.env.JWT_SECRET)
+		res.status(201).send({token})
 	} catch (err) {
 		console.error(err);
 	}
@@ -59,7 +54,9 @@ router.post('/login', async (req, res, next) => {
 			return
 		}
 
-		res.status(200).send(user)
+		const token = jwt.sign({id: user.id, username: user.username, isAdmin: user.isAdmin},
+			process.env.JWT_SECRET)
+		res.status(200).send({token})
 	} catch (err) {
 		console.error(err);
 	}
