@@ -14,12 +14,15 @@
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.2",
+    "pokemontcgsdk": "^2.0.0",
     "prisma": "^5.8.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.21.1",
     "vite-express": "*"
   },
   "devDependencies": {
+    "@faker-js/faker": "^8.3.1",
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.10",
     "@vitejs/plugin-react": "^4.2.0",
