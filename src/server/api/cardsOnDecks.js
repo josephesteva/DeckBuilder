@@ -71,4 +71,19 @@ router.delete('/', async (req, res, next) => {
 	}
 })
 
+// removes all cards from a deck
+router.delete('/cleardeck', async (req, res, next) => {
+	const {deckId} = req.body;
+	try {
+		const cardsRemoved = await prisma.cardsOnDecks.deleteMany({
+			where: {
+				deckId: +deckId
+			}
+		})
+		res.status(200).send(cardsRemoved)
+	} catch (err) {
+		console.error(err);
+	}
+})
+
 module.exports = router;
