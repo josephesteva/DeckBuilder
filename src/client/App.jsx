@@ -6,6 +6,7 @@ import HomePage from './components/Homepage';
 import Login from './components/Login';
 import Register from './components/Register';
 import NavBar from './components/NavBar';
+import Cards from "./components/cards";
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/cards" element={<Cards />} />
       </Routes>
     </Router> 
   );
