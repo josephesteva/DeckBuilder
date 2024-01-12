@@ -38,3 +38,194 @@
     height: auto;
     display: block;
 }
+
+/* Home Page Styling */
+body {
+  background-color: #c3dbfa;
+}
+/* header styling  */
+.header {
+  font-family: 'pokemon solid';
+  letter-spacing: 2px;
+  font-size: 3em;
+  color: #FFD500;
+  text-align: center;
+  text-shadow: 3px 3px 5px #035096;
+  -webkit-text-stroke: 2px #035096;
+  transform: translateY(-50px);
+  transition: transform 3s ease;
+}
+/* FONT IMPORT  */
+@font-face{
+  font-family: 'pokemon solid';
+  src: url('../../fonts/Pokemon\ Solid.ttf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden; 
+}
+
+/* Forest Background Styles */
+.forest-background {
+  background: url('/images/forest-backround.jpg') center/cover fixed;
+  height: 100vh; 
+  position: relative;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.portal-enter {
+  opacity: 1; /* Fade in the background */
+}
+
+.header-enter {
+  transform: translateY(0); /* Move the header down to its original position */
+}
+
+/* Hero Section Styles */
+.hero-section {
+  text-align: center;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  opacity: 0; 
+  transform: translateX(-100%); /* Start on the left */
+  animation: slideIn 1s ease-in-out 1s forwards; 
+ position: relative;
+}
+
+@keyframes slideIn {
+  to {
+    opacity: 1; 
+    transform: translateX(0); /* Slide in from left to right */
+  }
+}
+ /* HERO SECTION  */
+.hero-section h1 {
+  font-size: 2em;
+  margin-bottom: 10px;
+  font-family: 'pokemon solid';
+  color: #FFD500;
+  -webkit-text-stroke: 2px #035096;
+
+}
+
+.hero-section p {
+  margin-bottom: 10px;
+}
+
+ img {
+  border-radius: 10px;
+}
+
+/* POKEMON SCROLLBAR  */
+
+.trainer-section {
+  display: flex;
+  align-items: flex-start;
+  position: absolute;
+  z-index: 1;
+  bottom: .4rem;
+  max-width: 1200px;
+}
+
+.trainer-image {
+  width: 100x;
+  height: auto;
+}
+/* TRY NOW BUTTON */
+.try-now-button {
+  background-color: #f8f8f8;
+  color: #333;
+  padding: 10px 20px;
+  border: 2px solid #035096;
+  font-family: 'Pokemon Solid', sans-serif;
+  font-size: 1.2em;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.try-now-button:hover {
+  background-color: #E3350D;
+  color: #fff;
+}
+
+.pokemon-deck {
+  overflow-y: auto;
+  max-height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 2rem;
+  width: 100%;
+}
+
+.pokemon-image {
+  width: 100x;
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+/* Cloud header  */
+
+.cloud-image {
+  position: fixed;
+  top: 3px; 
+  left: 20%; 
+  transform: translateX(-50%); 
+  width: 50%; 
+  height: 60px; 
+  
+}
+
+.cloud-image2 {
+  position: fixed;
+  top: 3px;
+  left: 70%; 
+  transform: translateX(-50%); 
+  width: 50%; 
+  height: 60px; 
+  
+}
+/* JOIN THE COMMUNITY STYLING */
+.community-section {
+  position: absolute;
+  top: 0;
+  left: 1500px;
+  bottom: 0;
+  width: 40%;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.community-image {
+  width: 400px;
+  height: auto;
+  border-radius: 10px;
+  
+}
+
+.community-text {
+  text-align: center;
+  margin-top: 0;
+}
+
+.community-text h3 {
+  font-size: 1.6rem;
+  margin-bottom: 10px;
+  font-family: 'pokemon solid';
+  letter-spacing: 2px;
+  color: #FFD500;
+  text-align: center;
+  text-shadow: 3px 3px 5px #035096;
+  -webkit-text-stroke: 2px #035096;
+}
