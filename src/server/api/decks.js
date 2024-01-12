@@ -15,6 +15,20 @@ router.get('/', async (req, res, next) => {
 	}
 })
 
+// gets decks by currently signed in user
+router.get('/mydecks', verify, async (req, res, next) => {
+	try {
+		const myDecks = await prisma.deck.findMany({
+			where: {
+				userId: req.user.id
+			}
+		})
+		res.status(200).send(myDecks)
+	} catch (err) {
+		console.error(err);
+	}
+})
+
 // gets a deck by deck id
 router.get('/:id', async (req, res, next) => {
 	const {id} = req.params;
@@ -30,7 +44,22 @@ router.get('/:id', async (req, res, next) => {
 	}
 })
 
-// POST creates a new deck
+// gets decks by user id
+router.get('/user/:userid', async (req, res, next) => {
+	const {userid} = req.params;
+	try {
+		const userDecks = await prisma.deck.findMany({
+			where: {
+				userId: +userid
+			}
+		});
+		res.status(200).send(userDecks);
+	} catch (err) {
+		console.error(err);
+	}
+})
+
+// POST creates a new deck for the user assigned in the body
 router.post('/', async (req, res, next) => {
 	const {name, userId, description, numCards} = req.body;
 	try {
@@ -39,7 +68,7 @@ router.post('/', async (req, res, next) => {
 				name: name,
 				userId: +userId,
 				description: description,
-				numCards: +numCards
+				numCards: 60
 			}
 		})
 		res.status(201).send(deck);
@@ -48,6 +77,7 @@ router.post('/', async (req, res, next) => {
 	}
 })
 
+// creates a deck for the currently signed in user
 router.post('/mydeck', verify, async (req, res, next) => {
 	const {name, description} = req.body;
 	try {
@@ -59,6 +89,7 @@ router.post('/mydeck', verify, async (req, res, next) => {
 				numCards: 60
 			}
 		})
+		res.status(201).send(deck);
 	} catch (err) {
 		console.error(err);
 	}
