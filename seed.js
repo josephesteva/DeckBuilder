@@ -47,9 +47,9 @@ async function main() {
     for (let i = 0; i < NUM_USERS; i++) {
         const deck = await prisma.deck.create({
             data: {
-                name: "Deck" + i,
+                name: "Deck" + (i+1),
                 userId: users[i].id,
-                description: "user " + i + " deck",
+                description: "user " + (i+1) + " deck",
                 numCards: 60,
             },
         })
@@ -78,7 +78,7 @@ async function main() {
     let allCards = [];
 
     let promises = [];
-    for (let i = 1; i < NUM_BASES; i++) {
+    for (let i = 1; i <= NUM_BASES; i++) {
         let promise = pokemon.card.all({ q: 'set.id:base' + i })
             .then(async result => {
                 for (let i = 0; i < result.length; i++) {
@@ -88,8 +88,11 @@ async function main() {
                             cardImage: result[i].images.small,
                         },
                     });
+
                     allCards.push(newCard);
                 }
+                console.log("loaded", result[1].set.name);
+
             });
         promises.push(promise);
     }
@@ -152,6 +155,7 @@ async function main() {
         }
     }
     console.log("following seeded sucessfully!");
+    console.log("Seeding was a success!")
 }
 
 main()
