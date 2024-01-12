@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const Register = () => {
+const Register = ({setIsLoggedIn}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [username, setUsername] = useState('');
     const [error, setError] = useState('');
+    const navigate = useNavigate();
 
     const handleRegister = async (event) => {
         event.preventDefault();
@@ -27,6 +29,10 @@ const Register = () => {
             if (response.ok) {
                 const data = await response.json();
                 console.log('Registration successful:', data);
+                localStorage.setItem('token', data.token);
+                console.log(localStorage.getItem('token'))
+                setIsLoggedIn(true);
+                navigate("/");
             } else {
                 const errorData = await response.json();
                 console.error('Registration failed:', errorData.message);

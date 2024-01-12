@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const Login = () => {
+const Login = ({setIsLoggedIn}) => {
     const [password, setPassword] = useState('');
     const [username, setUsername] = useState('');
     const [error, setError] = useState('');
+    const navigate = useNavigate()
 
     const handleLogin = async (event) => {
         event.preventDefault();
@@ -25,6 +27,10 @@ const Login = () => {
             if (response.ok) {
                 const data = await response.json();
                 console.log('Login successful:', data);
+                localStorage.setItem('token', data.token);
+                setIsLoggedIn(true);
+                navigate("/");
+
             } else {
                 const errorData = await response.json();
                 console.error('Login failed:', errorData.message);
@@ -32,7 +38,7 @@ const Login = () => {
                 setError(errorData.message);
             }
         } catch (error) {
-            console.error('Error during registration:', error);
+            console.error('Error during Login:', error);
             // Set error message if request fails
             setError('An error occurred during login');
         }
