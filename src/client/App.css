@@ -229,3 +229,34 @@ body, html {
   text-shadow: 3px 3px 5px #035096;
   -webkit-text-stroke: 2px #035096;
 }
+
+/* USER DECK STYLING  */
+
+.user-deck-container {
+  display: flex;
+  overflow-y: auto;
+  max-height: 80vh;
+  border: 2px solid #dfe1e5;
+  justify-content: center;
+  align-items: center;
+}
+
+.deck-heading {
+  font-size: 24px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.card-container {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  display: grid;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.card-image {
+  width: 100px;
+  height: auto;
+}

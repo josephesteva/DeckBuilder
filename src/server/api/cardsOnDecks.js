@@ -11,6 +11,9 @@ router.get('/:deckid', async (req, res, next) => {
 			where: {
 				deckId: +deckid,
 			},
+			include: {
+				card: true, 
+			  },
 		})
 		res.status(200).send(deckCards);
 	} catch (err) {
