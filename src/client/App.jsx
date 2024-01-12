@@ -6,6 +6,9 @@ import Login from './components/Login';
 import Register from './components/Register';
 import NavBar from './components/NavBar';
 import Cards from "./components/cards";
+import UserDeck from "./components/UserDeck";
+import DeckBuilder from "./components/DeckBuilder";
+
 
 function App() {
 
@@ -17,6 +20,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/cards" element={<Cards />} />
+        <Route path="/userdeck" element={<UserDeck />} />
       </Routes>
     </Router> 
   );
