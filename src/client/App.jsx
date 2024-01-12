@@ -5,7 +5,7 @@ import HomePage from './components/Homepage';
 import Login from './components/Login';
 import Register from './components/Register';
 import NavBar from './components/NavBar';
-import Cards from "./components/cards";
+import Cards from "./components/Cards";
 
 function App() {
 
