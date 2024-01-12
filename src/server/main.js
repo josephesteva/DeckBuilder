@@ -1,11 +1,15 @@
 const express = require("express"); 
-const ViteExpress =require ("vite-express")
+const ViteExpress = require ("vite-express");
+require("dotenv").config();
 
 const app = express();
 
-app.get("/hello", (req, res) => {
-  res.send("Hello Vite + React!");
-});
+//middleware
+app.use(express.json());
+
+//routes
+app.use('/api', require('./api/index.js'));
+app.use('/auth', require('./auth/index.js'));
 
 ViteExpress.listen(app, 3000, () =>
   console.log("Server is listening on port 3000..."),

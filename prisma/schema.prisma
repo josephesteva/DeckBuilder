@@ -1,0 +1,60 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  username  String   @unique
+  email     String   @unique
+  password  String
+  isAdmin   Boolean
+  following User[]   @relation("UserFollowers")
+  followers User[]   @relation("UserFollowers")
+  decks     Deck[]
+  comments  Comment[]
+}
+
+model Deck {
+  id          Int      @id @default(autoincrement())
+  name        String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      Int
+  description String?
+  numCards    Int
+  comments    Comment[]
+  cards       CardsOnDecks[]
+}
+
+model Comment {
+  id      Int      @id @default(autoincrement())
+  content String
+  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId  Int
+  deck    Deck     @relation(fields: [deckId], references: [id], onDelete: Cascade)
+  deckId  Int
+  date    DateTime @default(now())
+}
+
+model Card {
+  id         Int    @id @default(autoincrement())
+  name       String
+  cardImage  String
+  decks      CardsOnDecks[]
+}
+
+model CardsOnDecks{
+  deck       Deck     @relation(fields: [deckId], references: [id], onDelete: Cascade)
+  deckId     Int 
+  card       Card @relation(fields: [cardId], references: [id], onDelete: Cascade)
+  cardId     Int
+
+  @@id([cardId, deckId])
+}
