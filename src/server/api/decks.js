@@ -2,6 +2,7 @@ const { PrismaClient } = require('.prisma/client');
 const prisma = new PrismaClient()
 
 const router = require('express').Router();
+const verify = require('../util.js');
 
 
 // GET gets all decks
@@ -42,6 +43,22 @@ router.post('/', async (req, res, next) => {
 			}
 		})
 		res.status(201).send(deck);
+	} catch (err) {
+		console.error(err);
+	}
+})
+
+router.post('/mydeck', verify, async (req, res, next) => {
+	const {name, description} = req.body;
+	try {
+		const deck = await prisma.deck.create({
+			data: {
+				name: name,
+				userId: req.user.id,
+				description: description,
+				numCards: 60
+			}
+		})
 	} catch (err) {
 		console.error(err);
 	}
