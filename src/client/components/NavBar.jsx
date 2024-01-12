@@ -1,3 +1,4 @@
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const NavBar = ({isLoggedIn,setIsLoggedIn}) => {
@@ -11,8 +12,12 @@ const NavBar = ({isLoggedIn,setIsLoggedIn}) => {
     const handleRegisterClick = () => {
         navigate("/register");
     }
+    const handleCardClick = () => {
+        navigate("/cards");
+    }
     const handleLogoutClick = () => {
-        setisLoggedIn(false);
+        localStorage.removeItem('token');
+        setIsLoggedIn(false);
         navigate("/");
     }
 
@@ -33,6 +38,7 @@ const NavBar = ({isLoggedIn,setIsLoggedIn}) => {
                 )}
 
             <button>Deck Viewer</button>
+            <button onClick={handleCardClick}>Card Viewer</button>
         </nav>
     )
 }
