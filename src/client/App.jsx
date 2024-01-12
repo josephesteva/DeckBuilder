@@ -1,5 +1,5 @@
 import "./App.css";
-import React from "react";
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './components/Homepage';
 import Login from './components/Login';
@@ -9,13 +9,15 @@ import Cards from "./components/Cards";
 
 function App() {
 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   return (
     <Router>
-      <NavBar/>
+      <NavBar isLoggedIn = {isLoggedIn} setIsLoggedIn = {setIsLoggedIn}/>
       <Routes>
+        <Route path="/login" element={<Login setIsLoggedIn= {setIsLoggedIn}/>} />
         <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/register" element={<Register setIsLoggedIn= {setIsLoggedIn}/>} />
         <Route path="/cards" element={<Cards />} />
       </Routes>
     </Router> 
