@@ -8,6 +8,7 @@ import NavBar from './components/NavBar';
 import Cards from "./components/Cards";
 import UserDeck from "./components/UserDeck";
 import DeckBuilder from "./components/DeckBuilder";
+import AccountInfo from "./components/AccountInfo";
 
 function App() {
 
@@ -17,9 +18,10 @@ function App() {
     <Router>
       <NavBar isLoggedIn = {isLoggedIn} setIsLoggedIn = {setIsLoggedIn}/>
       <Routes>
-        <Route path="/login" element={<Login setIsLoggedIn= {setIsLoggedIn}/>} />
         <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<Login setIsLoggedIn= {setIsLoggedIn}/>} />
         <Route path="/register" element={<Register setIsLoggedIn= {setIsLoggedIn}/>} />
+        <Route path="/account" element={<AccountInfo />} />
         <Route path="/deckbuilder" element={<DeckBuilder />} />
         <Route path="/userdeck" element={<UserDeck />} />
       </Routes>

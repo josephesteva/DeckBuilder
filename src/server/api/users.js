@@ -5,10 +5,11 @@ const router = require('express').Router();
 const verify = require('../util.js')
 
 router.get('/current', verify, async (req, res, next) => {
+	const id = req.user.id;
 	try {
 		const currentUser = await prisma.user.findUnique({
 			where: {
-				userId: req.user.id,
+				id: +id,
 			}
 		})
 		res.status(200).send(currentUser)
