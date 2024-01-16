@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const {PrismaClient} = require('@prisma/client');
 const prisma = new PrismaClient();
+const verify = require('../util.js')
 
 
 // /api/comments/
@@ -55,6 +56,61 @@ router.get('/byuser/:userid', async (req, res, next) => {
 			}
 		})
 		res.status(200).send(userComments)
+	} catch (err) {
+		console.error(err);
+	}
+})
+
+// POST creates a comment on behalf of a user with the user id included in the body
+router.post('/', async (req, res, next) => {
+	const {content, userId, deckId} = req.body;
+	try {
+		const newComment = await prisma.comment.create({
+			data: {
+				content,
+				userId: +userId,
+				deckId: +deckId
+			}
+		})
+		res.status(201).send(newComment);
+	} catch (err) {
+		console.error(err);
+	}
+})
+
+// creates a comment for a user that is logged in
+// pull user id from the token included in the auth header
+router.post('/currentuser', verify, async (req, res, next) => {
+	const {content, deckId} = req.body;
+	try {
+		const newComment = await prisma.comment.create({
+			data: {
+				content,
+				userId: req.user.id,
+				deckId: +deckId
+			}
+		})
+		res.status(201).send(newComment)
+	} catch (err) {
+		console.error(err);
+	}
+})
+
+// PATCH updates the content for a comment, user must be logged in with auth header included
+// comment id comes from the req params, content comes from the req body
+router.patch('/:id', verify, async (req, res, next) => {
+	const {id} = req.params;
+	const {content} = req.body;
+	try {
+		const updatedComment = await prisma.comment.update({
+			where: {
+				id: +id
+			},
+			data: {
+				content: content
+			}
+		})
+		res.status(200).send(updatedComment)
 	} catch (err) {
 		console.error(err);
 	}
