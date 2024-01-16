@@ -23,7 +23,7 @@ const NavBar = ({isLoggedIn,setIsLoggedIn}) => {
 
 
     return (
-        <nav>
+        <nav className='navbar'>
             <button onClick={handleHomeClick}>Home</button>
             {isLoggedIn ? (
                     <>

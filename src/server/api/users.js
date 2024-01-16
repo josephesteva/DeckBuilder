@@ -1,9 +1,7 @@
-const { PrismaClient } = require('.prisma/client');
+const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient()
 
 const router = require('express').Router();
-const {PrismaClient} = require('@prisma/client');
-const prisma = new PrismaClient();
 const verify = require('../util.js')
 
 router.get('/current', verify, async (req, res, next) => {
@@ -44,4 +42,22 @@ router.get('/:id', async (req, res, next) => {
 	}
 })
 
+<<<<<<< HEAD
 module.exports = router;
+=======
+
+router.get('/current', verify, async (req, res, next) => {
+	try {
+		const currentUser = await prisma.user.findUnique({
+			where: {
+				userId: req.user.id,
+			}
+		})
+		res.status(200).send(currentUser)
+	} catch (err) {
+		console.error(err);
+	}
+})
+
+module.exports = router;
+>>>>>>> cd98e3b994aaa8168b8dab09822bc83e8482c1ec
