@@ -1,11 +1,16 @@
 import React from 'react';
-import Cards from './cards';
+import Cards from './Cards';
 import UserDeck from './UserDeck';
 import '../App.css'; 
 
 const DeckBuilder = () => {
-    return <h1>hi</h1>
-}
+    return (
+      <div className="deck-builder-container">
+        <UserDeck />
+        <Cards />
+      </div>
+    );
+  };
 
 
 export default DeckBuilder;

@@ -20,7 +20,7 @@ function App() {
         <Route path="/login" element={<Login setIsLoggedIn= {setIsLoggedIn}/>} />
         <Route path="/" element={<HomePage />} />
         <Route path="/register" element={<Register setIsLoggedIn= {setIsLoggedIn}/>} />
-        <Route path="/cards" element={<Cards />} />
+        <Route path="/deckbuilder" element={<DeckBuilder />} />
         <Route path="/userdeck" element={<UserDeck />} />
       </Routes>
     </Router> 
