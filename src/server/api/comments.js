@@ -116,4 +116,19 @@ router.patch('/:id', verify, async (req, res, next) => {
 	}
 })
 
+// DELETE deletes a comment by comment id included in the req params
+router.delete('/:id', async (req, res, next) => {
+	const {id} = req.params;
+	try {
+		const deletedComment = await prisma.comment.delete({
+			where: {
+				id: +id
+			}
+		})
+		res.status(200).send(deletedComment)
+	} catch (err) {
+		console.error(err);
+	}
+})
+
 module.exports = router;
