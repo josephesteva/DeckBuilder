@@ -19,7 +19,7 @@ const HomePage = () => {
       // Trigger ENTRY animations after a delay 
       const portalAnimationTimeout = setTimeout(() => {
         setShowPortal(true);
-      }, 1000);
+      }, 2000);
   
       // Cleanup: Clear the timeout
       return () => clearTimeout(portalAnimationTimeout);
@@ -43,8 +43,16 @@ const HomePage = () => {
     
     
       return (
+        <div>
+
+        {!showPortal &&  (
+          <div className="bounce-in-top">
+            <img src="/images/pokeball.png" alt="Loading Pokeball" />
+        </div>
+        )}
         
         <div className={`forest-background ${showPortal ? 'portal-enter' : ''}`}>
+          
           <div className={`header ${showPortal ? 'header-enter' : ''}`}>
             <h1>Pokemon</h1>
             <h2>DeckBuilder</h2>
@@ -82,6 +90,9 @@ const HomePage = () => {
           <div className="cloud-image" style={{ backgroundImage: 'url("/images/cloudsheader.png")' }}></div>
           <div className="cloud-image2" style={{ backgroundImage: 'url("/images/cloudsheader.png")' }}></div>
 
+          
+
+        </div>
         </div>
 
         
