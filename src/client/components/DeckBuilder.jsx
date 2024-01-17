@@ -125,25 +125,28 @@ const DeckBuilder = () => {
       }
       axios.delete(`api/decks/${selectedDeck.id}`, {
         headers: {
-          Authorization: `Bearer ${token}`
+            Authorization: `Bearer ${token}`
         }
-      })
-        .then(response => {
-          setDecks(prevDecks => prevDecks.filter(deck => deck.id !== selectedDeck.id));
-
-          // If the deleted deck was the selected deck, select the first deck in the list
-          if (decks[0] && decks[0].id === selectedDeck.id && decks.length > 1) {
-            setSelectedDeck(decks[1]);
-            fetchDeckCards(decks[1].id);
-          } else {
-            //if their are no decks, set user deck and selected deck to null
+    })
+    .then(response => {
+        const updatedDecks = decks.filter(deck => deck.id !== selectedDeck.id);
+        setDecks(updatedDecks);
+    
+        //select the first deck in the list if there are still decks
+        if (updatedDecks.length > 0) {
+            setSelectedDeck(updatedDecks[0]);
+            fetchDeckCards(updatedDecks[0].id);
+        } else {
+            //if there are no decks, set user deck and selected deck to null
             setSelectedDeck(null);
             setUserDeck([]);
-          }
-        })
-        .catch(error => {
-          console.error(error);
-        });
+        }
+    })
+    .catch(error => {
+        console.error(error);
+    });
+    
+    
     }
   };
 
