@@ -18,6 +18,14 @@ const NavBar = ({isLoggedIn,setIsLoggedIn}) => {
     const handleAccountClick = () => {
         navigate("/account");
     }
+
+    const handleExploreClick = () => {
+        navigate("/explore");
+    }
+
+    const handleDeckClick = () => {
+        navigate("/deckbuilder");
+    }
     const handleLogoutClick = () => {
         localStorage.removeItem('token');
         setIsLoggedIn(false);
@@ -40,8 +48,8 @@ const NavBar = ({isLoggedIn,setIsLoggedIn}) => {
                     </>
                 )}
 
-            <button>Deck Viewer</button>
-            <button onClick={handleCardClick}>Deck Builder</button>
+            <button onClick={handleDeckClick}>Deck Viewer</button>
+            <button onClick={handleExploreClick}>Explore</button>
         </nav>
     )
 }

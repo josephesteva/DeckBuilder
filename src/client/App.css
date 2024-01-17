@@ -155,6 +155,7 @@ body, html {
   color: #fff;
 }
 
+
 .pokemon-deck {
   overflow-y: auto;
   max-height: 400px;
@@ -279,3 +280,40 @@ body, html {
 
 @keyframes bounce-in-top{0%{transform:translateY(-500px);animation-timing-function:ease-in;opacity:0}38%{transform:translateY(0);animation-timing-function:ease-out;opacity:1}55%{transform:translateY(-65px);animation-timing-function:ease-in}72%{transform:translateY(0);animation-timing-function:ease-out}81%{transform:translateY(-28px);animation-timing-function:ease-in}90%{transform:translateY(0);animation-timing-function:ease-out}95%{transform:translateY(-8px);animation-timing-function:ease-in}100%{transform:translateY(0);animation-timing-function:ease-out}}
 
+
+/* EXPLORE PAGE STYLING  */
+
+.explore-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Heading styles */
+.explore-heading {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Deck item styles */
+.deck-item {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 15px;
+  background-color: #f8f8f8;
+}
+
+.deck-item strong {
+  color: #333;
+}
+
+.deck-item p {
+  margin: 0;
+  color: #666;
+}
+
+/* Optional: Add hover effect */
+.deck-item:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}

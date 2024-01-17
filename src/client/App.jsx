@@ -5,9 +5,8 @@ import HomePage from './components/Homepage';
 import Login from './components/Login';
 import Register from './components/Register';
 import NavBar from './components/NavBar';
-import Cards from "./components/Cards";
-import UserDeck from "./components/UserDeck";
 import DeckBuilder from "./components/DeckBuilder";
+import Explore from "./components/Explore";
 import AccountInfo from "./components/AccountInfo";
 
 function App() {
@@ -23,7 +22,7 @@ function App() {
         <Route path="/register" element={<Register setIsLoggedIn= {setIsLoggedIn}/>} />
         <Route path="/account" element={<AccountInfo />} />
         <Route path="/deckbuilder" element={<DeckBuilder />} />
-        <Route path="/userdeck" element={<UserDeck />} />
+        <Route path="/explore" element={<Explore />} />
       </Routes>
     </Router> 
   );
