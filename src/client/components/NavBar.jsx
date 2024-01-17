@@ -13,7 +13,10 @@ const NavBar = ({isLoggedIn,setIsLoggedIn}) => {
         navigate("/register");
     }
     const handleCardClick = () => {
-        navigate("/cards");
+        navigate("/deckbuilder");
+    }
+    const handleAccountClick = () => {
+        navigate("/account");
     }
 
     const handleExploreClick = () => {
@@ -36,7 +39,7 @@ const NavBar = ({isLoggedIn,setIsLoggedIn}) => {
             {isLoggedIn ? (
                     <>
                         <button onClick={handleLogoutClick}>Logout</button>
-                        <button>Account Page</button>
+                        <button onClick={handleAccountClick}>Account Page</button>
                     </>
                 ) : (
                     <>
@@ -46,7 +49,6 @@ const NavBar = ({isLoggedIn,setIsLoggedIn}) => {
                 )}
 
             <button onClick={handleDeckClick}>Deck Viewer</button>
-            <button onClick={handleCardClick}>Card Viewer</button>
             <button onClick={handleExploreClick}>Explore</button>
         </nav>
     )
