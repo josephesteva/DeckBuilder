@@ -3,9 +3,10 @@ import "../App.css";
 import { jwtDecode } from 'jwt-decode';
 import React, { useEffect, useState } from 'react';
 import Cards from './Cards';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const DeckBuilder = () => {
-
   //stores all the users decks
   const [decks, setDecks] = useState([]);
   //keeps track of the selected deck in the drop down
@@ -20,10 +21,14 @@ const DeckBuilder = () => {
 
   //logged in users token and info
   const token = localStorage.getItem('token');
-  const decodedToken = jwtDecode(token);
-  const userId = decodedToken.id;
-  const userName = decodedToken.username;
+  let userId;
+  let userName;
 
+  if(token){
+    const decodedToken = jwtDecode(token);
+    userId = decodedToken.id;
+    userName = decodedToken.username;
+  }
   //this function fetches all the decks of the logged in user
   const fetchDecks = () => {
     axios.get('api/decks/mydecks', {
@@ -53,6 +58,10 @@ const DeckBuilder = () => {
   //This function creates a new empty deck
   const createNewDeck = (event) => {
     event.preventDefault();
+    if(!token){
+      toast.error("You must be logged in to create a deck");
+      return;
+    }
     axios.post('api/decks', {
       name: newDeckName,
       description: newDeckDescription,
@@ -70,6 +79,7 @@ const DeckBuilder = () => {
         setNewDeckName('');
         setNewDeckDescription('');
         fetchDeckCards(newDeck.id);
+        toast.success("Created new deck with the name" + newDeck.name);
       })
       .catch(error => {
         console.error(error);

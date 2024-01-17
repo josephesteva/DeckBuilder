@@ -8,6 +8,8 @@ import NavBar from './components/NavBar';
 import DeckBuilder from "./components/DeckBuilder";
 import Explore from "./components/Explore";
 import AccountInfo from "./components/AccountInfo";
+import { ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 
@@ -24,7 +26,9 @@ function App() {
         <Route path="/deckbuilder" element={<DeckBuilder />} />
         <Route path="/explore" element={<Explore />} />
       </Routes>
+      <ToastContainer autoClose={1000}/>
     </Router> 
+    
   );
 }
 

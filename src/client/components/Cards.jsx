@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import "../App.css";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const Cards = ({selectedDeck, fetchDeckCards}) => {
+const Cards = ({ selectedDeck, fetchDeckCards }) => {
   const [cards, setCards] = useState([]);
   const [search, setSearch] = useState('');
 
@@ -45,7 +45,7 @@ const Cards = ({selectedDeck, fetchDeckCards}) => {
         console.error(error);
       });
     } else {
-      alert("Please select a deck first");
+      toast.error("You must be logged in to add a card to a deck")
     }
   };
 
@@ -60,15 +60,12 @@ const Cards = ({selectedDeck, fetchDeckCards}) => {
       </div>
       <div className="cards-container-cards">
         {filteredCards.map(card => (
-                  <div key={card.id} className="card-cards" onClick={() => handleCardClick(card.name)} style={{ position: 'relative' }}>
-                  <img src={card.cardImage} alt={card.name} loading="lazy" />
-                  <button className='add-button-cards' onClick={(event) => handleAddButtonClick(event, card.id, card.name)}>Add</button>
-                </div>
+          <div key={card.id} className="card-cards" onClick={() => handleCardClick(card.name)} style={{ position: 'relative' }}>
+            <img src={card.cardImage} alt={card.name} loading="lazy" />
+            <button className='add-button-cards' onClick={(event) => handleAddButtonClick(event, card.id, card.name)}>Add</button>
+          </div>
         ))}
       </div>
-      <ToastContainer />
-
-
     </div>
   );
 };
