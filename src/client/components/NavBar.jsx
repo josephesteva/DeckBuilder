@@ -21,6 +21,10 @@ const NavBar = ({isLoggedIn,setIsLoggedIn}) => {
         navigate("/");
     }
 
+    const handleDeckBuilderClick = () =>{
+        navigate("/deckbuilder");
+    }
+
 
     return (
         <nav className='navbar'>
@@ -29,6 +33,7 @@ const NavBar = ({isLoggedIn,setIsLoggedIn}) => {
                     <>
                         <button onClick={handleLogoutClick}>Logout</button>
                         <button>Account Page</button>
+                        <button onClick={handleDeckBuilderClick}>Deck Builder</button>
                     </>
                 ) : (
                     <>

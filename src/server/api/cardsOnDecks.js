@@ -53,6 +53,7 @@ router.post('/', async (req, res, next) => {
 		res.status(201).send(deckCard)
 	} catch (err) {
 		console.error(err);
+		res.status(500).json({err});//added this for frontend -dante
 	}
 })
 

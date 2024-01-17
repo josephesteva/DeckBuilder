@@ -38,7 +38,21 @@
     height: auto;
     display: block;
 }
-
+.add-button-cards{
+  background-color: green;
+  opacity: 0.8;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 5px;
+  position: absolute;
+  bottom: 10px; 
+  right: 10px;
+}
+.add-button-cards:hover {
+  background-color: darkgreen;
+}
 /* Home Page Styling */
 body {
   background-color: #c3dbfa;
@@ -265,6 +279,62 @@ body, html {
   display: flex;
  justify-content: center;
 
+}
+
+.user-deck-nav{
+  display: flex;
+  justify-content: center;
+  gap:10px;
+}
+
+.deck-select-container{
+  border: 1px solid #ddd;
+  min-width: 20%;
+}
+
+.deck-select-container select{
+  min-width: 80%;
+}
+.deck-add-container{
+  border: 1px solid #ddd;
+  min-width: 20%;
+}
+
+.delete-button-userdeck{
+  background-color: red;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  width:20%;
+}
+
+.delete-button-userdeck:hover {
+  background-color: darkred;
+}
+
+.create-deck-form input{
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 10px 0px;
+  outline: none;
+  border-bottom: 1px solid black; 
+  display: block;
+  width: 100%;
+}
+
+.create-deck-form input:focus{
+  border-bottom: 2px solid blue; 
+}
+
+.create-deck-form button{
+  width: 100%;
+  text-align: left;
+}
+
+.select-container{
+  display: flex;
 }
 
 /* LOADING SCREEN STYLING */
