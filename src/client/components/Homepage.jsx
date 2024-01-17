@@ -1,5 +1,6 @@
 import '../App.css';
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 
 
@@ -68,7 +69,10 @@ const HomePage = () => {
               
               <img src='/images/ash.jpg' alt='pokemon trainer' className="trainer-image"></img>
               <p>S Rank/Pokemon Master</p>
-              <button className="try-now-button">Try Now</button>
+              <button className="try-now-button">
+              <Link to="/deckbuilder">Try Now</Link>
+              </button>
+                
               
             </aside>
             <div className="community-section">
