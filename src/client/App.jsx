@@ -8,6 +8,7 @@ import NavBar from './components/NavBar';
 import DeckBuilder from "./components/DeckBuilder";
 import Explore from "./components/Explore";
 import AccountInfo from "./components/AccountInfo";
+import DeckComments from "./components/DeckComments";
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
         <Route path="/account" element={<AccountInfo />} />
         <Route path="/deckbuilder" element={<DeckBuilder />} />
         <Route path="/explore" element={<Explore />} />
+				<Route path="/deckcomments" element={<DeckComments />} />
       </Routes>
     </Router> 
   );
