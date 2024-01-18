@@ -10,7 +10,12 @@ router.get('/current', verify, async (req, res, next) => {
 		const currentUser = await prisma.user.findUnique({
 			where: {
 				id: +id,
-			}
+			},
+			include: {
+				followers: true,
+				following: true,
+				comments: true,
+			  },
 		})
 		res.status(200).send(currentUser)
 	} catch (err) {
