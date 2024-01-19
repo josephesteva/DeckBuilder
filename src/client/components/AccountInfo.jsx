@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function AccountInfo() {
     const [userInfo, setUserInfo] = useState(null);
+    const [userDecks, setUserDecks] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -15,7 +16,11 @@ export default function AccountInfo() {
                                             });
                 const userData = await response.json();
                 console.log(userData);
+                const deckRes = await fetch(`http://localhost:3000/api/decks/user/${userData.id}`);
+                const deckData = await deckRes.json();
+                console.log(deckData);
                 setUserInfo(userData);
+                setUserDecks(deckData);
             } catch (error) {
                 console.error('Failed to fetch user:', error);
             }
@@ -52,19 +57,19 @@ export default function AccountInfo() {
             <h2>E-mail: {userInfo.email}</h2>
             <h2>Followers:</h2>
                 <ul>
-                    <li>none</li>
+                    {userInfo.followers.map((follower)=>{return (<li key={follower.id}>{follower.username}</li>)})}
                 </ul>
             <h2>Following:</h2>
                 <ul>
-                    <li>none</li>
+                    {userInfo.following.map((followed)=>{return (<li key={followed.id}>{followed.username}</li>)})}
                 </ul>
             <h2>Decks: </h2>
                 <ul>
-                    <li>none</li>
+                    {userDecks.map((deck)=>{return (<li key={deck.id}>{deck.name}</li>)})}
                 </ul>
             <h2>Comments: </h2>
                 <ul>
-                    <li>none</li>
+                    {userInfo.comments.map((comment)=>{return (<li key={comment.id}>{comment.content}</li>)})}
                 </ul>
             <button>Update Info</button>
             <button>Delete Account</button>

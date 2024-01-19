@@ -3,9 +3,10 @@ import "../App.css";
 import { jwtDecode } from 'jwt-decode';
 import React, { useEffect, useState } from 'react';
 import Cards from './Cards';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const DeckBuilder = () => {
-
   //stores all the users decks
   const [decks, setDecks] = useState([]);
   //keeps track of the selected deck in the drop down
@@ -20,10 +21,14 @@ const DeckBuilder = () => {
 
   //logged in users token and info
   const token = localStorage.getItem('token');
-  const decodedToken = jwtDecode(token);
-  const userId = decodedToken.id;
-  const userName = decodedToken.username;
+  let userId;
+  let userName;
 
+  if(token){
+    const decodedToken = jwtDecode(token);
+    userId = decodedToken.id;
+    userName = decodedToken.username;
+  }
   //this function fetches all the decks of the logged in user
   const fetchDecks = () => {
     axios.get('api/decks/mydecks', {
@@ -53,6 +58,10 @@ const DeckBuilder = () => {
   //This function creates a new empty deck
   const createNewDeck = (event) => {
     event.preventDefault();
+    if(!token){
+      toast.error("You must be logged in to create a deck");
+      return;
+    }
     axios.post('api/decks', {
       name: newDeckName,
       description: newDeckDescription,
@@ -70,6 +79,7 @@ const DeckBuilder = () => {
         setNewDeckName('');
         setNewDeckDescription('');
         fetchDeckCards(newDeck.id);
+        toast.success("Created new deck with the name" + newDeck.name);
       })
       .catch(error => {
         console.error(error);
@@ -125,25 +135,28 @@ const DeckBuilder = () => {
       }
       axios.delete(`api/decks/${selectedDeck.id}`, {
         headers: {
-          Authorization: `Bearer ${token}`
+            Authorization: `Bearer ${token}`
         }
-      })
-        .then(response => {
-          setDecks(prevDecks => prevDecks.filter(deck => deck.id !== selectedDeck.id));
-
-          // If the deleted deck was the selected deck, select the first deck in the list
-          if (decks[0] && decks[0].id === selectedDeck.id && decks.length > 1) {
-            setSelectedDeck(decks[1]);
-            fetchDeckCards(decks[1].id);
-          } else {
-            //if their are no decks, set user deck and selected deck to null
+    })
+    .then(response => {
+        const updatedDecks = decks.filter(deck => deck.id !== selectedDeck.id);
+        setDecks(updatedDecks);
+    
+        //select the first deck in the list if there are still decks
+        if (updatedDecks.length > 0) {
+            setSelectedDeck(updatedDecks[0]);
+            fetchDeckCards(updatedDecks[0].id);
+        } else {
+            //if there are no decks, set user deck and selected deck to null
             setSelectedDeck(null);
             setUserDeck([]);
-          }
-        })
-        .catch(error => {
-          console.error(error);
-        });
+        }
+    })
+    .catch(error => {
+        console.error(error);
+    });
+    
+    
     }
   };
 
