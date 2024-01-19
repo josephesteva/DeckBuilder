@@ -89,7 +89,11 @@ const DeckBuilder = () => {
         selectedDeck={selectedDeck}
       />
 
-      <Cards selectedDeck={selectedDeck} fetchDeckCards={fetchDeckCards} />
+      <Cards selectedDeck={selectedDeck} 
+        fetchDeckCards={fetchDeckCards} 
+        token={token} 
+      />
+
     </div>
   );
 };

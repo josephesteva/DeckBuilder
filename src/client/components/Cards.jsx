@@ -4,7 +4,7 @@ import "../App.css";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const Cards = ({ selectedDeck, fetchDeckCards }) => {
+const Cards = ({ selectedDeck, fetchDeckCards, token}) => {
   const [cards, setCards] = useState([]);
   const [search, setSearch] = useState('');
 
@@ -31,6 +31,10 @@ const Cards = ({ selectedDeck, fetchDeckCards }) => {
 
   const handleAddButtonClick = (event, cardId, cardName) => {
     event.stopPropagation();
+    if(!token){
+      toast.error("You must be logged in to add a card");
+      return;
+    }
     if (selectedDeck) {
       axios.post('/api/deckcards', {
         deckId: selectedDeck.id,
@@ -45,7 +49,7 @@ const Cards = ({ selectedDeck, fetchDeckCards }) => {
         console.error(error);
       });
     } else {
-      toast.error("You must be logged in to add a card to a deck")
+      toast.error("Create a deck to add a card");
     }
   };
 
