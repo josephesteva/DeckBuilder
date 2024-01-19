@@ -38,7 +38,10 @@ router.get('/ondeck/:deckid', async (req, res, next) => {
 		const deckComments = await prisma.comment.findMany({
 			where: {
 				deckId: +deckid
-			}
+			},
+			include: {
+				user: true, 
+			  },
 		})
 		res.status(200).send(deckComments)
 	} catch (err) {
