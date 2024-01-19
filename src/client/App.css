@@ -81,7 +81,6 @@ body, html {
   margin: 0;
   padding: 0;
   height: 100%;
-  overflow: hidden; 
 }
 
 /* Forest Background Styles */
@@ -357,25 +356,31 @@ body, html {
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
+  text-align: center;
+  width: 300px;
 }
 
 /* Heading styles */
 .explore-heading {
   font-size: 24px;
   margin-bottom: 20px;
+  text-align: center;
 }
 
 /* Deck item styles */
 .deck-item {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 10px;
-  margin-bottom: 15px;
-  background-color: #f8f8f8;
+  background: rgba( 255, 255, 255, 0.15 );
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 4px );
+  -webkit-backdrop-filter: blur( 4px );
+  border-radius: 10px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
+  margin-bottom: 10px;
 }
 
 .deck-item strong {
   color: #333;
+  font-family: "pokemon solid";
 }
 
 .deck-item p {
@@ -383,7 +388,23 @@ body, html {
   color: #666;
 }
 
-/* Optional: Add hover effect */
 .deck-item:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
+.deck-info {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  z-index: 1;
+  border-radius: 8px;
+}
+
+
+
+

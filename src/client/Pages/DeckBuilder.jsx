@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 import React, { useEffect, useState } from 'react';
-import Cards from './Cards';
-import DeckBuilderNav from './DeckBuilderNav';
-import DeckBuilderDeck from './DeckBuilderDeck';
+import Cards from '../components/Cards';
+import DeckBuilderNav from '../components/DeckBuilderNav';
+import DeckBuilderDeck from '../components/DeckBuilderDeck';
 import "../App.css";
 
 const DeckBuilder = () => {

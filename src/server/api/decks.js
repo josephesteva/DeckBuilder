@@ -8,7 +8,13 @@ const verify = require('../util.js');
 // GET gets all decks
 router.get('/', async (req, res, next) => {
 	try {
-		const decks = await prisma.deck.findMany({});
+		const decks = await prisma.deck.findMany({
+			include: {
+				user: true, 
+			  },
+			  
+			});
+		
 		res.status(200).send(decks)
 	} catch (err) {
 		console.error(err);
