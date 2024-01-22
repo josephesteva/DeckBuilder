@@ -8,7 +8,20 @@ import DeckComments from '../components/DeckComments';
 
 function SingleDeck() {
 	const {id} = useParams();
+	const [deck, setDeck] = useState({})
 	const [userDeck, setUserDeck] = useState([]);
+
+	useEffect(()=> {
+		const getDeck = async () => {
+			try {
+				const {data: foundDeck} = await axios.get(`/api/decks/${id}`)
+				setDeck(foundDeck)
+			} catch (err) {
+				console.error(err);
+			}
+		}
+		getDeck();
+	}, [])
 
   //logged in users token and info
   const token = localStorage.getItem('token');
@@ -37,9 +50,15 @@ function SingleDeck() {
   };
 	fetchDeckCards(id);
 
+	if (!deck.id) {
+		return <div>Loading...</div>
+	}
+
 	return (
 		<>
 		<h1>PokeDeck</h1>
+		<h1>{deck.name}</h1>
+		<h3>Likes: {deck.Like.length}</h3>
 		<DeckBuilderDeck 
         userDeck={userDeck} 
         token={token} 
