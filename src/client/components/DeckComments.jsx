@@ -7,19 +7,21 @@ const DeckComments = ({id}) => {
 	const [commentThread, setCommentThread] = useState([])
 	const [content, setContent] = useState("")
 
-	useEffect(() => {
-		const getComments = async () => {
-			try {
-				console.log(deckId);
-				const {data} = await axios.get(`/api/comments/ondeck/${deckId}`)
-				setCommentThread(data)
-				console.log(data)
-			} catch (err) {
-				console.error(err);
-			}
+	const getComments = async () => {
+		try {
+			console.log(deckId);
+			const {data} = await axios.get(`/api/comments/ondeck/${deckId}`)
+			setCommentThread(data)
+			console.log(data)
+		} catch (err) {
+			console.error(err);
 		}
+	}
+
+	useEffect(() => {
 		getComments();
 	}, [])
+
 	const handleCreateComment = async () => {
 		try {
 			const { data: comment } = await axios.post("/api/comments/currentuser",
@@ -29,6 +31,7 @@ const DeckComments = ({id}) => {
 						Authorization: "Bearer " + window.localStorage.getItem("token"),
 					}
 				});
+			getComments();
 			console.log(comment);
 		} catch (err) {
 			console.error(err);
