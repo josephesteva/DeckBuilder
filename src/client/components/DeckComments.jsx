@@ -2,11 +2,24 @@ import axios from 'axios';
 import "../App.css";
 import React, { useEffect, useState } from 'react';
 
-const DeckComments = () => {
-	const [deckId, setDeckId] = useState("")
+const DeckComments = ({id}) => {
+	const [deckId, setDeckId] = useState(id)
 	const [commentThread, setCommentThread] = useState([])
 	const [content, setContent] = useState("")
 
+	useEffect(() => {
+		const getComments = async () => {
+			try {
+				console.log(deckId);
+				const {data} = await axios.get(`/api/comments/ondeck/${deckId}`)
+				setCommentThread(data)
+				console.log(data)
+			} catch (err) {
+				console.error(err);
+			}
+		}
+		getComments();
+	}, [])
 	const handleCreateComment = async () => {
 		try {
 			const { data: comment } = await axios.post("/api/comments/currentuser",
@@ -22,29 +35,30 @@ const DeckComments = () => {
 		}
 	}
 
-	const handleShowComments = async () => {
-		try {
-			const {data} = await axios.get(`/api/comments/ondeck/${deckId}`)
-			setCommentThread(data)
-			console.log(data)
-		} catch (err) {
-			console.error(err);
-		}
+	// const handleShowComments = async () => {
+	// 	try {
+	// 		console.log(deckId);
+	// 		const {data} = await axios.get(`/api/comments/ondeck/${deckId}`)
+	// 		setCommentThread(data)
+	// 		console.log(data)
+	// 	} catch (err) {
+	// 		console.error(err);
+	// 	}
 		
-	}
+	// }
 
 	return (
 		<>
 			<div>
-				<h4>Deck ID: </h4>
+				{/* <h4>Deck ID: </h4>
 				<input
 					placeholder="Deck ID here"
 					value={deckId}
 					onChange={(e) => setDeckId(e.target.value)}
 				/>
-				<hr />
+				<hr /> */}
 				<h3>Comments</h3>
-				<button onClick={handleShowComments}>Show Comments</button>
+				{/* <button onClick={handleShowComments}>Show Comments</button> */}
 				<div>
 					{commentThread.map((comment) => (
 						<div style={{border: "solid black .1em", margin: ".5em"}} key={comment.id} >
