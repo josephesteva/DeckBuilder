@@ -11,26 +11,28 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  username  String   @unique
-  email     String   @unique
+  id        Int       @id @default(autoincrement())
+  username  String    @unique
+  email     String    @unique
   password  String
   isAdmin   Boolean
-  following User[]   @relation("UserFollowers")
-  followers User[]   @relation("UserFollowers")
+  following User[]    @relation("UserFollowers")
+  followers User[]    @relation("UserFollowers")
   decks     Deck[]
   comments  Comment[]
+  Like      Like[]
 }
 
 model Deck {
-  id          Int      @id @default(autoincrement())
+  id          Int            @id @default(autoincrement())
   name        String
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user        User           @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId      Int
   description String?
   numCards    Int
   comments    Comment[]
   cards       CardsOnDecks[]
+  Like        Like[]
 }
 
 model Comment {
@@ -44,17 +46,25 @@ model Comment {
 }
 
 model Card {
-  id         Int    @id @default(autoincrement())
-  name       String
-  cardImage  String
-  decks      CardsOnDecks[]
+  id        Int            @id @default(autoincrement())
+  name      String
+  cardImage String
+  decks     CardsOnDecks[]
 }
 
-model CardsOnDecks{
-  deck       Deck     @relation(fields: [deckId], references: [id], onDelete: Cascade)
-  deckId     Int 
-  card       Card @relation(fields: [cardId], references: [id], onDelete: Cascade)
-  cardId     Int
+model CardsOnDecks {
+  deck   Deck @relation(fields: [deckId], references: [id], onDelete: Cascade)
+  deckId Int
+  card   Card @relation(fields: [cardId], references: [id], onDelete: Cascade)
+  cardId Int
 
   @@id([cardId, deckId])
+}
+
+model Like {
+  id     Int  @id @default(autoincrement())
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId Int
+  deck   Deck @relation(fields: [deckId], references: [id], onDelete: Cascade)
+  deckId Int
 }
