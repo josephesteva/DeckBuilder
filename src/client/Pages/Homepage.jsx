@@ -61,8 +61,8 @@ const HomePage = () => {
           <div className="hero-section">
             <h1>Welcome to Your Pokémon TCG Deck Builder</h1>
             <img src='/images/pokeball.jpg' alt='pokeball' className="pokeball"></img>
-            <p>Your <strong>source</strong> for building the ultimate Pokémon Trading Card Game decks.</p>
-            <p>Unlock the power of Pokémon cards and dominate your battles!</p>
+            <p className='hero-text'> Your <strong>source</strong> for building the ultimate Pokémon Trading Card Game decks.</p>
+            <p className='hero-text'>Unlock the power of Pokémon cards and dominate your battles!</p>
           <div className="trainer-section">
             <aside>
               <h3>Trainer of the Year : Ash Ketchum </h3>

@@ -57,6 +57,17 @@
 body {
   background-color: #c3dbfa;
 }
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+/* NAV BAR */
+.navbar {
+  display: flex;
+ justify-content: center;
+
+}
 /* header styling  */
 .header {
   font-family: 'pokemon solid';
@@ -77,11 +88,6 @@ body {
   font-style: normal;
 }
 
-body, html {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-}
 
 /* Forest Background Styles */
 .forest-background {
@@ -100,7 +106,7 @@ body, html {
   transform: translateY(0); /* Move the header down to its original position */
 }
 
-/* Hero Section Styles */
+/* HERO SECTION STYLES */
 .hero-section {
   text-align: center;
   padding: 20px;
@@ -118,7 +124,6 @@ body, html {
     transform: translateX(0); /* Slide in from left to right */
   }
 }
- /* HERO SECTION  */
 .hero-section h1 {
   font-size: 2em;
   margin-bottom: 10px;
@@ -244,7 +249,7 @@ body, html {
   -webkit-text-stroke: 2px #035096;
 }
 
-/* USER DECK STYLING  */
+/* USER DECK STYLING (DECK BUILDER)  */
 
 .user-deck-container {
   display: flex;
@@ -275,11 +280,6 @@ body, html {
   height: auto;
 }
 
-.navbar {
-  display: flex;
- justify-content: center;
-
-}
 
 .user-deck-nav{
   display: flex;
@@ -354,7 +354,6 @@ body, html {
 
 .explore-container {
   max-width: 800px;
-  margin: 0 auto;
   padding: 20px;
   text-align: center;
   width: 300px;
@@ -365,10 +364,18 @@ body, html {
   font-size: 24px;
   margin-bottom: 20px;
   text-align: center;
+  font-family: "pokemon solid";
 }
 
-/* Deck item styles */
+/* Deck item styles (EXPLORE PAGE) */
+.deck-container {
+  position: relative;
+  margin-bottom: 20px;
+  z-index: 2;
+}
+
 .deck-item {
+  position: relative;
   background: rgba( 255, 255, 255, 0.15 );
   box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
   backdrop-filter: blur( 4px );
@@ -379,8 +386,14 @@ body, html {
 }
 
 .deck-item strong {
-  color: #333;
+  
   font-family: "pokemon solid";
+  letter-spacing: 2px;
+  font-size: 1.7em;
+  color: #FFD500;
+  text-align: center;
+  text-shadow: 3px 3px 5px #035096;
+  -webkit-text-stroke: 2px #035096;
 }
 
 .deck-item p {
@@ -388,22 +401,177 @@ body, html {
   color: #666;
 }
 
-.deck-item:hover {
+.deck-item:hover .user-deck-container  {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: block;
 }
 
 .deck-info {
   position: absolute;
   top: 0;
   left: 0;
-  background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
-  padding: 10px;
+   background: rgba(255, 0, 0, 0.8);
   width: 100%;
   box-sizing: border-box;
   text-align: center;
   z-index: 1;
   border-radius: 8px;
 }
+
+.user-deck-container2 {
+  position: absolute;
+  top: .5%;
+  left: -20%;
+  transform: translateX(-50%);
+  width: 300px;
+  height: 245px;
+  padding: 10px;
+  text-align: center;
+  z-index: -1;
+  border-radius: 8px;
+  animation: slide-right 0.5s both;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  overflow-y: auto;
+  max-height: 80vh;
+  border: 2px solid #dfe1e5;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Card container styles */
+
+
+.card-container2 {
+  display: inline-block;
+  margin: 5px;
+  animation: slide-right 0.5s both;
+  width: 300px;
+  z-index: 0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  display: grid;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+
+.card-image2 {
+  width: 192px;
+  height: 262px;
+  z-index: -1;
+}
+
+
+@keyframes slide-right {
+  0% {
+    transform: translateX(0); /* Start off-screen to the left */
+  }
+  100% {
+    transform: translateX(100%); /* Slide to the right */
+  }
+}
+
+
+/* Small screens (up to 768px) */
+@media screen and (max-width: 768px) {
+  .header {
+    font-size: 2em;
+  }
+
+  .hero-section {
+    padding: 10px;
+  }
+
+  .hero-section h1 {
+    font-size: 1.5em;
+  }
+
+  /* Adjustments for trainer section on small screens */
+  .trainer-section {
+    flex-direction: row;
+    align-items: center;
+    bottom:-32rem;
+    background-color: white;
+    border-radius: 8px;
+  }
+
+  .trainer-image {
+    width: 100%;
+    height: auto;
+  }
+
+  /* Adjustments for try-now-button on small screens */
+  .try-now-button {
+    font-size: 1em;
+    margin-top: 10px;
+  }
+
+  /* Adjustments for pokemon-deck on small screens */
+  .pokemon-deck {
+    max-height: 300px;
+    margin-left: 0;
+  }
+
+  .pokemon-image {
+    width: 75%;
+    margin-bottom: 0.5rem;
+  }
+
+
+  .community-section {
+    bottom:-400px;
+    left: 25rem;
+    width:70%;
+    max-height: 322px;
+  }
+
+  .community-image {
+    max-width: 350px;
+  }
+}
+
+
+
+/* Medium screens (769px to 1600px) */
+@media screen and (min-width: 769px) and (max-width: 1600px)  {
+  .header {
+    font-size: 2.5em;
+  }
+
+  .hero-section h1 {
+    font-size: 2em;
+    margin-left: 200px;
+  }
+
+  .pokeball {
+    margin-left: 200px;
+  }
+
+  .hero-text {
+    margin-left: 200px;
+  }
+
+  .community-section {
+    left: 76rem;
+  }
+
+  .community-image {
+    max-width: 300px;
+  }
+
+  
+
+  
+
+  
+
+}
+
+
+
 
 
 
