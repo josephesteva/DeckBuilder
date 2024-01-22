@@ -43,6 +43,9 @@ router.get('/:id', async (req, res, next) => {
 			where: {
 				id: +id,
 			},
+			include: {
+				Like: true
+			}
 		})
 		res.status(200).send(deck)
 	} catch (err) {

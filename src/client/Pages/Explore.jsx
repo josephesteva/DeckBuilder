@@ -1,6 +1,7 @@
 import '../App.css';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 
 
@@ -66,6 +67,7 @@ const Explore = () => {
             </div>
             <div className="explore-container">
                 {decks.map((deck) => (
+									<Link to={`/deck/${deck.id}`}>
                     <div key={deck.id} className="deck-container">
                         <div className="deck-item" onClick={() => handleDeckClick(deck.id)}>
                             <div className="deck-info">
@@ -85,6 +87,7 @@ const Explore = () => {
                             </div>
                         )}
                     </div>
+										</Link>
                 ))}
             </div>
         </div>
