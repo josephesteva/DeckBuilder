@@ -32,6 +32,7 @@ function SingleDeck() {
 					Authorization: "Bearer " + window.localStorage.getItem('token')
 				}
 			})
+			setDeck({...deck, Like: [...deck.Like, like]})
 			console.log(like);
 		} catch (err) {
 			console.error(err);
