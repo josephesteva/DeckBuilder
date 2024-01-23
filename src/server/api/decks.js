@@ -104,6 +104,21 @@ router.post('/mydeck', verify, async (req, res, next) => {
 	}
 })
 
+router.post('/like/:id', verify, async (req, res, next) => {
+	const {id} = req.params;
+	try {
+		const like = await prisma.like.create({
+			data: {
+				userId: req.user.id,
+				deckId: +id
+			}
+		})
+		res.status(201).send(like)
+	} catch (err) {
+		console.error(err);
+	}
+})
+
 // Delete deletes an existing deck by id
 router.delete('/:id', async (req, res, next) => {
 	const {id} = req.params;

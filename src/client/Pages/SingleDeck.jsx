@@ -23,6 +23,21 @@ function SingleDeck() {
 		getDeck();
 	}, [])
 
+	const handleCreateLike = async () => {
+		try {
+			const {data: like} = await axios.post(`/api/decks/like/${id}`,
+			{},
+			{
+				headers: {
+					Authorization: "Bearer " + window.localStorage.getItem('token')
+				}
+			})
+			console.log(like);
+		} catch (err) {
+			console.error(err);
+		}
+	}
+
   //logged in users token and info
   const token = localStorage.getItem('token');
   let userId;
@@ -58,6 +73,7 @@ function SingleDeck() {
 		<>
 		<h1>PokeDeck</h1>
 		<h1>{deck.name}</h1>
+		<button onClick={handleCreateLike}>👍 Like this Deck</button>
 		<h3>Likes: {deck.Like.length}</h3>
 		<DeckBuilderDeck 
         userDeck={userDeck} 
