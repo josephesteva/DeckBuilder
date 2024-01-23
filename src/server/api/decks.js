@@ -11,8 +11,13 @@ router.get('/', async (req, res, next) => {
 		const decks = await prisma.deck.findMany({
 			include: {
 				user: true, 
+				Like: true
 			  },
-			  
+			  orderBy: {
+					Like: {
+						_count: "desc"
+					}
+				}
 			});
 		
 		res.status(200).send(decks)
