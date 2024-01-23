@@ -107,6 +107,18 @@ router.post('/mydeck', verify, async (req, res, next) => {
 router.post('/like/:id', verify, async (req, res, next) => {
 	const {id} = req.params;
 	try {
+		const exists = await prisma.like.findFirst({
+			where: {
+				userId: req.user.id,
+				deckId: +id
+			}
+		})
+		if (exists) {
+			console.log('Already exists')
+			res.status(400)
+			return
+		}
+
 		const like = await prisma.like.create({
 			data: {
 				userId: req.user.id,
