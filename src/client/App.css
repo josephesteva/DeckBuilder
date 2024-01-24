@@ -53,6 +53,13 @@
 .add-button-cards:hover {
   background-color: darkgreen;
 }
+
+.filter-bar-cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
 /* Home Page Styling */
 body {
   background-color: #c3dbfa;
