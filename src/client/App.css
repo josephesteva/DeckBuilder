@@ -352,6 +352,96 @@ body, html {
 
 /* EXPLORE PAGE STYLING  */
 
+
+.explore-background{
+  background: linear-gradient(
+    to right,
+     #c3dbfa 0%,
+     #c3dbfa 50%,  
+     #035096 50%,
+     yellow 100%
+     );
+}
+
+.sticky-image {
+  position: sticky;
+  bottom: 0;
+  height: 70vh;
+  justify-content: flex-end;
+  display: flex;
+  animation: bounce-in-right 1.1s both;
+}
+
+@keyframes bounce-in-right {
+  0% {
+    transform: translateX(600px);
+    animation-timing-function: ease-in;
+    opacity: 0;
+  }
+  38% {
+    transform: translateX(0);
+    animation-timing-function: ease-out;
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0);
+    animation-timing-function: ease-out;
+  }
+}
+
+.thought-bubble {
+  position: absolute;
+  left: 50%;
+  background:url("/images/thought-bubble.png") center/cover;
+  height: 33vh;
+  width: 20%;
+  text-align: center;
+  padding-top: 10px;
+  font-family: "pokemon solid";
+
+}
+
+.more-info {
+  position: absolute;
+  height:40em;
+  border:rgba( 195, 219, 250, 0.7 ) 5px solid ;
+  width: 49%;
+  top: 3030px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+}
+
+.prepare-img {
+  width: 300px;
+  height: 300px;
+  box-shadow: 5px 10px 5px;
+}
+
+.prepare {
+  position: relative;
+  background:rgba( 3, 80, 150, 0.7 );
+  height: 65%;
+  text-align: center;
+  z-index: 1;
+  border-radius: 42px;
+  padding: 10px;
+}
+
+.prepare-unite {
+  position: relative;
+  background: rgba(255, 0, 0, 0.8);
+  height: 65%;
+  text-align: center;
+  z-index: 1;
+  border-radius: 50px;
+  padding: 10px;
+}
+
+
+
 .explore-container {
   max-width: 800px;
   padding: 20px;
@@ -365,6 +455,12 @@ body, html {
   margin-bottom: 20px;
   text-align: center;
   font-family: "pokemon solid";
+  letter-spacing: 2px;
+  color: #FFD500;
+  text-shadow: 3px 3px 5px #035096;
+  -webkit-text-stroke: 2px #035096;
+  border: solid 5px white;
+  background-color: white;
 }
 
 /* Deck item styles (EXPLORE PAGE) */
@@ -463,6 +559,7 @@ body, html {
   height: 262px;
   z-index: -1;
 }
+
 
 
 @keyframes slide-right {

@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import "../App.css";
 import { Link } from 'react-router-dom';
+import ExploreContent from '../components/ExploreContent';
 
 
 const Explore = () => {
@@ -12,6 +13,8 @@ const Explore = () => {
 
     //stores the user deck-cards of the selected deck (actually conatains cards)
     const [deckOfCards, setDeckOfCards] = useState([]);
+
+    const [search, setSearch] = useState('');
 
 
     //this function fetches all the decks of the logged in user (run auto)
@@ -30,6 +33,8 @@ const Explore = () => {
     useEffect(() => {
         fetchDecks();
     }, []);
+
+    console.log(decks)
 
     // Fetches the cards of the selected deck and stores into DeckOfCards
     const fetchDeckCards = (deckId) => {
@@ -51,8 +56,12 @@ const Explore = () => {
 
     }
 
+    const filteredDecks = decks.filter(deck =>
+        deck.name.toLowerCase().includes(search.toLowerCase())
+      );
+
     return (
-        <div>
+        <div className='explore-background'>
             <h2 className="explore-heading">Explore Decks</h2>
             <div className="search-bar-cards">
                 <input
@@ -65,36 +74,53 @@ const Explore = () => {
 
 
             <div className="explore-container">
-                {decks.map((deck) => (
-									<Link to={`/deck/${deck.id}`}>
-                    <div key={deck.id} className="deck-container">
-                        <div className="deck-item" onMouseEnter={() => handleDeckHover(deck.id)}>
-                            <div className="deck-info">
-                                <strong>{deck.name}</strong> - Created by Trainer {deck.user.username}
+                {filteredDecks.map((deck) => (
+                    <Link to={`/deck/${deck.id}`}>
+                        <div key={deck.id} className="deck-container">
+                            <div className="deck-item" onMouseEnter={() => handleDeckHover(deck.id)}>
+                                <div className="deck-info">
+                                    <strong>{deck.name}</strong> - Created by Trainer {deck.user.username}
+                                </div>
+                                <img src="/images/pokemondeck.jpg" alt="Pokemon deck cover"></img>
                             </div>
-                            <img src="/images/pokemondeck.jpg" alt="Pokemon deck cover"></img>
-                        </div>
 
-                        {/* make sure selected deck equals the current deck being mapped */}
-                        {selectedDeck === deck.id && (
-                            <div className="user-deck-container2">
-                                {deckOfCards.map((card) => (
-                                    <div key={card.id} className='card-container2'>
-                                        <img
-                                            src={card.card.cardImage}
-                                            alt={card.card.name}
-                                            className='card-image2'
-                                            loading="lazy"
-                                        />
-                                    </div>
-                                ))}
-                            </div>
-                        )}
-                    </div>
-										</Link>
+                            {/* make sure selected deck equals the current deck being mapped */}
+                            {selectedDeck === deck.id && (
+                                <div className="user-deck-container2">
+                                    {deckOfCards.map((card) => (
+                                        <div key={card.id} className='card-container2'>
+                                            <img
+                                                src={card.card.cardImage}
+                                                alt={card.card.name}
+                                                className='card-image2'
+                                                loading="lazy"
+                                            />
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    </Link>
                 ))}
             </div>
+            <div className="sticky-image">
+                <div className='thought-bubble'>
+                    <h2>Hey Guys!!</h2>
+                    <p>Be sure to signup for upcoming</p>
+                    <p>Pokemon GO events</p>
+                </div>
+                <img src="/images/Pikachu-Transparent-Background.png" alt="Sticky Image" className='explore-sticky'></img>
+            </div>
+
+            <ExploreContent />
+
+
+
+
+            <div className="cloud-image" style={{ backgroundImage: 'url("/images/cloudsheader.png")' }}></div>
+            <div className="cloud-image2" style={{ backgroundImage: 'url("/images/cloudsheader.png")' }}></div>
         </div>
+
     );
 
 }
