@@ -46,10 +46,15 @@ model Comment {
 }
 
 model Card {
-  id        Int            @id @default(autoincrement())
-  name      String
-  cardImage String
-  decks     CardsOnDecks[]
+  id            Int            @id @default(autoincrement())
+  name          String
+  cardImage     String
+  mainType      String?
+  secondaryType String?
+  superType     String
+  setName       String
+  hp            Int?
+  decks         CardsOnDecks[]
 }
 
 model CardsOnDecks {

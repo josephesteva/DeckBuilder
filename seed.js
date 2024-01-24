@@ -86,6 +86,11 @@ async function main() {
                         data: {
                             name: result[i].name,
                             cardImage: result[i].images.small,
+                            mainType: result[i].types && result[i].types.length > 0 ? result[i].types[0] : "noType",
+                            secondaryType: result[i].types && result[i].types.length > 1 ? result[i].types[1] : "noType",
+                            setName: result[i].set.name,
+                            hp: +result[i].hp,
+                            superType: result[i].supertype,
                         },
                     });
 

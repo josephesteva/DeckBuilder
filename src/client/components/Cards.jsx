@@ -4,10 +4,37 @@ import "../App.css";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const Cards = ({ selectedDeck, fetchDeckCards, token}) => {
+const Cards = ({ selectedDeck, fetchDeckCards, token }) => {
   const [cards, setCards] = useState([]);
   const [search, setSearch] = useState('');
+  const [type, setType] = useState(''); 
+  const [setName, setSetName] = useState(''); 
+  const [superType, setSuperType] = useState('');
+  const superTypes = ["Pokémon", "Energy", "Trainer"];
 
+  //we can also fetch these from api, but is it worth?
+  const types = [
+    "Colorless",
+    "Darkness",
+    "Dragon",
+    "Fairy",
+    "Fighting",
+    "Fire",
+    "Grass",
+    "Lightning",
+    "Metal",
+    "Psychic",
+    "Water"
+  ];
+  const setNames = [
+    "Fossil",
+    "Jungle",
+    "Team Rocket",
+    "Base",
+    "Legendary Collection",
+    "Base Set 2"
+  ];
+  
   useEffect(() => {
     const fetchCards = async () => {
       try {
@@ -22,7 +49,10 @@ const Cards = ({ selectedDeck, fetchDeckCards, token}) => {
   }, []);
 
   const filteredCards = cards.filter(card =>
-    card.name.toLowerCase().includes(search.toLowerCase())
+    card.name.toLowerCase().includes(search.toLowerCase()) &&
+    card.mainType.includes(type) &&
+    card.setName.includes(setName) &&
+    card.superType.includes(superType)
   );
 
   const handleCardClick = (cardName) => {
@@ -31,7 +61,7 @@ const Cards = ({ selectedDeck, fetchDeckCards, token}) => {
 
   const handleAddButtonClick = (event, cardId, cardName) => {
     event.stopPropagation();
-    if(!token){
+    if (!token) {
       toast.error("You must be logged in to add a card");
       return;
     }
@@ -53,6 +83,13 @@ const Cards = ({ selectedDeck, fetchDeckCards, token}) => {
     }
   };
 
+  const handleSuperTypeChange = (value) => {
+    setSuperType(value);
+    if (value === "Trainer" || value === "Energy") {
+      setType('');
+    }
+  };
+
   return (
     <div>
       <div className="search-bar-cards">
@@ -61,6 +98,29 @@ const Cards = ({ selectedDeck, fetchDeckCards, token}) => {
           placeholder="Search cards..."
           onChange={e => setSearch(e.target.value)}
         />
+      </div>
+      <div className="filter-bar-cards">
+        <select onChange={e => handleSuperTypeChange(e.target.value)}>
+          <option value="">All Super Types</option>
+          {superTypes.map((superType, index) => (
+            <option key={index} value={superType}>{superType}</option>
+          ))}
+        </select>
+  
+        {superType !== "Trainer" && superType !== "Energy" && (
+          <select onChange={e => setType(e.target.value)}>
+            <option value="">All Types</option>
+            {types.map((type, index) => (
+              <option key={index} value={type}>{type}</option>
+            ))}
+          </select>
+        )}
+        <select onChange={e => setSetName(e.target.value)}>
+          <option value="">All Sets</option>
+          {setNames.map((setName, index) => (
+            <option key={index} value={setName}>{setName}</option>
+          ))}
+        </select>
       </div>
       <div className="cards-container-cards">
         {filteredCards.map(card => (
@@ -72,6 +132,6 @@ const Cards = ({ selectedDeck, fetchDeckCards, token}) => {
       </div>
     </div>
   );
-};
-
-export default Cards;
+}
+  export default Cards;
+  
