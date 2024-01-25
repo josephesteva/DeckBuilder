@@ -13,7 +13,7 @@ const DeckBuilder = () => {
   const [selectedDeck, setSelectedDeck] = useState(null);
   //stores the user deck-cards of the selected deck
   const [userDeck, setUserDeck] = useState([]);
-  
+
   //logged in users token and info
   const token = localStorage.getItem('token');
   let userId;
@@ -92,6 +92,7 @@ const DeckBuilder = () => {
       <Cards selectedDeck={selectedDeck} 
         fetchDeckCards={fetchDeckCards} 
         token={token} 
+        userDeck={userDeck}
       />
 
     </div>
