@@ -4,19 +4,22 @@ import { useNavigate } from 'react-router-dom';
 export default function AccountInfo() {
     const [userInfo, setUserInfo] = useState(null);
     const [userDecks, setUserDecks] = useState(null);
+    const [showUpdate, setShowUpdate] = useState(false);
+    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
         async function fetchUser() {
 
             try {
-                const response = await fetch(`http://localhost:3000/api/users/current`,
+                const response = await fetch(`/api/users/current`,
                                             {
                                                 headers: {"Authorization": `Bearer ${localStorage.getItem('token')}`},
                                             });
                 const userData = await response.json();
                 console.log(userData);
-                const deckRes = await fetch(`http://localhost:3000/api/decks/user/${userData.id}`);
+                const deckRes = await fetch(`/api/decks/user/${userData.id}`);
                 const deckData = await deckRes.json();
                 console.log(deckData);
                 setUserInfo(userData);
@@ -28,6 +31,37 @@ export default function AccountInfo() {
         fetchUser();
     }, []);
 
+
+    const handleUpdate = async (event) => {
+        event.preventDefault();
+        const newData = {
+            username,
+            email
+        }
+
+        
+        try {
+            const response = await fetch('/api/users/', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    "Authorization": `Bearer ${localStorage.getItem('token')}`
+                },
+                body: JSON.stringify(newData)
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                console.log('Update successful:', data);
+                setUserInfo(data);
+            } else {
+                const errorData = await response.json();
+                console.error('Update failed:', errorData.message);
+            }
+        } catch (error) {
+            console.error('Error during Login:', error);
+        }
+    }
 
  /*   const deleteAccount = async () => {
         try{
@@ -71,10 +105,22 @@ export default function AccountInfo() {
                 <ul>
                     {userInfo.comments.map((comment)=>{return (<li key={comment.id}>{comment.content}</li>)})}
                 </ul>
-            <button>Update Info</button>
+            <button onClick={() => setShowUpdate(true)}>Update Info</button>
+            {showUpdate && 
+                <form onSubmit={handleUpdate}>
+                    <div>
+                        <label>Change Username</label>
+                        <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} required />
+                    </div>
+                    <div>
+                        <label>Change Email</label>
+                        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                    </div>
+                    <button type="submit">Update</button>
+                    <button type="button" onClick={() => setShowUpdate(false)}>Cancel</button>
+                </form>}
             <button>Delete Account</button>
             <button onClick={() => navigate(-1)}>Go Back</button>
         </section>
     );
-    // Will replace unordered list with JSON showing unordered list with links to respective fields. ex. Decks have links to the individual deck page.
 }
