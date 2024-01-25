@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useState } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './Pages/Homepage';
 import Login from './Pages/Login';
@@ -15,15 +15,14 @@ import SingleDeck from "./Pages/SingleDeck";
 
 function App() {
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
     <Router>
-      <NavBar isLoggedIn = {isLoggedIn} setIsLoggedIn = {setIsLoggedIn}/>
+      <NavBar/>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<Login setIsLoggedIn= {setIsLoggedIn}/>} />
-        <Route path="/register" element={<Register setIsLoggedIn= {setIsLoggedIn}/>} />
+        <Route path="/login" element={<Login/>} />
+        <Route path="/register" element={<Register/>} />
         <Route path="/account" element={<AccountInfo />} />
         <Route path="/deckbuilder" element={<DeckBuilder />} />
         <Route path="/explore" element={<Explore />} />

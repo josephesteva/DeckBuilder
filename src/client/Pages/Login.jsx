@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Login = ({setIsLoggedIn}) => {
+const Login = () => {
     const [password, setPassword] = useState('');
     const [username, setUsername] = useState('');
     const [error, setError] = useState('');
@@ -28,7 +28,6 @@ const Login = ({setIsLoggedIn}) => {
                 const data = await response.json();
                 console.log('Login successful:', data);
                 localStorage.setItem('token', data.token);
-                setIsLoggedIn(true);
                 navigate("/");
 
             } else {

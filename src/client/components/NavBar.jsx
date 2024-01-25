@@ -22,7 +22,6 @@ const NavBar = ({isLoggedIn,setIsLoggedIn}) => {
 
     const handleLogoutClick = () => {
         localStorage.removeItem('token');
-        setIsLoggedIn(false);
         navigate("/");
     }
 
@@ -34,7 +33,7 @@ const NavBar = ({isLoggedIn,setIsLoggedIn}) => {
     return (
         <nav className='navbar'>
             <button onClick={handleHomeClick}>Home</button>
-            {isLoggedIn ? (
+            {localStorage.getItem('token') ? (
                     <>
                         <button onClick={handleLogoutClick}>Logout</button>
                         <button onClick={handleDeckBuilderClick}>Deck Builder</button>

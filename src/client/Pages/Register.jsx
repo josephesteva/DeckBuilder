@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Register = ({setIsLoggedIn}) => {
+const Register = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [username, setUsername] = useState('');
@@ -30,8 +30,7 @@ const Register = ({setIsLoggedIn}) => {
                 const data = await response.json();
                 console.log('Registration successful:', data);
                 localStorage.setItem('token', data.token);
-                console.log(localStorage.getItem('token'))
-                setIsLoggedIn(true);
+                console.log(localStorage.getItem('token'));
                 navigate("/");
             } else {
                 const errorData = await response.json();
