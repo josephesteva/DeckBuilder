@@ -48,4 +48,25 @@ router.get('/:id', async (req, res, next) => {
 	}
 })
 
+// Update a user
+// restricted to authenticated users
+router.put('/', verify, async (req, res, next) => {
+    const id = req.user.id;
+    try {
+        const updatedUser = await prisma.user.update({
+            where: { id: +id },
+            data: req.body,
+			include: {
+				followers: true,
+				following: true,
+				comments: true,
+			  },
+        });
+        res.json(updatedUser);
+    } catch (error) {
+        console.error(error.message);
+        next(error);
+    }
+});
+
 module.exports = router;
