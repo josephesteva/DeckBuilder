@@ -1,5 +1,38 @@
 
 const ExploreContent = () => {
+    
+    const handleScroll = () => {
+        const scrollThreshold = 1000;  // Adjust this value based on your needs
+        const stickyImage = document.querySelector('.explore-sticky');
+        const thoughtBubble = document.querySelector('.thought-bubble');
+
+
+        if (window.scrollY > scrollThreshold) {
+            // Change the image source or apply a new background once scroll threshold is reached
+            stickyImage.src = '/images/Ash-Ketchum.png';
+            thoughtBubble.innerHTML=`
+            <h2 style="font-family: 'pokemon solid'">Use our Resources!</h2>
+            <p>Gotta catch 'em all!</p>
+            <p>You are on the road to</p>
+            <p> becoming a Pokemon Master!</p>
+            `;
+        } else {
+            // Reset the image source or revert to the original background
+            stickyImage.src = '/images/Pikachu-Transparent-Background.png';
+            thoughtBubble.innerHTML = `
+            <h2 style="font-family: 'pokemon solid'">Hey Guys!!</h2>
+            <p>Be sure to signup for upcoming</p>
+            <p>Pokemon battle events</p>
+            <p>in your area!</p>
+            `;
+            }
+    };
+    
+    // Add scroll event listener
+    window.addEventListener('scroll', handleScroll);
+    
+    
+    
     return (
         
         <>
