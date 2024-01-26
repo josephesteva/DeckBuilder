@@ -26,7 +26,7 @@ function DeckBuilderDeck({ userDeck, setUserDeck, selectedDeck, token }) {
             className='card-image'
             loading="lazy"
           />
-          <button onClick={() => handleRemove(card.id)}>Remove</button>
+          {selectedDeck && <button onClick={() => handleRemove(card.id)}>Remove</button>}
         </div>
       ))}
     </div>
