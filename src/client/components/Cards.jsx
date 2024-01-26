@@ -4,7 +4,7 @@ import "../App.css";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const Cards = ({ selectedDeck, fetchDeckCards, token }) => {
+const Cards = ({ selectedDeck, fetchDeckCards, token, userDeck }) => {
   const [cards, setCards] = useState([]);
   const [search, setSearch] = useState('');
   const [type, setType] = useState(''); 
@@ -34,6 +34,8 @@ const Cards = ({ selectedDeck, fetchDeckCards, token }) => {
     "Legendary Collection",
     "Base Set 2"
   ];
+
+  const MAX_DUPLICATES = 4;
   
   useEffect(() => {
     const fetchCards = async () => {
@@ -59,8 +61,32 @@ const Cards = ({ selectedDeck, fetchDeckCards, token }) => {
     alert(cardName + " was clicked");
   };
 
-  const handleAddButtonClick = (event, cardId, cardName) => {
+  //this function makes sure a card can be in a deck
+  const checkCard = (cardName, superType) => {
+
+    //if card is energy or trainer, add to deck
+    if(superType === "Energy"){
+      return true;
+    }
+
+    const count = userDeck.filter(card => card.card.name === cardName).length;
+
+    if(count < MAX_DUPLICATES){
+      return true;
+    }
+    return false;
+  }
+
+  const handleAddButtonClick = (event, cardId, cardName, superType) => {
     event.stopPropagation();
+    if(!checkCard(cardName, superType)){
+      toast.error("Cannot add more than 4 of the same cards")
+      return;
+    }
+    if(userDeck.length >= 60){
+      toast.error("Cannot have more than 60 cards on a deck");
+      return;
+    }
     if (!token) {
       toast.error("You must be logged in to add a card");
       return;
@@ -126,7 +152,7 @@ const Cards = ({ selectedDeck, fetchDeckCards, token }) => {
         {filteredCards.map(card => (
           <div key={card.id} className="card-cards" onClick={() => handleCardClick(card.name)} style={{ position: 'relative' }}>
             <img src={card.cardImage} alt={card.name} loading="lazy" />
-            <button className='add-button-cards' onClick={(event) => handleAddButtonClick(event, card.id, card.name)}>Add</button>
+            <button className='add-button-cards' onClick={(event) => handleAddButtonClick(event, card.id, card.name, card.superType, card.mainType)}>Add</button>
           </div>
         ))}
       </div>
