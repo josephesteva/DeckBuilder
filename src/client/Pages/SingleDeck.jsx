@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { jwtDecode } from 'jwt-decode';
 import { useParams } from 'react-router-dom';
 import DeckBuilderDeck from '../components/DeckBuilderDeck';
 import "../App.css";
@@ -14,15 +13,8 @@ function SingleDeck() {
 
 	//logged in users token and info
 	const token = localStorage.getItem('token');
-	let userId
-	let userName;
-
-	if (token) {
-		const decodedToken = jwtDecode(token);
-		// setUserid(decodedToken.id);
-		userId = decodedToken.userId;
-		userName = decodedToken.username;
-	}
+	const userId = localStorage.getItem('userId');
+	const userName = localStorage.getItem('userName');
 
 	// Fetches the cards of the selected deck and stores into userDeck
 	const fetchDeckCards = (deckId) => {

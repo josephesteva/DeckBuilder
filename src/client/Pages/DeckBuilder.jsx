@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { jwtDecode } from 'jwt-decode';
 import React, { useEffect, useState } from 'react';
 import Cards from '../components/Cards';
 import DeckBuilderNav from '../components/DeckBuilderNav';
@@ -16,14 +15,9 @@ const DeckBuilder = () => {
 
   //logged in users token and info
   const token = localStorage.getItem('token');
-  let userId;
-  let userName;
+  const userId = localStorage.getItem('userId');
+  const userName = localStorage.getItem('userName');
 
-  if(token){
-    const decodedToken = jwtDecode(token);
-    userId = decodedToken.id;
-    userName = decodedToken.username;
-  }
   //this function fetches all the decks of the logged in user
   const fetchDecks = () => {
     axios.get('api/decks/mydecks', {

@@ -11,6 +11,4 @@ const ExploreSearchBar = ({setSearch}) => {
     )
 }
 
-
-
 export default ExploreSearchBar;
