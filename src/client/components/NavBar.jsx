@@ -24,6 +24,7 @@ const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
     localStorage.removeItem('userName');
+    localStorage.removeItem('isAdmin');
     setIsLoggedIn(false);
     navigate("/");
   }

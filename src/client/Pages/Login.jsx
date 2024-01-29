@@ -34,6 +34,7 @@ const Login = ({ setIsLoggedIn }) => {
           const decodedToken = jwtDecode(data.token);
           localStorage.setItem('userId', decodedToken.id);
           localStorage.setItem('userName', decodedToken.username);
+          localStorage.setItem('isAdmin', decodedToken.isAdmin);
         }
         setIsLoggedIn(true);
         navigate("/");
