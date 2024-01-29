@@ -20,12 +20,27 @@ function SingleDeck() {
 	if (token) {
 		const decodedToken = jwtDecode(token);
 		// setUserid(decodedToken.id);
-		console.log("Infinite Loop");
 		userId = decodedToken.userId;
 		userName = decodedToken.username;
 	}
 
+	// Fetches the cards of the selected deck and stores into userDeck
+	const fetchDeckCards = (deckId) => {
+		axios.get(`/api/deckcards/${deckId}`, {
+			headers: {
+				Authorization: `Bearer ${token}`
+			}
+		})
+			.then(response => {
+				setUserDeck(response.data);
+			})
+			.catch(error => {
+				console.error(error);
+			});
+	};
+
 	useEffect(() => {
+		fetchDeckCards(id);
 		const getDeck = async () => {
 			try {
 				const { data: foundDeck } = await axios.get(`/api/decks/${id}`)
@@ -52,36 +67,6 @@ function SingleDeck() {
 			console.error(err);
 		}
 	}
-
-	// //logged in users token and info
-	// const token = localStorage.getItem('token');
-	// let userId
-	// let userName;
-	
-
-	// if (token) {
-	// 	const decodedToken = jwtDecode(token);
-	// 	// setUserid(decodedToken.id);
-	// 	console.log("Infinite Loop");
-	// 	userId = decodedToken.userId;
-	// 	userName = decodedToken.username;
-	// }
-
-	// Fetches the cards of the selected deck and stores into userDeck
-	const fetchDeckCards = (deckId) => {
-		axios.get(`/api/deckcards/${deckId}`, {
-			headers: {
-				Authorization: `Bearer ${token}`
-			}
-		})
-			.then(response => {
-				setUserDeck(response.data);
-			})
-			.catch(error => {
-				console.error(error);
-			});
-	};
-	fetchDeckCards(id);
 
 	if (!deck.id) {
 		return <div>Loading...</div>
