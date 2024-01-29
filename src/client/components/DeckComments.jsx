@@ -1,8 +1,9 @@
 import axios from 'axios';
 import "../App.css";
 import React, { useEffect, useState } from 'react';
+import Comment from './Comment';
 
-const DeckComments = ({id}) => {
+const DeckComments = ({ id }) => {
 	const [deckId, setDeckId] = useState(id)
 	const [commentThread, setCommentThread] = useState([])
 	const [content, setContent] = useState("")
@@ -10,7 +11,7 @@ const DeckComments = ({id}) => {
 	const getComments = async () => {
 		try {
 			console.log(deckId);
-			const {data} = await axios.get(`/api/comments/ondeck/${deckId}`)
+			const { data } = await axios.get(`/api/comments/ondeck/${deckId}`)
 			setCommentThread(data)
 			console.log(data)
 		} catch (err) {
@@ -47,27 +48,21 @@ const DeckComments = ({id}) => {
 	// 	} catch (err) {
 	// 		console.error(err);
 	// 	}
-		
+
 	// }
 
 	return (
 		<>
 			<div>
-				{/* <h4>Deck ID: </h4>
-				<input
-					placeholder="Deck ID here"
-					value={deckId}
-					onChange={(e) => setDeckId(e.target.value)}
-				/>
-				<hr /> */}
 				<h3>Comments</h3>
-				{/* <button onClick={handleShowComments}>Show Comments</button> */}
 				<div>
 					{commentThread.map((comment) => (
-						<div style={{border: "solid black .1em", margin: ".5em"}} key={comment.id} >
-							<p> {comment.content}</p>
-							<p> Posted by {comment.user.username} at {comment.date}</p>
-						</div>
+						<Comment comment={comment} />
+						// <div style={{border: "solid black .1em", margin: ".5em"}} key={comment.id} >
+						// 	<p> {comment.content}</p>
+						// 	<p> Posted by {comment.user.username} on {comment.date.slice(0, 10)}</p>
+						// 	<button>Edit comment</button>
+						// </div>
 					))}
 				</div>
 				<hr />
