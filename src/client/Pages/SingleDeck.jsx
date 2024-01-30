@@ -10,6 +10,7 @@ function SingleDeck() {
 	const [deck, setDeck] = useState({})
 	const [userDeck, setUserDeck] = useState([]);
 	// const [userId, setUserid] = useState(null)
+	console.log(deck);
 
 	//logged in users token and info
 	const token = localStorage.getItem('token');
@@ -68,6 +69,8 @@ function SingleDeck() {
 		<>
 			<h1>PokeDeck</h1>
 			<h1>{deck.name}</h1>
+			<h2>Trainer: {deck.user.username}</h2>
+
 			<button onClick={handleCreateLike}>👍 Like this Deck</button>
 			<h3>Likes: {deck.Like.length}</h3>
 			<DeckBuilderDeck
