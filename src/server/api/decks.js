@@ -74,6 +74,21 @@ router.get('/user/:userid', async (req, res, next) => {
 	}
 })
 
+//gets likes on a deck
+router.get('/likes/:id', async (req, res, next) => {
+	const deckId = +req.params.id;
+	try {
+		const likes = await prisma.like.findMany({
+			where: {
+				deckId
+			}
+		})
+		res.status(200).send(likes)
+	} catch (error) {
+		console.error(error);
+	}
+})
+
 // POST creates a new deck for the user assigned in the body
 router.post('/', async (req, res, next) => {
 	const {name, userId, description, numCards} = req.body;

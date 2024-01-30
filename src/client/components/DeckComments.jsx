@@ -10,10 +10,8 @@ const DeckComments = ({ id }) => {
 
 	const getComments = async () => {
 		try {
-			console.log(deckId);
 			const { data } = await axios.get(`/api/comments/ondeck/${deckId}`)
 			setCommentThread(data)
-			console.log(data)
 		} catch (err) {
 			console.error(err);
 		}
@@ -45,7 +43,7 @@ const DeckComments = ({ id }) => {
 				<h3>Comments</h3>
 				<div>
 					{commentThread.map((comment) => (
-						<Comment comment={comment} />
+						<Comment key={comment.id} comment={comment} />
 					))}
 				</div>
 				<hr />

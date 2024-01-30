@@ -29,7 +29,7 @@ function Comment({ comment, userId }) {
 
 	return (
 		<>
-			<div style={{ border: "solid black .1em", margin: ".5em" }} key={comment.id} >
+			<div style={{ border: "solid black .1em", margin: ".5em" }}>
 				{
 					!editing ? (
 						<p>{comment.content}</p>
