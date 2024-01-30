@@ -1,6 +1,17 @@
 import React from 'react'
 import axios from 'axios';
+import { useState } from 'react';
+
+
 function DeckBuilderDeck({ userDeck, setUserDeck, selectedDeck, token }) {
+  
+  const [flexWrap, setFlexWrap] = useState(false);
+
+  const handleToggle = () => {
+    setFlexWrap(!flexWrap);
+    console.log("clicked")
+  };
+  
   //Handles when a card is removed from the selected deck
   const handleRemove = (cardId) => {
     axios.delete(`/api/deckcards/${cardId}`, {
@@ -17,7 +28,9 @@ function DeckBuilderDeck({ userDeck, setUserDeck, selectedDeck, token }) {
       });
   };
   return (
-    <div className="user-deck-container">
+    <div>
+    <button onClick={handleToggle}>Change View</button>
+    <div className={`user-deck-container ${flexWrap ? 'flex-wrap' : ''}`}>
       {userDeck.map((card) => (
         <div key={card.id} className='card-container'>
           <img
@@ -29,6 +42,7 @@ function DeckBuilderDeck({ userDeck, setUserDeck, selectedDeck, token }) {
           {selectedDeck && <button onClick={() => handleRemove(card.id)}>Remove</button>}
         </div>
       ))}
+    </div>
     </div>
   )
 }
