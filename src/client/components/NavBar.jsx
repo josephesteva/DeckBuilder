@@ -20,6 +20,10 @@ const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
     navigate("/explore");
   }
 
+  const handleAdminClick = () => {
+    navigate("/admin");
+  }
+
   const handleLogoutClick = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
@@ -42,6 +46,7 @@ const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
           <button onClick={handleLogoutClick}>Logout</button>
           <button onClick={handleDeckBuilderClick}>Deck Builder</button>
           <button onClick={handleAccountClick}>Account Page</button>
+          {localStorage.getItem('isAdmin') && <button onClick={handleAdminClick}>Admin</button>}
         </>
       ) : (
         <>
@@ -49,7 +54,7 @@ const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
           <button onClick={handleRegisterClick}>Register</button>
         </>
       )}
-
+  
       <button onClick={handleExploreClick}>Explore</button>
     </nav>
   )
