@@ -49,7 +49,8 @@ router.get('/:id', async (req, res, next) => {
 				id: +id,
 			},
 			include: {
-				Like: true
+				Like: true,
+				user: true
 			}
 		})
 		res.status(200).send(deck)
