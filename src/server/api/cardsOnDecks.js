@@ -57,23 +57,19 @@ router.post('/', async (req, res, next) => {
 	}
 })
 
-// DELETE removes a card from a deck
-router.delete('/', async (req, res, next) => {
-	const {deckId, cardId} = req.body;
+router.delete('/:id', async (req, res, next) => {
+	const id = +req.params.id;
 	try {
-		const removedCard = await prisma.cardsOnDecks.delete({
-			where: {
-				cardId_deckId: {
-					cardId: +cardId,
-					deckId: +deckId
-				}
-			}
-		})
-		res.send(removedCard);
+	  const card = await prisma.cardsOnDecks.delete({
+		where: {
+		  id
+		}
+	  })
+	  res.status(200).send(card);
 	} catch (err) {
-		console.error(err);
+	  console.error(err);
 	}
-})
+  })
 
 // removes all cards from a deck
 router.delete('/cleardeck', async (req, res, next) => {

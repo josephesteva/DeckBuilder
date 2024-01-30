@@ -1,33 +1,37 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const NavBar = ({isLoggedIn,setIsLoggedIn}) => {
-    const navigate = useNavigate();
-    const handleHomeClick = () => {
-        navigate("/");
-    }
-    const handleLoginClick = () => {
-        navigate("/login");
-    }
-    const handleRegisterClick = () => {
-        navigate("/register");
-    }
-    const handleAccountClick = () => {
-        navigate("/account");
-    }
+const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
+  const navigate = useNavigate();
+  const handleHomeClick = () => {
+    navigate("/");
+  }
+  const handleLoginClick = () => {
+    navigate("/login");
+  }
+  const handleRegisterClick = () => {
+    navigate("/register");
+  }
+  const handleAccountClick = () => {
+    navigate("/account");
+  }
 
-    const handleExploreClick = () => {
-        navigate("/explore");
-    }
+  const handleExploreClick = () => {
+    navigate("/explore");
+  }
 
-    const handleLogoutClick = () => {
-        localStorage.removeItem('token');
-        navigate("/");
-    }
+  const handleLogoutClick = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('userName');
+    localStorage.removeItem('isAdmin');
+    setIsLoggedIn(false);
+    navigate("/");
+  }
 
-    const handleDeckBuilderClick = () =>{
-        navigate("/deckbuilder");
-    }
+  const handleDeckBuilderClick = () => {
+    navigate("/deckbuilder");
+  }
 
 
     return (
@@ -46,9 +50,9 @@ const NavBar = ({isLoggedIn,setIsLoggedIn}) => {
                     </>
                 )}
 
-            <button onClick={handleExploreClick}>Explore</button>
-        </nav>
-    )
+      <button onClick={handleExploreClick}>Explore</button>
+    </nav>
+  )
 }
 
 export default NavBar;
