@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 
 
-const Register = ({ setIsLoggedIn }) => {
+const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
@@ -38,7 +38,6 @@ const Register = ({ setIsLoggedIn }) => {
           localStorage.setItem('userName', decodedToken.username);
 					localStorage.setItem('isAdmin', decodedToken.isAdmin);
         }
-        setIsLoggedIn(true);
         navigate("/");
       } else {
         const errorData = await response.json();
