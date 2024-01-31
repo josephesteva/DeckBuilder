@@ -1,17 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import "../styles/AdminPage.css";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function UserModal({ userId, onClose }) {
   const [user, setUser] = useState(null);
   const [decks, setDecks] = useState([]);
   const [comments, setComments] = useState([]);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const token = localStorage.getItem('token');
 
   //fetch clicked user
   useEffect(() => {
     axios.get(`api/users/${userId}`)
       .then(response => {
         setUser(response.data);
+        setIsAdmin(response.data.isAdmin);
       })
       .catch(error => {
         console.error('There was an error!', error);
@@ -45,6 +50,8 @@ function UserModal({ userId, onClose }) {
     axios.delete(`api/decks/${deckId}`)
       .then(() => {
         setDecks(decks.filter(deck => deck.id !== deckId));
+        toast.success("Deck Deleted");
+
       })
       .catch(error => {
         console.error('There was an error!', error);
@@ -56,6 +63,7 @@ function UserModal({ userId, onClose }) {
     axios.delete(`api/comments/${commentId}`)
       .then(() => {
         setComments(comments.filter(comment => comment.id !== commentId));
+        toast.success("Comment Deleted");
       })
       .catch(error => {
         console.error('There was an error!', error);
@@ -63,12 +71,32 @@ function UserModal({ userId, onClose }) {
   };
 
   const makeAdmin = (userId) => {
-    window.alert("Need to implement this");
+  const newAdmin = axios.post(`api/users/giveAdmin/${userId}`, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  })
+    .then(() => {
+      setIsAdmin(true);
+      toast.success("User is now an admin");
+
+    })
+    .catch(error => {
+      window.alert("ruh");
+      console.error('There was an error!', error);
+    });
   }
 
   const banUser = (userId) => {
-    window.alert("Need to implement this");
-  }
+    axios.delete(`api/users/${userId}`)
+      .then(() => {
+        toast.success("User has been banned!");
+        onClose(userId);
+      })
+      .catch(error => {
+        console.error('There was an error!', error);
+      });
+  };
 
   return (
     <div className='modal'>
@@ -79,11 +107,11 @@ function UserModal({ userId, onClose }) {
             {/* general user information */}
             <h2>
               {user.username} 
-              {!user.isAdmin && <button className='make-admin-button' onClick={() => makeAdmin(user.id)}>Make Admin</button>}
-              {!user.isAdmin && <button className='ban-button' onClick={() => banUser(user.id)}>Ban User</button>}
+              {!isAdmin && <button className='make-admin-button' onClick={() => makeAdmin(user.id)}>Make Admin</button>}
+              {!isAdmin && <button className='ban-button' onClick={() => banUser(user.id)}>Ban User</button>}
             </h2>
             <p>Email: {user.email}</p>
-            <p>Is Admin: {user.isAdmin ? 'Yes' : 'No'}</p>
+            <p>Is Admin: {isAdmin ? 'Yes' : 'No'}</p>
             <h3>User's Decks:</h3>
 
             {/* renders users decks with a delete button on each*/}

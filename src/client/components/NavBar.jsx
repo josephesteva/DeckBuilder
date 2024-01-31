@@ -46,7 +46,7 @@ const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
           <button onClick={handleLogoutClick}>Logout</button>
           <button onClick={handleDeckBuilderClick}>Deck Builder</button>
           <button onClick={handleAccountClick}>Account Page</button>
-          {localStorage.getItem('isAdmin') && <button onClick={handleAdminClick}>Admin</button>}
+          {localStorage.getItem('isAdmin') === 'true' && <button onClick={handleAdminClick}>Admin</button>}
         </>
       ) : (
         <>
