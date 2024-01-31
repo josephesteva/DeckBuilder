@@ -24,11 +24,14 @@ function AdminPage() {
   //open user info modal
   const handleThumbnailClick = (userId) => {
     setSelectedUserId(userId);
+
   };
 
   //close user info modal
-  const handleCloseModal = () => {
+  const handleCloseModal = (userId) => {
     setSelectedUserId(null);
+    setUsers(users.filter(user => user.id !== userId));
+
   };
 
   return (
