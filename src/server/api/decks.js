@@ -152,7 +152,24 @@ router.post('/like/:id', verify, async (req, res, next) => {
 	}
 })
 
+// DELETE
 // Delete deletes an existing deck by id
+
+router.delete('/like/:id', async (req, res, next) => {
+	const id = +req.params.id;
+	try {
+		const deletedLike = await prisma.like.delete({
+			where: {
+				id
+			}
+		})
+		res.send(deletedLike)
+	} catch (error) {
+		console.error(error);
+	}
+})
+
+
 router.delete('/:id', async (req, res, next) => {
 	const {id} = req.params;
 	try{
@@ -164,6 +181,21 @@ router.delete('/:id', async (req, res, next) => {
 		res.status(200).send(deletedDeck)
 	} catch (err) {
 		console.error(err);
+	}
+})
+
+
+router.delete('like/:id', async (req, res, next) => {
+	const id = +req.params.id;
+	try {
+		const deletedLike = await prisma.like.delete({
+			where: {
+				id
+			}
+		})
+		res.send("Success")
+	} catch (error) {
+		console.error(error);
 	}
 })
 

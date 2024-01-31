@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import DeckBuilderDeck from '../components/DeckBuilderDeck';
 import "../App.css";
 import DeckComments from '../components/DeckComments';
-import Likes from '../components/Likes';
+import DeckLikes from '../components/DeckLikes';
 
 function SingleDeck() {
 	const { id } = useParams();
@@ -79,10 +79,8 @@ function SingleDeck() {
 			<h1>{deck.name}</h1>
 			<h2>Trainer: {deck.user.username}</h2>
 			<hr></hr>
-			<Likes id = {id}/>
+			<DeckLikes id = {id}/>
 			<hr></hr>
-			<button onClick={handleCreateLike}>👍 Like this Deck</button>
-			<h3>Likes: {deck.Like.length}</h3>
 			<DeckBuilderDeck
 				userDeck={userDeck}
 				token={token}

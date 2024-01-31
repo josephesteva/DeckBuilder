@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 
-function Likes({id}) {
+function Likes({ id }) {
 	const [likes, setLikes] = useState([]);
+	const [userLike, setUserLike] = useState({})
 	const [likeStatus, setLikeStatus] = useState(false)
 
 	const handleCreateLike = async () => {
@@ -20,31 +21,46 @@ function Likes({id}) {
 		}
 	}
 
+	const handleUnlike = async () => {
+		try {
+			const { data: unlike } = await axios.delete(`/api/decks/like/${userLike.id}`)
+			setUserLike({})
+			setLikeStatus(false)
+			fetchLikes()
+		} catch (error) {
+			console.error(error);
+		}
+	}
+
 	const fetchLikes = async () => {
-		const {data: likeArray} = await axios.get(`/api/decks/likes/${id}`)
-		console.log({likes: likeArray});
+		const { data: likeArray } = await axios.get(`/api/decks/likes/${id}`)
 		setLikes(likeArray)
 	}
 
-	useEffect(()=> {
+	useEffect(() => {
 		fetchLikes();
 	}, [])
 
-	useEffect(()=> {
-		const likeByUser = likes.find(({userId}) => userId == localStorage.getItem('userId'))
-		console.log(likeByUser);
-		setLikeStatus(likeByUser)
+	useEffect(() => {
+		const likeByUser = likes.find(({ userId }) => userId == localStorage.getItem('userId'))
+		setUserLike(likeByUser)
+		if (likeByUser) {
+			setLikeStatus(true)
+		}
 	}, [likes])
 
 	return (
 		<>
-		<h2>Likes: {likes.length}</h2>
-		{likeStatus ? (
-			<p>This user liked this deck</p>
-		) : (
-			<p>User has not liked this deck</p>
-		)}
-		<button onClick={handleCreateLike}>👍 Like this Deck</button>
+			<h2>Likes: {likes.length}</h2>
+			{likeStatus ? (
+				<>
+					<button style={{ backgroundColor: "#00A86B" }} onClick={handleUnlike}>👍 Liked</button>
+				</>
+			) : (
+				<>
+					<button onClick={handleCreateLike}>👍 Like</button>
+				</>
+			)}
 		</>
 	)
 }
