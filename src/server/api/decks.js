@@ -74,6 +74,21 @@ router.get('/user/:userid', async (req, res, next) => {
 	}
 })
 
+//gets likes on a deck
+router.get('/likes/:id', async (req, res, next) => {
+	const deckId = +req.params.id;
+	try {
+		const likes = await prisma.like.findMany({
+			where: {
+				deckId
+			}
+		})
+		res.status(200).send(likes)
+	} catch (error) {
+		console.error(error);
+	}
+})
+
 // POST creates a new deck for the user assigned in the body
 router.post('/', async (req, res, next) => {
 	const {name, userId, description, numCards} = req.body;
@@ -137,7 +152,24 @@ router.post('/like/:id', verify, async (req, res, next) => {
 	}
 })
 
+// DELETE
 // Delete deletes an existing deck by id
+
+router.delete('/like/:id', async (req, res, next) => {
+	const id = +req.params.id;
+	try {
+		const deletedLike = await prisma.like.delete({
+			where: {
+				id
+			}
+		})
+		res.send(deletedLike)
+	} catch (error) {
+		console.error(error);
+	}
+})
+
+
 router.delete('/:id', async (req, res, next) => {
 	const {id} = req.params;
 	try{
@@ -149,6 +181,21 @@ router.delete('/:id', async (req, res, next) => {
 		res.status(200).send(deletedDeck)
 	} catch (err) {
 		console.error(err);
+	}
+})
+
+
+router.delete('like/:id', async (req, res, next) => {
+	const id = +req.params.id;
+	try {
+		const deletedLike = await prisma.like.delete({
+			where: {
+				id
+			}
+		})
+		res.send("Success")
+	} catch (error) {
+		console.error(error);
 	}
 })
 
