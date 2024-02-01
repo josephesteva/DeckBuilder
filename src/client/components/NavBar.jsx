@@ -37,24 +37,6 @@ const NavBar = () => {
   }
 
 
-<<<<<<< HEAD
-    return (
-        <nav className='navbar'>
-            <button onClick={handleHomeClick}>Home</button>
-            {localStorage.getItem('token') ? (
-                    <>
-                        <button onClick={handleLogoutClick}>Logout</button>
-                        <button onClick={handleDeckBuilderClick}>Deck Builder</button>
-                        <button onClick={handleAccountClick}>Account Page</button>
-                    </>
-                ) : (
-                    <>
-                        <button onClick={handleLoginClick}>Login</button>
-                        <button onClick={handleRegisterClick}>Register</button>
-                    </>
-                )}
-
-=======
   return (
     <nav className='navbar'>
       <button onClick={handleHomeClick}>Home</button>
@@ -72,7 +54,6 @@ const NavBar = () => {
         </>
       )}
   
->>>>>>> 598a437339b2cb6d27b6147492653b84531b76bd
       <button onClick={handleExploreClick}>Explore</button>
     </nav>
   )
