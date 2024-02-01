@@ -80,7 +80,10 @@ router.patch('/registertemp/:id', async (req, res, next) => {
 				isTemp: false
 			}
 		})
-		res.status(200).send(user)
+		const token = jwt.sign({id: user.id, username: user.username, isAdmin: user.isAdmin, isTemp: user.isTemp},
+			process.env.JWT_SECRET)
+		console.log(user);
+		res.status(200).send(token)
 	} catch (error) {
 		console.error(error);
 	}
