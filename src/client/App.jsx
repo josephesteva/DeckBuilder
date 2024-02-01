@@ -8,6 +8,7 @@ import NavBar from './components/NavBar';
 import DeckBuilder from "./Pages/DeckBuilder";
 import Explore from "./Pages/Explore";
 import AccountInfo from "./Pages/AccountInfo";
+import Profile from "./Pages/Profile";
 import DeckComments from "./components/DeckComments";
 import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -25,6 +26,7 @@ function App() {
         <Route path="/login" element={<Login/>} />
         <Route path="/register" element={<Register/>} />
         <Route path="/account" element={<AccountInfo />} />
+        <Route path="/account/:id" element={<Profile />} />
         <Route path="/deckbuilder" element={<DeckBuilder />} />
         <Route path="/explore" element={<Explore />} />
 				<Route path="/deckcomments" element={<DeckComments />} />

@@ -5,6 +5,7 @@ export default function AccountInfo() {
   const [userInfo, setUserInfo] = useState(null);
   const [userDecks, setUserDecks] = useState(null);
   const [showUpdate, setShowUpdate] = useState(false);
+  const [deleteConfirm, setDeleteConfirm] = useState(false);
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const navigate = useNavigate();
@@ -63,22 +64,25 @@ export default function AccountInfo() {
     }
   }
 
-  /*   const deleteAccount = async () => {
+     const deleteAccount = async () => {
          try{
-             const response = await fetch(`http://localhost:3000/api/users/${localStorage.getItem('userId')}`,
+             const response = await fetch(`/api/users/${localStorage.getItem('userId')}`,
                                          {
                                              method: "DELETE",
                                              headers: {"Authorization": `Bearer ${localStorage.getItem('token')}`},
                                          });
              const result = await response.json()
              console.log(result);
-             logout();
-             navigate(-1);
+             localStorage.removeItem('token');
+             localStorage.removeItem('userId');
+             localStorage.removeItem('userName');
+             localStorage.removeItem('isAdmin');
+             navigate("/");
          } catch (error){
              console.error('Failed to delete user:', error);          
          }
  
-     } */
+     }
 
   if (!userInfo) {
     return <div>Loading...</div>; // Display while data is loading
@@ -119,7 +123,14 @@ export default function AccountInfo() {
           <button type="submit">Update</button>
           <button type="button" onClick={() => setShowUpdate(false)}>Cancel</button>
         </form>}
-      <button>Delete Account</button>
+      <button onClick={() => setDeleteConfirm(true)}>Delete Account</button>
+      {deleteConfirm &&
+        <>
+          <h2>Are you sure you want to delete your account?</h2>
+            <button onClick={() => deleteAccount()}>I'm Sure</button>
+            <button onClick={() => setDeleteConfirm(false)}>Cancel</button>
+        </>
+      }
       <button onClick={() => navigate(-1)}>Go Back</button>
     </section>
   );

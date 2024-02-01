@@ -41,6 +41,11 @@ router.get('/:id', async (req, res, next) => {
       where: {
         id: +id,
       },
+      include: {
+        followers: true,
+        following: true,
+        comments: true,
+      },
     })
     res.status(200).send(user);
   } catch (err) {
@@ -87,7 +92,8 @@ router.post("/giveAdmin/:id", async (req, res, next) => {
 });
 
 //delete a user
-router.delete('/:id', async (req, res) => {
+// restricted to authenticated users
+router.delete('/:id', verify, async (req, res) => {
   const { id } = req.params;
   
   try {
