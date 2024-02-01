@@ -20,7 +20,7 @@ router.post('/register', async (req, res, next) => {
 				isAdmin: false
 			}
 		});
-		const token = jwt.sign({id: user.id, username: user.username, isAdmin: user.isAdmin},
+		const token = jwt.sign({id: user.id, username: user.username, isAdmin: user.isAdmin, isTemp: user.isTemp},
 			process.env.JWT_SECRET)
 		res.status(201).send({token})
 	} catch (err) {
@@ -54,12 +54,38 @@ router.post('/login', async (req, res, next) => {
 			return
 		}
 
-		const token = jwt.sign({id: user.id, username: user.username, isAdmin: user.isAdmin},
+		const token = jwt.sign({id: user.id, username: user.username, isAdmin: user.isAdmin, isTemp: user.isTemp},
 			process.env.JWT_SECRET)
 		res.status(200).send({token})
 	} catch (err) {
 		console.error(err);
 	}
 })
+
+// PATCH
+router.patch('/registertemp/:id', async (req, res, next) => {
+	const id = +req.params.id;
+	const {username, email, password} = req.body;
+	const SALT_ROUNDS = 5
+	const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS)
+	try {
+		const user = await prisma.user.update({
+			where: {
+				id
+			},
+			data: {
+				username, 
+				email,
+				password: hashedPassword,
+				isTemp: false
+			}
+		})
+		res.status(200).send(user)
+	} catch (error) {
+		console.error(error);
+	}
+})
+
+
 
 module.exports = router;
