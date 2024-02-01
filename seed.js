@@ -32,15 +32,17 @@ async function main() {
 
 
     // create admin
+    const hashedPassword = await bcrypt.hash('123', SALT_ROUNDS);
+
     const admin = await prisma.user.create({
         data: {
             username: "Admin",
             email: "admin@gmail.com",
-            password: "123",
+            password: hashedPassword,
             isAdmin: true,
         },
     })
-    console.log("admin seeded sucessfully!");
+    console.log("admin seeded sucessfully! " + admin.username);
 
     //decks
     let decks = [];

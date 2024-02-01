@@ -12,6 +12,7 @@ import DeckComments from "./components/DeckComments";
 import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import SingleDeck from "./Pages/SingleDeck";
+import AdminPage from "./Pages/AdminPage";
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
         <Route path="/explore" element={<Explore />} />
 				<Route path="/deckcomments" element={<DeckComments />} />
 				<Route path="/deck/:id" element={<SingleDeck />} />
+        <Route path="admin" element={<AdminPage />} />
       </Routes>
       <ToastContainer autoClose={1000}/>
     </Router> 

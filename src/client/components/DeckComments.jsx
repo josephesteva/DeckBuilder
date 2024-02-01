@@ -10,10 +10,8 @@ const DeckComments = ({ id }) => {
 
 	const getComments = async () => {
 		try {
-			console.log(deckId);
 			const { data } = await axios.get(`/api/comments/ondeck/${deckId}`)
 			setCommentThread(data)
-			console.log(data)
 		} catch (err) {
 			console.error(err);
 		}
@@ -39,30 +37,13 @@ const DeckComments = ({ id }) => {
 		}
 	}
 
-	// const handleShowComments = async () => {
-	// 	try {
-	// 		console.log(deckId);
-	// 		const {data} = await axios.get(`/api/comments/ondeck/${deckId}`)
-	// 		setCommentThread(data)
-	// 		console.log(data)
-	// 	} catch (err) {
-	// 		console.error(err);
-	// 	}
-
-	// }
-
 	return (
 		<>
 			<div>
 				<h3>Comments</h3>
 				<div>
 					{commentThread.map((comment) => (
-						<Comment comment={comment} />
-						// <div style={{border: "solid black .1em", margin: ".5em"}} key={comment.id} >
-						// 	<p> {comment.content}</p>
-						// 	<p> Posted by {comment.user.username} on {comment.date.slice(0, 10)}</p>
-						// 	<button>Edit comment</button>
-						// </div>
+						<Comment key={comment.id} comment={comment} />
 					))}
 				</div>
 				<hr />

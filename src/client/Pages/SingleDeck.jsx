@@ -4,11 +4,13 @@ import { useParams } from 'react-router-dom';
 import DeckBuilderDeck from '../components/DeckBuilderDeck';
 import "../App.css";
 import DeckComments from '../components/DeckComments';
+import DeckLikes from '../components/DeckLikes';
 
 function SingleDeck() {
 	const { id } = useParams();
 	const [deck, setDeck] = useState({})
 	const [userDeck, setUserDeck] = useState([]);
+	const [likeStatus, setLikeStatus] = useState(null)
 	// const [userId, setUserid] = useState(null)
 
 	//logged in users token and info
@@ -32,16 +34,24 @@ function SingleDeck() {
 	};
 
 	useEffect(() => {
-		fetchDeckCards(id);
 		const getDeck = async () => {
 			try {
 				const { data: foundDeck } = await axios.get(`/api/decks/${id}`)
 				setDeck(foundDeck)
+				console.log({deck: foundDeck});
 			} catch (err) {
 				console.error(err);
 			}
 		}
 		getDeck();
+		const fetchLikeStatus = () => {
+			const isLiked = deck.Like.find(({userId})=>userId === userId)
+			console.log({status: isLiked});
+		}
+		if (deck.id) {
+			fetchLikeStatus()};
+		fetchDeckCards(id);
+
 	}, [token])
 
 	const handleCreateLike = async () => {
@@ -54,7 +64,6 @@ function SingleDeck() {
 					}
 				})
 			setDeck({ ...deck, Like: [...deck.Like, like] })
-			console.log(like);
 		} catch (err) {
 			console.error(err);
 		}
@@ -68,8 +77,10 @@ function SingleDeck() {
 		<>
 			<h1>PokeDeck</h1>
 			<h1>{deck.name}</h1>
-			<button onClick={handleCreateLike}>👍 Like this Deck</button>
-			<h3>Likes: {deck.Like.length}</h3>
+			<h2>Trainer: {deck.user.username}</h2>
+			<hr></hr>
+			<DeckLikes id = {id}/>
+			<hr></hr>
 			<DeckBuilderDeck
 				userDeck={userDeck}
 				token={token}

@@ -8,7 +8,6 @@ const ExploreCards = ({ deckOfCards }) => {
             src={card.card.cardImage}
             alt={card.card.name}
             className='card-image2'
-            loading="lazy"
           />
         </div>
       ))}

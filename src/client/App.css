@@ -83,7 +83,6 @@ body, html {
   overflow-y: auto;
   max-height: 80vh;
   border: 2px solid #dfe1e5;
-  justify-content: center;
   align-items: center;
 }
 
@@ -162,6 +161,11 @@ body, html {
 
 .select-container{
   display: flex;
+}
+
+
+.flex-wrap {
+  flex-wrap: wrap;
 }
 
 
