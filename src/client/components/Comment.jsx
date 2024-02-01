@@ -7,6 +7,7 @@ function Comment({ comment, userId }) {
 	// console.log(comment)
 
 	const handleEditClick = () => {
+		setEditComment(comment.content)
 		setEditing(!editing)
 	}
 

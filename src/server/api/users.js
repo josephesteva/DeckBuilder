@@ -86,6 +86,44 @@ router.post("/giveAdmin/:id", async (req, res, next) => {
   }
 });
 
+// PATCH
+// changes a users admin status
+router.patch('/admin/:id', async (req, res, next) => {
+	const id = +req.params.id;
+	try {
+		const user = await prisma.user.findUnique({
+			where: {
+				id
+			}
+		})
+
+		if (user.isAdmin == true) {
+			const updatedUser = await prisma.user.update({
+				where: {
+					id
+				},
+				data: {
+					isAdmin: false
+				}
+			}) 
+			res.status(200).send(updatedUser)
+		} else {
+			const updatedUser = await prisma.user.update({
+				where: {
+					id
+				},
+				data: {
+					isAdmin: true
+				}
+			}) 
+			res.status(200).send(updatedUser)
+		}
+
+	} catch (error) {
+		console.error(error);
+	}
+})
+
 //delete a user
 router.delete('/:id', async (req, res) => {
   const { id } = req.params;
