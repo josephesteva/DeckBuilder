@@ -1,9 +1,10 @@
 import axios from 'axios'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 function Comment({ comment, userId }) {
 	const [editComment, setEditComment] = useState(comment.content)
 	const [editing, setEditing] = useState(false)
+	const [date, setDate] = useState("")
 	// console.log(comment)
 
 	const handleEditClick = () => {
@@ -47,7 +48,7 @@ function Comment({ comment, userId }) {
 						</>
 					)
 				}
-				<p> Posted by {comment.user.username} on {comment.date.slice(0, 10)}</p>
+				<p> Posted by {comment.user.username} on {Date(comment.date).slice(0, 24)}</p>
 				{comment.userId == localStorage.getItem('userId') && !editing ?
 					(
 						<button onClick={handleEditClick}>Edit Comment</button>
