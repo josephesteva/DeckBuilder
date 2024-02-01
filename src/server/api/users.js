@@ -1,5 +1,6 @@
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient()
+const { faker } = require('@faker-js/faker');
 
 const router = require('express').Router();
 const verify = require('../util.js')
@@ -69,7 +70,27 @@ router.put('/', verify, async (req, res, next) => {
   }
 });
 
-//give a user admin
+// POST
+// creates a temporary user that can be used to try the website out 
+router.post('/temp', async (req, res, next) => {
+	try {
+		const tempUser = await prisma.user.create({
+			data: {
+				username: faker.internet.userName(),
+				email: faker.internet.userName(),
+				password: faker.internet.password(),
+				isAdmin: false,
+				isTemp: true
+			}
+		})
+		res.status(201).send(tempUser)
+	} catch (error) {
+		console.error(error);
+	}
+})
+
+// TODO delete this endpoint after front end updates to use admin patch
+// give a user admin
 router.post("/giveAdmin/:id", async (req, res, next) => {
   const userId = parseInt(req.params.id);
 
@@ -85,6 +106,44 @@ router.post("/giveAdmin/:id", async (req, res, next) => {
     res.json(error);
   }
 });
+
+// PATCH
+// changes a users admin status
+router.patch('/admin/:id', async (req, res, next) => {
+	const id = +req.params.id;
+	try {
+		const user = await prisma.user.findUnique({
+			where: {
+				id
+			}
+		})
+
+		if (user.isAdmin == true) {
+			const updatedUser = await prisma.user.update({
+				where: {
+					id
+				},
+				data: {
+					isAdmin: false
+				}
+			}) 
+			res.status(200).send(updatedUser)
+		} else {
+			const updatedUser = await prisma.user.update({
+				where: {
+					id
+				},
+				data: {
+					isAdmin: true
+				}
+			}) 
+			res.status(200).send(updatedUser)
+		}
+
+	} catch (error) {
+		console.error(error);
+	}
+})
 
 //delete a user
 router.delete('/:id', async (req, res) => {
