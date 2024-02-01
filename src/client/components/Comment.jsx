@@ -5,12 +5,16 @@ function Comment({ comment, userId }) {
 	const [editComment, setEditComment] = useState(comment.content)
 	const [editing, setEditing] = useState(false)
 	const [date, setDate] = useState("")
-	// console.log(comment)
 
 	const handleEditClick = () => {
 		setEditComment(comment.content)
 		setEditing(!editing)
 	}
+
+	useEffect(() => {
+		const jsDate = new Date(comment.date)
+		setDate(String(jsDate))
+	}, [])
 
 	const handleUpdateComment = async () => {
 		console.log(editComment);
@@ -48,7 +52,7 @@ function Comment({ comment, userId }) {
 						</>
 					)
 				}
-				<p> Posted by {comment.user.username} on {Date(comment.date).slice(0, 24)}</p>
+				<p> Posted by {comment.user.username} on {date.slice(0, 24)}</p>
 				{comment.userId == localStorage.getItem('userId') && !editing ?
 					(
 						<button onClick={handleEditClick}>Edit Comment</button>
