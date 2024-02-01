@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
+const NavBar = () => {
   const navigate = useNavigate();
   const handleHomeClick = () => {
     navigate("/");
@@ -29,7 +29,6 @@ const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
     localStorage.removeItem('userId');
     localStorage.removeItem('userName');
     localStorage.removeItem('isAdmin');
-    setIsLoggedIn(false);
     navigate("/");
   }
 
