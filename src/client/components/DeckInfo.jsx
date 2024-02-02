@@ -12,20 +12,24 @@ function DeckInfo({ deck }) {
 		setEditingName(!editingName)
 	}
 
+	const handleEditDescription = () => {
+		setTempDescription(deck.description)
+		setEditingDescription(!editingDescription)
+	}
+
 	const handleUpdateName = async () => {
 		try {
-			console.log(deck.id);
 			const { data } = await axios.patch(`/api/decks/${deck.id}`,
 				{
 					name: tempName,
 					description: deck.description
 				},
 				{
-					headers: { 
-						Authorization: "Bearer " + window.localStorage.getItem('token') 
+					headers: {
+						Authorization: "Bearer " + window.localStorage.getItem('token')
 					}
 				})
-				console.log(data);
+			console.log(data);
 		} catch (error) {
 			console.error(error);
 		}
@@ -33,17 +37,34 @@ function DeckInfo({ deck }) {
 		setEditingName(!editingName)
 	}
 
+	const handleUpdateDescription = async () => {
+		try {
+			const {data} = await axios.patch(`/api/decks/${deck.id}`,
+			{
+				name: deck.name,
+				description: tempDescription
+			},
+			{
+				headers: {
+					Authorization: "Bearer " + window.localStorage.getItem('token')
+				}
+			})
+			console.log(data);
+		} catch (error) {
+			console.error(error);
+		}
+		deck.description = tempDescription
+		setEditingDescription(!editingDescription)
+	}
+
 	return (
 		<>
 			<div>DeckInfo</div>
-			<h2>{deck.name}</h2>
-			<h3>Trainer: {deck.user.username}</h3>
-			<h4>{deck.description}</h4>
 			{deck.user.id == window.localStorage.getItem('userId') ? (
 				<>
 					{!editingName ? (
 						<>
-							<h2>{deck.name}</h2>
+							<h1>{deck.name}</h1>
 							<button onClick={handleEditName}>Edit Name</button>
 						</>
 					) : (
@@ -56,16 +77,30 @@ function DeckInfo({ deck }) {
 							<button onClick={handleEditName}>Discard changes</button>
 						</>
 					)}
-					<h3>Trainer: {deck.user.username}</h3>
-					<h4>{deck.description}</h4>
-					<button>Edit Description</button>
+					<h2>Trainer: {deck.user.username}</h2>
+					{!editingDescription ? (
+						<>
+							<h3>{deck.description}</h3>
+							<button onClick={handleEditDescription}>Edit Description</button>
+						</>
+					) : (
+						<>
+							<textarea
+								value={tempDescription}
+								onChange={(e) => setTempDescription(e.target.value)}
+								style={{ height: "100px", width: "300px" }}
+							/>
+							<button onClick = {handleUpdateDescription}>Save Changes</button>
+							<button onClick={handleEditDescription}>Discard Chages</button>
+						</>
+					)}
 					<p>The current user owns this deck</p>
 				</>
 			) : (
 				<>
-					<h2>{deck.name}</h2>
-					<h3>Trainer: {deck.user.username}</h3>
-					<h4>{deck.description}</h4>
+					<h1>{deck.name}</h1>
+					<h2>Trainer: {deck.user.username}</h2>
+					<h3>{deck.description}</h3>
 					<p>NOT MY DECK</p>
 				</>
 			)}
