@@ -22,19 +22,24 @@ const DeckComments = ({ id }) => {
 	}, [])
 
 	const handleCreateComment = async () => {
-		try {
-			const { data: comment } = await axios.post("/api/comments/currentuser",
+		if (content) {
+			try {
+				const { data: comment } = await axios.post("/api/comments/currentuser",
 				{ deckId, content },
 				{
 					headers: {
 						Authorization: "Bearer " + window.localStorage.getItem("token"),
 					}
 				});
-			getComments();
-			console.log(comment);
-		} catch (err) {
-			console.error(err);
-		}
+				getComments();
+				setContent("")
+				console.log(comment);
+			} catch (err) {
+				console.error(err);
+			}
+		 } else {
+				console.log("Comment must have info in it");
+	}
 	}
 
 	return (

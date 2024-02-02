@@ -2,12 +2,12 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 
 function Comment({ comment, userId }) {
-	const [editComment, setEditComment] = useState(comment.content)
+	const [tempComment, setTempComment] = useState(comment.content)
 	const [editing, setEditing] = useState(false)
 	const [date, setDate] = useState("")
 
 	const handleEditClick = () => {
-		setEditComment(comment.content)
+		setTempComment(comment.content)
 		setEditing(!editing)
 	}
 
@@ -17,18 +17,18 @@ function Comment({ comment, userId }) {
 	}, [])
 
 	const handleUpdateComment = async () => {
-		console.log(editComment);
+		console.log(tempComment);
 		console.log(comment.id);
 		const { data: updatedComment } = await axios.patch(`/api/comments/${comment.id}`,
 		{
-			content: editComment
+			content: tempComment
 		},
 		{
 			headers: {
 				Authorization: "Bearer " + localStorage.getItem('token')
 			}
 		})
-		comment.content = editComment
+		comment.content = tempComment
 		setEditing(!editing)
 		console.log(updatedComment);
 	}
@@ -42,8 +42,8 @@ function Comment({ comment, userId }) {
 					) : (
 						<>
 							<textarea
-								value={editComment}
-								onChange={(e) => setEditComment(e.target.value)}
+								value={tempComment}
+								onChange={(e) => setTempComment(e.target.value)}
 								style={{ height: "100px", width: "300px" }}
 							/>
 							<br></br>
