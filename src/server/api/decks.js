@@ -125,6 +125,7 @@ router.post('/mydeck', verify, async (req, res, next) => {
 	}
 })
 
+// creates a like by the current user on the deck specified in the params
 router.post('/like/:id', verify, async (req, res, next) => {
 	const {id} = req.params;
 	try {
@@ -152,6 +153,27 @@ router.post('/like/:id', verify, async (req, res, next) => {
 	}
 })
 
+// PATCH
+// updates the information for a deck based on the body
+router.patch('/:id', verify, async (req, res, next) => {
+	const id = +req.params.id;
+	const {name, description} = req.body;
+	try {
+		const deck = await prisma.deck.update({
+			where: {
+				id
+			},
+			data: {
+				name,
+				description
+			}
+		})
+		res.status(200).send(deck)
+	} catch (error) {
+		console.error(error);
+	}
+})
+
 // DELETE
 // Delete deletes an existing deck by id
 
@@ -169,7 +191,7 @@ router.delete('/like/:id', async (req, res, next) => {
 	}
 })
 
-
+// deletes a deck by deck id
 router.delete('/:id', async (req, res, next) => {
 	const {id} = req.params;
 	try{
@@ -184,7 +206,7 @@ router.delete('/:id', async (req, res, next) => {
 	}
 })
 
-
+// deletes a like by like id
 router.delete('like/:id', async (req, res, next) => {
 	const id = +req.params.id;
 	try {

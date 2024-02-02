@@ -5,6 +5,7 @@ import DeckBuilderDeck from '../components/DeckBuilderDeck';
 import "../App.css";
 import DeckComments from '../components/DeckComments';
 import DeckLikes from '../components/DeckLikes';
+import DeckInfo from '../components/DeckInfo';
 
 function SingleDeck() {
 	const { id } = useParams();
@@ -76,11 +77,13 @@ function SingleDeck() {
 	return (
 		<>
 			<h1>PokeDeck</h1>
-			<h1>{deck.name}</h1>
-			<h2>Trainer: {deck.user.username}</h2>
-			<hr></hr>
+			<hr />
+			<DeckInfo deck={deck} />
+			{/* <h1>{deck.name}</h1>
+			<h2>Trainer: {deck.user.username}</h2> */}
+			<hr />
 			<DeckLikes id = {id}/>
-			<hr></hr>
+			<hr/>
 			<DeckBuilderDeck
 				userDeck={userDeck}
 				token={token}
