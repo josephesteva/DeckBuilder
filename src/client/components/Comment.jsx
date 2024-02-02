@@ -38,12 +38,12 @@ function Comment({ comment, userId }) {
 					Authorization: "Bearer " + localStorage.getItem('token')
 				}
 			})
+			console.log(updatedComment);
 		} catch (error) {
 			console.error(error);
 		}
 		comment.content = tempComment
 		setEditing(!editing)
-		console.log(updatedComment);
 	}
 
 	return (
