@@ -4,7 +4,7 @@ import "../styles/AdminPage.css";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function UserModal({ userId, onClose }) {
+function AdminModal({ userId, onClose }) {
   const [user, setUser] = useState(null);
   const [decks, setDecks] = useState([]);
   const [comments, setComments] = useState([]);
@@ -46,7 +46,7 @@ function UserModal({ userId, onClose }) {
   }, [userId]);
 
   //when delete button is clicked
-  const deleteDeck = (deckId) => { 
+  const deleteDeck = (deckId) => {
     axios.delete(`api/decks/${deckId}`)
       .then(() => {
         setDecks(decks.filter(deck => deck.id !== deckId));
@@ -59,7 +59,7 @@ function UserModal({ userId, onClose }) {
   };
 
   //when delete button is clicked
-  const deleteComment = (commentId) => { 
+  const deleteComment = (commentId) => {
     axios.delete(`api/comments/${commentId}`)
       .then(() => {
         setComments(comments.filter(comment => comment.id !== commentId));
@@ -70,21 +70,29 @@ function UserModal({ userId, onClose }) {
       });
   };
 
-  const makeAdmin = (userId) => {
-  const newAdmin = axios.post(`api/users/giveAdmin/${userId}`, {
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  })
-    .then(() => {
-      setIsAdmin(true);
-      toast.success("User is now an admin");
+  const updateAdmin = (userId) => {
 
+    const newAdmin = axios.patch(`api/users/admin/${userId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
     })
-    .catch(error => {
-      window.alert("ruh");
-      console.error('There was an error!', error);
-    });
+      .then(() => {
+        console.log(newAdmin);
+      })
+      .catch(error => {
+        console.error('There was an error!', error); 
+        return;
+      });
+    
+    if (isAdmin) {
+      setIsAdmin(false);
+      toast.success("User is no longer an admin");
+    }
+    else {
+      setIsAdmin(true)
+      toast.success("User is now an admin");
+    }
   }
 
   const banUser = (userId) => {
@@ -106,9 +114,16 @@ function UserModal({ userId, onClose }) {
           <div>
             {/* general user information */}
             <h2>
-              {user.username} 
-              {!isAdmin && <button className='make-admin-button' onClick={() => makeAdmin(user.id)}>Make Admin</button>}
-              {!isAdmin && <button className='ban-button' onClick={() => banUser(user.id)}>Ban User</button>}
+              {user.username}
+              
+              {!isAdmin && <button className='make-admin-button' 
+                onClick={() => updateAdmin(user.id)}>Make Admin</button>}
+              
+              {isAdmin && <button className='make-admin-button' 
+                onClick={() => updateAdmin(user.id)}>Remove Admin</button>}
+              
+              {!isAdmin && <button className='ban-button' 
+                onClick={() => banUser(user.id)}>Ban User</button>}
             </h2>
             <p>Email: {user.email}</p>
             <p>Is Admin: {isAdmin ? 'Yes' : 'No'}</p>
@@ -140,4 +155,4 @@ function UserModal({ userId, onClose }) {
   );
 }
 
-export default UserModal;
+export default AdminModal;
