@@ -23,7 +23,7 @@ function Comment({ comment, userId }) {
 	}
 
 	useEffect(() => {
-		const jsDate = new Date(comment.date)
+		const jsDate = new Date(comment.updatedAt)
 		setDate(String(jsDate))
 	}, [])
 

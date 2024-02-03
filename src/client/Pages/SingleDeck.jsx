@@ -76,8 +76,6 @@ function SingleDeck() {
 
 	return (
 		<>
-			<h1>PokeDeck</h1>
-			<hr />
 			<DeckInfo deck={deck} />
 			{/* <h1>{deck.name}</h1>
 			<h2>Trainer: {deck.user.username}</h2> */}
