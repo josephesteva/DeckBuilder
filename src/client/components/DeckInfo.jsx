@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 function DeckInfo({ deck }) {
 	const [tempName, setTempName] = useState("")
@@ -39,16 +40,16 @@ function DeckInfo({ deck }) {
 
 	const handleUpdateDescription = async () => {
 		try {
-			const {data} = await axios.patch(`/api/decks/${deck.id}`,
-			{
-				name: deck.name,
-				description: tempDescription
-			},
-			{
-				headers: {
-					Authorization: "Bearer " + window.localStorage.getItem('token')
-				}
-			})
+			const { data } = await axios.patch(`/api/decks/${deck.id}`,
+				{
+					name: deck.name,
+					description: tempDescription
+				},
+				{
+					headers: {
+						Authorization: "Bearer " + window.localStorage.getItem('token')
+					}
+				})
 			console.log(data);
 		} catch (error) {
 			console.error(error);
@@ -59,7 +60,6 @@ function DeckInfo({ deck }) {
 
 	return (
 		<>
-			<div>DeckInfo</div>
 			{deck.user.id == window.localStorage.getItem('userId') ? (
 				<>
 					{!editingName ? (
@@ -77,10 +77,12 @@ function DeckInfo({ deck }) {
 							<button onClick={handleEditName}>Discard changes</button>
 						</>
 					)}
-					<h2>Trainer: {deck.user.username}</h2>
+					<Link to={`/account/${deck.user.id}`}>
+						<h2>Trainer: {deck.user.username}</h2>
+					</Link>
 					{!editingDescription ? (
 						<>
-							<h3>{deck.description}</h3>
+							<h3>Deck Description: {deck.description}</h3>
 							<button onClick={handleEditDescription}>Edit Description</button>
 						</>
 					) : (
@@ -90,18 +92,18 @@ function DeckInfo({ deck }) {
 								onChange={(e) => setTempDescription(e.target.value)}
 								style={{ height: "100px", width: "300px" }}
 							/>
-							<button onClick = {handleUpdateDescription}>Save Changes</button>
+							<button onClick={handleUpdateDescription}>Save Changes</button>
 							<button onClick={handleEditDescription}>Discard Chages</button>
 						</>
 					)}
-					<p>The current user owns this deck</p>
 				</>
 			) : (
 				<>
 					<h1>{deck.name}</h1>
-					<h2>Trainer: {deck.user.username}</h2>
-					<h3>{deck.description}</h3>
-					<p>NOT MY DECK</p>
+					<Link to={`/account/${deck.user.id}`}>
+						<h2>Trainer: {deck.user.username}</h2>
+					</Link>
+					<h3>Deck Description: {deck.description}</h3>
 				</>
 			)}
 		</>
