@@ -4,17 +4,18 @@ import React, { useEffect, useState } from 'react'
 function Comment({ comment, userId }) {
 	const [tempComment, setTempComment] = useState(comment.content)
 	const [editing, setEditing] = useState(false)
-	const [date, setDate] = useState("")
+	const [datePosted, setDatePosted] = useState("")
+	const [dateUpdated, setDateUpdated] = useState("")
 	const [deleted, setDeleted] = useState(false)
 
 	const handleEditClick = () => {
 		setTempComment(comment.content)
 		setEditing(!editing)
 	}
-// TODO: Add some form of confirmation for deletion
+	// TODO: Add some form of confirmation for deletion
 	const handleDeleteClick = async () => {
 		try {
-			const {data: deletedComment } = await axios.delete(`/api/comments/${comment.id}`)
+			const { data: deletedComment } = await axios.delete(`/api/comments/${comment.id}`)
 			console.log(deletedComment);
 			setDeleted(true);
 		} catch (error) {
@@ -23,21 +24,23 @@ function Comment({ comment, userId }) {
 	}
 
 	useEffect(() => {
-		const jsDate = new Date(comment.updatedAt)
-		setDate(String(jsDate))
+		const posted = new Date(comment.date)
+		setDatePosted(String(posted))
+		const updated = new Date(comment.updatedAt)
+		setDateUpdated(String(updated))
 	}, [])
 
 	const handleUpdateComment = async () => {
 		try {
 			const { data: updatedComment } = await axios.patch(`/api/comments/${comment.id}`,
-			{
-				content: tempComment
-			},
-			{
-				headers: {
-					Authorization: "Bearer " + localStorage.getItem('token')
-				}
-			})
+				{
+					content: tempComment
+				},
+				{
+					headers: {
+						Authorization: "Bearer " + localStorage.getItem('token')
+					}
+				})
 			console.log(updatedComment);
 		} catch (error) {
 			console.error(error);
@@ -48,35 +51,37 @@ function Comment({ comment, userId }) {
 
 	return (
 		<> {!deleted ? (
-		<>
-			<div style={{ border: "solid black .1em", margin: ".5em", borderRadius: ".5em"  }}>
-				{
-					!editing ? (
-						<p>{comment.content}</p>
-					) : (
-						<>
-							<textarea
-								value={tempComment}
-								onChange={(e) => setTempComment(e.target.value)}
-								style={{ height: "100px", width: "300px" }}
-							/>
-							<br></br>
-							<button onClick={handleUpdateComment}>Post Changes</button>
-							<button onClick={handleEditClick}>Discard Changes</button>
+			<>
+				<div style={{ border: "solid black .1em", margin: ".5em", borderRadius: ".5em" }}>
+					{
+						!editing ? (
+							<p>{comment.content}</p>
+						) : (
+							<>
+								<textarea
+									value={tempComment}
+									onChange={(e) => setTempComment(e.target.value)}
+									style={{ height: "100px", width: "300px" }}
+								/>
+								<br></br>
+								<button onClick={handleUpdateComment}>Post Changes</button>
+								<button onClick={handleEditClick}>Discard Changes</button>
+							</>
+						)
+					}
+					<p> Posted by {comment.user.username} on {datePosted.slice(0, 24)}
+						{dateUpdated == datePosted ? null : " and updated at " + dateUpdated.slice(0, 24)}
+					</p>
+					{comment.userId == localStorage.getItem('userId') && !editing ?
+						(<>
+							<button onClick={handleEditClick}>Edit Comment</button>
+							<button onClick={handleDeleteClick}>Delete Comment</button>
 						</>
-					)
-				}
-				<p> Posted by {comment.user.username} on {date.slice(0, 24)}</p>
-				{comment.userId == localStorage.getItem('userId') && !editing ?
-					(<>
-						<button onClick={handleEditClick}>Edit Comment</button>
-						<button onClick={handleDeleteClick}>Delete Comment</button>
-					</>
-					) : (
-						<></>
-					)}
-			</div>
-		</>) : (
+						) : (
+							<></>
+						)}
+				</div>
+			</>) : (
 			null
 		)}
 		</>
