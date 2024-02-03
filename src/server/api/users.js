@@ -168,4 +168,33 @@ router.delete('/:id', verify, async (req, res) => {
   }
 });
 
+//deletes a temporary user, no authentication required
+router.delete('/temp/:id', async (req, res) => {
+  const id = +req.params.id;
+
+  try {
+    const user = await prisma.user.findUnique({
+      where: {
+        id: id,
+      }
+    })
+  
+    if(user.isTemp){
+      const deletedUser = await prisma.user.delete({
+        where: {
+          id: id,
+        },
+      });
+  
+      res.status(200).send(deletedUser);
+    }
+    else{
+      console.log("User must be a temporary user")
+      return;
+    }
+
+  } catch (error) {
+    console.error(error);
+  }
+});
 module.exports = router;

@@ -96,7 +96,11 @@ function AdminModal({ userId, onClose }) {
   }
 
   const banUser = (userId) => {
-    axios.delete(`api/users/${userId}`)
+    axios.delete(`api/users/${userId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
       .then(() => {
         toast.success("User has been banned!");
         onClose(userId);

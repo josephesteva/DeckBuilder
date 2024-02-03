@@ -37,26 +37,28 @@ const NavBar = () => {
   }
 
 
-  return (
-    <nav className='navbar'>
-      <button onClick={handleHomeClick}>Home</button>
-      {localStorage.getItem('token') ? (
-        <>
-          <button onClick={handleLogoutClick}>Logout</button>
-          <button onClick={handleDeckBuilderClick}>Deck Builder</button>
-          <button onClick={handleAccountClick}>Account Page</button>
-          {localStorage.getItem('isAdmin') === 'true' && <button onClick={handleAdminClick}>Admin</button>}
-        </>
-      ) : (
-        <>
-          <button onClick={handleLoginClick}>Login</button>
-          <button onClick={handleRegisterClick}>Register</button>
-        </>
-      )}
-  
-      <button onClick={handleExploreClick}>Explore</button>
-    </nav>
-  )
+  if (localStorage.getItem('isTemp') !== 'true') {
+    return (
+      <nav className='navbar'>
+        <button onClick={handleHomeClick}>Home</button>
+        {localStorage.getItem('token') ? (
+          <>
+            <button onClick={handleLogoutClick}>Logout</button>
+            <button onClick={handleDeckBuilderClick}>Deck Builder</button>
+            <button onClick={handleAccountClick}>Account Page</button>
+            {localStorage.getItem('isAdmin') === 'true' && <button onClick={handleAdminClick}>Admin</button>}
+          </>
+        ) : (
+          <>
+            <button onClick={handleLoginClick}>Login</button>
+            <button onClick={handleRegisterClick}>Register</button>
+          </>
+        )}
+        <button onClick={handleExploreClick}>Explore</button>
+      </nav>
+    );
+  }
+  return null;
 }
 
 export default NavBar;
