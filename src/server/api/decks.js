@@ -175,8 +175,7 @@ router.patch('/:id', verify, async (req, res, next) => {
 })
 
 // DELETE
-// Delete deletes an existing deck by id
-
+// deletes an existing like by id
 router.delete('/like/:id', async (req, res, next) => {
 	const id = +req.params.id;
 	try {
@@ -203,21 +202,6 @@ router.delete('/:id', async (req, res, next) => {
 		res.status(200).send(deletedDeck)
 	} catch (err) {
 		console.error(err);
-	}
-})
-
-// deletes a like by like id
-router.delete('like/:id', async (req, res, next) => {
-	const id = +req.params.id;
-	try {
-		const deletedLike = await prisma.like.delete({
-			where: {
-				id
-			}
-		})
-		res.send("Success")
-	} catch (error) {
-		console.error(error);
 	}
 })
 
