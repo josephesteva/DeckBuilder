@@ -55,21 +55,6 @@ function SingleDeck() {
 
 	}, [token])
 
-	const handleCreateLike = async () => {
-		try {
-			const { data: like } = await axios.post(`/api/decks/like/${id}`,
-				{},
-				{
-					headers: {
-						Authorization: "Bearer " + window.localStorage.getItem('token')
-					}
-				})
-			setDeck({ ...deck, Like: [...deck.Like, like] })
-		} catch (err) {
-			console.error(err);
-		}
-	}
-
 	if (!deck.id) {
 		return <div>Loading...</div>
 	}
@@ -77,8 +62,6 @@ function SingleDeck() {
 	return (
 		<>
 			<DeckInfo deck={deck} />
-			{/* <h1>{deck.name}</h1>
-			<h2>Trainer: {deck.user.username}</h2> */}
 			<hr />
 			<DeckLikes id = {id}/>
 			<hr/>

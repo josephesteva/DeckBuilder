@@ -38,7 +38,7 @@ router.post('/:deckid', verify, async (req, res, next) => {
 		const like = await prisma.like.create({
 			data: {
 				userId: req.user.id,
-				deckId: +id
+				deckId
 			}
 		})
 		res.status(201).send(like)
@@ -49,7 +49,7 @@ router.post('/:deckid', verify, async (req, res, next) => {
 
 // DELETE
 // deletes a like by like id
-router.delete('/like/:id', async (req, res, next) => {
+router.delete('/:id', async (req, res, next) => {
 	const id = +req.params.id;
 	try {
 		const deletedLike = await prisma.like.delete({
