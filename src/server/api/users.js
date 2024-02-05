@@ -180,3 +180,44 @@ router.delete('/temp/:id', async (req, res) => {
   }
 });
 module.exports = router;
+
+// FOLLOWERS
+// follows a user with the followed user's id included in the req params
+router.patch('/follow/:id', verify, async (req, res, next) => {
+	const id = +req.params.id;
+	try {
+		const followedUser = await prisma.user.update({
+			where: {
+				id
+			},
+			data: {
+				followers: {
+					connect: {id: req.user.id}
+				}
+			}
+		})
+		res.send(followedUser)
+	} catch (error) {
+		console.error(error);
+	}
+})
+
+// unfollows a user with the unfollowed users' id included in the req params
+router.patch('/unfollow/:id', verify, async (req, res, next) => {
+	const id = +req.params.id;
+	try {
+		const unfollowedUser = await prisma.user.update({
+			where: {
+				id
+			},
+			data: {
+				followers: {
+					disconnect: {id: req.user.id}
+				}
+			}
+		})
+		res.status(200).send(unfollowedUser)
+	} catch (error) {
+		console.error(error);
+	}
+})
