@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import UserFollow from './UserFollow'
 
 function DeckInfo({ deck }) {
 	const [tempName, setTempName] = useState("")
@@ -77,7 +78,7 @@ function DeckInfo({ deck }) {
 							<button onClick={handleEditName}>Discard changes</button>
 						</>
 					)}
-					<Link to={`/account/${deck.user.id}`}>
+					<Link to={`/account/${deck.userId}`}>
 						<h2>Trainer: {deck.user.username}</h2>
 					</Link>
 					{!editingDescription ? (
@@ -103,6 +104,7 @@ function DeckInfo({ deck }) {
 					<Link to={`/account/${deck.user.id}`}>
 						<h2>Trainer: {deck.user.username}</h2>
 					</Link>
+					<UserFollow id={deck.userId}/>
 					<h3>Deck Description: {deck.description}</h3>
 				</>
 			)}
