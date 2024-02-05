@@ -94,24 +94,6 @@ router.post('/temp', async (req, res, next) => {
 	}
 })
 
-// TODO delete this endpoint after front end updates to use admin patch
-// give a user admin
-router.post("/giveAdmin/:id", async (req, res, next) => {
-  const userId = parseInt(req.params.id);
-
-  try {
-    const updatedUser = await prisma.user.update({
-      where: { id: userId },
-      data: { isAdmin: true },
-    });
-
-    res.status(200).send(updatedUser);
-  } catch (error) {
-    console.error(error);
-    res.json(error);
-  }
-});
-
 // PATCH
 // changes a users admin status
 router.patch('/admin/:id', async (req, res, next) => {

@@ -8,7 +8,7 @@ function Likes({ id }) {
 
 	const handleCreateLike = async () => {
 		try {
-			const { data: like } = await axios.post(`/api/decks/like/${id}`,
+			const { data: like } = await axios.post(`/api/likes/${id}`,
 				{},
 				{
 					headers: {
@@ -23,7 +23,7 @@ function Likes({ id }) {
 
 	const handleUnlike = async () => {
 		try {
-			const { data: unlike } = await axios.delete(`/api/decks/like/${userLike.id}`)
+			const { data: unlike } = await axios.delete(`/api/likes/${userLike.id}`)
 			setUserLike({})
 			setLikeStatus(false)
 			fetchLikes()
@@ -33,7 +33,7 @@ function Likes({ id }) {
 	}
 
 	const fetchLikes = async () => {
-		const { data: likeArray } = await axios.get(`/api/decks/likes/${id}`)
+		const { data: likeArray } = await axios.get(`/api/likes/${id}`)
 		setLikes(likeArray)
 	}
 
