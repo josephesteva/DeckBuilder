@@ -61,11 +61,11 @@ router.get('/:id', async (req, res, next) => {
 
 // gets decks by user id
 router.get('/user/:userid', async (req, res, next) => {
-	const {userid} = req.params;
+	const userId = +req.params.userid;
 	try {
 		const userDecks = await prisma.deck.findMany({
 			where: {
-				userId: +userid
+				userId
 			}
 		});
 		res.status(200).send(userDecks);
@@ -74,7 +74,8 @@ router.get('/user/:userid', async (req, res, next) => {
 	}
 })
 
-// POST creates a new deck for the user assigned in the body
+// POST 
+// creates a new deck for the user assigned in the body
 router.post('/', async (req, res, next) => {
 	const {name, userId, description, numCards} = req.body;
 	try {
