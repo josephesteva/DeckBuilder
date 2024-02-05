@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react';
 import ExploreContent from '../components/ExploreContent';
 import ExploreSearchBar from '../components/ExploreSearchBar';
 import ExploreDecks from '../components/ExploreDecks';
+import ExploreWatchBattle from "../components/ExploreWatchBattle";
 
 const Explore = () => {
   //stores all the users decks 
@@ -76,6 +77,7 @@ const Explore = () => {
       />
 
       <ExploreContent />
+      <ExploreWatchBattle />
 
     </div>
 

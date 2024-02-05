@@ -168,6 +168,12 @@ body, html {
   flex-wrap: wrap;
 }
 
+.deck-viewer {
+  font-size: 30px;
+  width: 100px;
+  background-color: #c3dbfa;
+}
+
 
 
 
