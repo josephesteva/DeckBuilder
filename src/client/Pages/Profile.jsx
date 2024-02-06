@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams, Link } from 'react-router-dom';
+import UserFollow from "../components/UserFollow";
 
 export default function ProfileInfo() {
 	const [userInfo, setUserInfo] = useState(null);
@@ -7,24 +8,27 @@ export default function ProfileInfo() {
 	const navigate = useNavigate();
 	const userId = useParams().id;
 
-	useEffect(() => {
-		async function fetchUser() {
-
-			try {
-				const response = await fetch(`/api/users/${userId}`);
-				const userData = await response.json();
-				console.log(userData);
-				const deckRes = await fetch(`/api/decks/user/${userData.id}`);
-				const deckData = await deckRes.json();
-				console.log(deckData);
-				setUserInfo(userData);
-				setUserDecks(deckData);
-			} catch (error) {
-				console.error('Failed to fetch user:', error);
-			}
-		}
+	const updateFollowers = () => {
 		fetchUser();
-	}, []);
+	}
+
+	async function fetchUser() {
+
+		try {
+			const response = await fetch(`/api/users/${userId}`);
+			const userData = await response.json();
+			const deckRes = await fetch(`/api/decks/user/${userData.id}`);
+			const deckData = await deckRes.json();
+			setUserInfo(userData);
+			setUserDecks(deckData);
+		} catch (error) {
+			console.error('Failed to fetch user:', error);
+		}
+	}
+
+	useEffect(() => {
+		fetchUser();
+	}, [userInfo]);
 
 	if (!userInfo) {
 		return <div>Loading...</div>; // Display while data is loading
@@ -35,27 +39,34 @@ export default function ProfileInfo() {
 		<section>
 			<h1>{userInfo.username}'s Page</h1>
 			<h2>E-mail: {userInfo.email}</h2>
+			<div onClick={updateFollowers}>
+				<UserFollow id={userInfo.id} username={userInfo.username} />
+			</div>
 			<h2>Followers:</h2>
 			<ul>
-				{userInfo.followers.map((follower) => { return (<li key={follower.id}>{follower.username}</li>) })}
+				{userInfo.followers.map((follower) => (
+					<li key={follower.id}>{follower.username}</li>
+				))}
 			</ul>
 			<h2>Following:</h2>
 			<ul>
-				{userInfo.following.map((followed) => { return (<li key={followed.id}>{followed.username}</li>) })}
+				{userInfo.following.map((followed) => (
+					<li key={followed.id}>{followed.username}</li>
+				))}
 			</ul>
 			<h2>Decks: </h2>
 			<ul>
 				{userDecks.map((deck) => (
-							<Link to={`/deck/${deck.id}`}>
-								<li key={deck.id}>{deck.name}</li>
-							</Link>
+					<Link key={deck.id} to={`/deck/${deck.id}`}>
+						<li>{deck.name}</li>
+					</Link>
 				))}
 			</ul>
 			<h2>Comments: </h2>
 			<ul>
-				{userInfo.comments.map((comment) => ( 
-					<Link to={`/deck/${comment.deckId}`}>
-				<li key={comment.id}>{comment.content}</li> 
+				{userInfo.comments.map((comment) => (
+					<Link key={comment.id} to={`/deck/${comment.deckId}`}>
+						<li>{comment.content}</li>
 					</Link>
 				))}
 			</ul>
