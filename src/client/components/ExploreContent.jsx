@@ -1,4 +1,4 @@
-
+import { useEffect } from "react";
 const ExploreContent = () => {
 
   const handleScroll = () => {
@@ -11,7 +11,7 @@ const ExploreContent = () => {
     const originalBackgroundStyle = 'linear-gradient(to right, #c3dbfa 0%, #c3dbfa 50%, #035096 50%, yellow 100%)';
     const WatchSection = document.querySelector('.watch-live-battle-section');
 
-    if (window.scrollY > scrollThreshold) {
+    if (window.scrollY> scrollThreshold) {
       // Change the image source or apply a new background once scroll threshold is reached
       stickyImage.src = '/images/Ash-Ketchum.png';
       thoughtBubble.innerHTML = `
@@ -42,8 +42,15 @@ const ExploreContent = () => {
     }
   };
 
+  //Added UseEffect to scroll 
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
 
-  window.addEventListener('scroll', handleScroll);
+    // Cleanup function to remove the scroll listener when the component unmounts
+    return () => {
+        window.removeEventListener('scroll', handleScroll);
+    };
+}, []);
 
 
 
@@ -53,7 +60,7 @@ const ExploreContent = () => {
       <div className="sticky-image">
         <div className='thought-bubble'>
           <h2 style={{ fontFamily: 'pokemon solid' }}>Hey Trainers!!</h2>
-          <p>Be sure to explore trainder decks</p>
+          <p>Be sure to explore trainer decks</p>
           <p>Leave a like & Follow your Favorites</p>
           <p>Stay tuned for exciting updates,</p>
           <p>events, and battles!</p>

@@ -62,7 +62,7 @@
     cursor: pointer;
   }
 
-  .deck-container{
+  .admin-deck-container{
     border: 1px solid grey;
   }
 
@@ -70,7 +70,7 @@
     border: 1px solid grey;
   }
 
-  .deck-container button, .comment-container button, .ban-button{
+  .admin-deck-container button, .comment-container button, .ban-button{
     background-color: #ff6961;
     color: #fff;
     border: none;
@@ -81,7 +81,7 @@
     margin: 1px;
   }
   
-  .deck-container button:hover, .comment-container button:hover, .ban-button:hover {
+  .admin-deck-container button:hover, .comment-container button:hover, .ban-button:hover {
     background-color: #d9534f;
   }
 
