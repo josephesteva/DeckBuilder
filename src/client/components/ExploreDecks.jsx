@@ -17,6 +17,7 @@ const ExploreDecks = ({ decks, handleDeckHover, selectedDeck, deckOfCards }) => 
                 <img src='/images/likes.png' alt='likes' className='icons'></img>
                 <p>{deck.Like.length}</p>
                 <img src='/images/comments.png' alt='comments' className='icons'></img>
+								<p>{deck.comments.length}</p>
                 <img src='/images/pokemon-cards-logo.png' alt='cards logo' className='icons'></img>
                 <p>{deck.numCards}</p>
               </div>
