@@ -1,5 +1,5 @@
 /* Cards.jsx */
-.search-bar-cards {
+/* .search-bar-cards {
     display: flex;
     justify-content: center;
     margin: 10px;
@@ -18,7 +18,7 @@
     outline: none;
     border-color: #4d90fe;
     box-shadow: 0 0 8px rgba(77, 144, 254, 0.3);
-}
+} */
 
 .cards-container-cards {
     display: flex;
@@ -73,7 +73,6 @@ body, html {
 .navbar {
   display: flex;
  justify-content: center;
-
 }
 
 /* USER DECK STYLING (DECK BUILDER)  */
@@ -171,8 +170,94 @@ body, html {
 .deck-viewer {
   font-size: 30px;
   width: 100px;
-  background-color: #c3dbfa;
+  border-radius: 10px;
+  background: linear-gradient(to right,#ff0000,#035096, #c3dbfa, #035096);
+  /* box-shadow: 3px 3px 3px #fffb00; */
 }
+
+
+/* CSS */
+button {
+  padding: 0.6em 2em;
+  border: none;
+  outline: none;
+  color: #fffb00;
+  background: #111;
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+  border-radius: 10px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  font-family: "pokemon solid";
+  text-shadow: 3px 3px 5px #035096;
+  -webkit-text-stroke: 2px #035096;
+  letter-spacing: 2.5px;
+  margin-right: 10px;
+}
+
+button:before {
+  content: "";
+  background: linear-gradient(
+    45deg,
+    #ff0000,
+    #ff7300,
+    #fffb00,
+    #48ff00,
+    #00ffd5,
+    #002bff,
+    #ff0000
+  );
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  background-size: 400%;
+  z-index: -1;
+  filter: blur(5px);
+  -webkit-filter: blur(5px);
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  animation: glowing-button-85 30s linear infinite;
+  transition: opacity 0.3s ease-in-out;
+  border-radius: 10px;
+}
+
+@keyframes glowing-button-85 {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+button:after {
+  z-index: -1;
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: white;
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+}
+
+form input {
+  margin: 20px;
+  background-color: white;
+  max-width: 190px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 15px;
+  color: #035096;
+  border: 2px solid #035096;
+}
+
 
 
 

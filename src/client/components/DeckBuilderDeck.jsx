@@ -1,6 +1,8 @@
 import React from 'react'
 import axios from 'axios';
 import { useState } from 'react';
+import { MdSwapVerticalCircle } from "react-icons/md";
+import { MdSwapHorizontalCircle } from "react-icons/md";
 
 
 function DeckBuilderDeck({ userDeck, setUserDeck, selectedDeck, token }) {
@@ -29,7 +31,12 @@ function DeckBuilderDeck({ userDeck, setUserDeck, selectedDeck, token }) {
   };
   return (
     <div>
-    <button onClick={handleToggle}>Change View</button>
+        <button onClick={handleToggle}>
+        {flexWrap ? <MdSwapHorizontalCircle className='deck-viewer' /> : 
+        
+        <MdSwapVerticalCircle className='deck-viewer' />}
+            
+        </button>
     <div className={`user-deck-container ${flexWrap ? 'flex-wrap' : ''}`}>
       {userDeck.map((card) => (
         <div key={card.id} className='card-container'>

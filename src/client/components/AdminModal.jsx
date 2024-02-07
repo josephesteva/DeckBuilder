@@ -135,7 +135,7 @@ function AdminModal({ userId, onClose }) {
 
             {/* renders users decks with a delete button on each*/}
             {decks.map(deck => (
-              <div className='deck-container' key={deck.id}>
+              <div className='admin-deck-container' key={deck.id}>
                 <h4>{deck.name}</h4>
                 <p>Description: {deck.description}</p>
                 <p>Number of Cards: {deck.numCards}</p>
