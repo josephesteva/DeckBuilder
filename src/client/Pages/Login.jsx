@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
+import "../styles/Login.css";
 
 
 const Login = () => {
@@ -52,22 +53,32 @@ const Login = () => {
   }
 
   return (
-    <>
-      <h1>Login!</h1>
+    <div className='background-color'>
+    <div className='form-container'>
+      <h1>Welcome back!</h1>
       <form onSubmit={handleLogin}>
         {error && <div className="error-message">{error}</div>}
         <div>
-          <label>Username</label>
-          <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} required />
+          <label></label>
+          <input type="text" placeholder='Username' value={username} onChange={(e) => setUsername(e.target.value)} required />
         </div>
         <div>
-          <label>Password</label>
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+          <label></label>
+          <input type="password" placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)} required />
         </div>
         <button type="submit">Login</button>
         <button type="button">Cancel</button>
       </form>
-    </>
+
+      <div class="drops">
+    <div class="drop drop-1"></div>
+    <div class="drop drop-2"></div>
+    <div class="drop drop-3"></div>
+    <div class="drop drop-4"></div>
+    <div class="drop drop-5"></div>
+    </div>
+    </div>
+    </div>
   )
 }
 

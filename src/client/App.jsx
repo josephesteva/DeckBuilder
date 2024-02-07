@@ -14,13 +14,17 @@ import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import SingleDeck from "./Pages/SingleDeck";
 import AdminPage from "./Pages/AdminPage";
+import AudioPlayer from "./components/AudioPlayer";
 
 function App() {
 
 
   return (
+
+    
     <Router>
       <NavBar/>
+      <AudioPlayer />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<Login/>} />
@@ -34,6 +38,7 @@ function App() {
         <Route path="admin" element={<AdminPage />} />
       </Routes>
       <ToastContainer autoClose={1000}/>
+
     </Router> 
     
   );
