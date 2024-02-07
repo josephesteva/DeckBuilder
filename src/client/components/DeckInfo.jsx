@@ -8,6 +8,7 @@ function DeckInfo({ deck }) {
 	const [editingName, setEditingName] = useState(false)
 	const [tempDescription, setTempDescription] = useState("")
 	const [editingDescription, setEditingDescription] = useState(false)
+	const username = deck.user.username
 
 	const handleEditName = () => {
 		setTempName(deck.name)
@@ -104,7 +105,7 @@ function DeckInfo({ deck }) {
 					<Link to={`/account/${deck.user.id}`}>
 						<h2>Trainer: {deck.user.username}</h2>
 					</Link>
-					<UserFollow id={deck.userId}/>
+					<UserFollow id={deck.userId} username={username}/>
 					<h3>Deck Description: {deck.description}</h3>
 				</>
 			)}

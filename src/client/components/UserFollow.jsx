@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 
-function UserFollow({ id }) {
+function UserFollow({ id, username }) {
 	const [followed, setFollowed] = useState(false)
 
 	const handleFollow = async () => {
@@ -13,7 +13,6 @@ function UserFollow({ id }) {
 						Authorization: "Bearer " + window.localStorage.getItem('token')
 					}
 				})
-			console.log(user);
 		} catch (error) {
 			console.error(error);
 		}
@@ -29,7 +28,6 @@ function UserFollow({ id }) {
 						Authorization: "Bearer " + window.localStorage.getItem('token')
 					}
 				})
-			console.log(user);
 		} catch (error) {
 			console.error(error);
 		}
@@ -39,15 +37,12 @@ function UserFollow({ id }) {
 	const followedByUser = async () => {
 		const { data: user } = await axios.get(`/api/users/${id}`)
 		const followerArray = user.followers;
-		console.log(followerArray);
 		const status = followerArray.find(user => user.id == window.localStorage.getItem('userId'))
-		console.log("follow status", status)
 		if (!(status == undefined)) {
 			setFollowed(true)
 		} else {
 			setFollowed(false)
 		}
-		console.log(followed);
 	}
 
 	useEffect(() => {
@@ -57,9 +52,9 @@ function UserFollow({ id }) {
 	return (
 		<>
 			{followed ? (
-				<button onClick={handleUnfollow}>Unfollow</button>
+				<button onClick={handleUnfollow}>Unfollow {`${username}`}</button>
 			) : (
-				<button onClick={handleFollow}>Follow</button>
+				<button onClick={handleFollow}>Follow {`${username}`}</button>
 			)}
 		</>
 	)

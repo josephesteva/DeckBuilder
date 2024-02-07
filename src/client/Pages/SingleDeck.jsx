@@ -39,7 +39,6 @@ function SingleDeck() {
 			try {
 				const { data: foundDeck } = await axios.get(`/api/decks/${id}`)
 				setDeck(foundDeck)
-				console.log({deck: foundDeck});
 			} catch (err) {
 				console.error(err);
 			}
@@ -47,7 +46,6 @@ function SingleDeck() {
 		getDeck();
 		const fetchLikeStatus = () => {
 			const isLiked = deck.Like.find(({userId})=>userId === userId)
-			console.log({status: isLiked});
 		}
 		if (deck.id) {
 			fetchLikeStatus()};
