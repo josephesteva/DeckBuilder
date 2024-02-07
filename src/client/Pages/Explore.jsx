@@ -68,6 +68,7 @@ const Explore = () => {
       <ExploreSearchBar
         setSearch={setSearch}
       />
+      
 
       <ExploreDecks
         decks={filteredDecks}

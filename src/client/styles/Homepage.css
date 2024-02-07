@@ -26,6 +26,7 @@
     position: relative;
     opacity: 0;
     transition: opacity 1s ease;
+    top: -19px;
   }
   
   .portal-enter {
@@ -128,7 +129,7 @@
     left: 20%; 
     transform: translateX(-50%); 
     width: 50%; 
-    height: 80px; 
+    height: 110px; 
     z-index: -1;  
   }
   
@@ -138,7 +139,7 @@
     left: 70%; 
     transform: translateX(-50%); 
     width: 61%; 
-    height: 80px; 
+    height: 110px; 
     z-index: -1;  
   }
   /* JOIN THE COMMUNITY STYLING */

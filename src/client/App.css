@@ -258,7 +258,34 @@ form input {
   border: 2px solid #035096;
 }
 
+.audio-player {
+  font-size: larger;
+  color: #002bff;
+  background-color: whitesmoke;
+  border-radius: 50px;
+}
+.audio-container {
+  width: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 1000px;
+}
 
+.audio-container:after {
+  background: none;
+}
+
+.navbar button::before {
+  background: linear-gradient(45deg, #035096,#035096);
+  animation: glowing-button-85 5s linear infinite;
+  transition: opacity .3s ease-in-out;
+  background-size: 400%;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  border: 1px solid #035096;
+  
+}
 
 
 
