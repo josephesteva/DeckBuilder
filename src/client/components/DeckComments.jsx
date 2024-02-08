@@ -25,21 +25,21 @@ const DeckComments = ({ id }) => {
 		if (content) {
 			try {
 				const { data: comment } = await axios.post("/api/comments/currentuser",
-				{ deckId, content },
-				{
-					headers: {
-						Authorization: "Bearer " + window.localStorage.getItem("token"),
-					}
-				});
+					{ deckId, content },
+					{
+						headers: {
+							Authorization: "Bearer " + window.localStorage.getItem("token"),
+						}
+					});
 				getComments();
 				setContent("")
 				console.log(comment);
 			} catch (err) {
 				console.error(err);
 			}
-		 } else {
-				console.log("Comment must have info in it");
-	}
+		} else {
+			console.log("Comment must have info in it");
+		}
 	}
 
 	return (
@@ -56,8 +56,9 @@ const DeckComments = ({ id }) => {
 					placeholder="Input comment here..."
 					value={content}
 					onChange={(e) => setContent(e.target.value)}
-					style={{ height: "100px", width: "300px" }}
+					style={{ height: "150px", width: "500px" }}
 				/>
+				<br />
 				<button onClick={handleCreateComment}>Post Comment</button>
 			</div>
 		</>

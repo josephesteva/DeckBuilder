@@ -20,6 +20,10 @@
     box-shadow: 0 0 8px rgba(77, 144, 254, 0.3);
 } */
 
+html{
+  font-family: "Roboto","Arial",sans-serif;
+}
+
 .cards-container-cards {
     display: flex;
     flex-wrap: wrap;
