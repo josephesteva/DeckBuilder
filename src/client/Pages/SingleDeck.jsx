@@ -6,6 +6,7 @@ import "../App.css";
 import DeckComments from '../components/DeckComments';
 import DeckLikes from '../components/DeckLikes';
 import DeckInfo from '../components/DeckInfo';
+import '../styles/SingleDeck.css'
 
 function SingleDeck() {
 	const { id } = useParams();
@@ -45,10 +46,11 @@ function SingleDeck() {
 		}
 		getDeck();
 		const fetchLikeStatus = () => {
-			const isLiked = deck.Like.find(({userId})=>userId === userId)
+			const isLiked = deck.Like.find(({ userId }) => userId === userId)
 		}
 		if (deck.id) {
-			fetchLikeStatus()};
+			fetchLikeStatus()
+		};
 		fetchDeckCards(id);
 
 	}, [token])
@@ -59,19 +61,21 @@ function SingleDeck() {
 
 	return (
 		<>
-			<DeckInfo deck={deck} />
-			<hr />
-			<DeckLikes id = {id}/>
-			<hr/>
-			<DeckBuilderDeck
-				userDeck={userDeck}
-				token={token}
-				setUserDeck={setUserDeck}
-			/>
-			<DeckComments
-				id={id}
-				userId={userId}
-			/>
+			<div className="singleDeck">
+				<DeckInfo deck={deck} />
+				<hr />
+				<DeckLikes id={id} />
+				<hr />
+				<DeckBuilderDeck
+					userDeck={userDeck}
+					token={token}
+					setUserDeck={setUserDeck}
+				/>
+				<DeckComments
+					id={id}
+					userId={userId}
+				/>
+			</div>
 		</>
 	)
 }

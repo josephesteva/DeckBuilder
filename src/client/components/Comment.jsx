@@ -41,7 +41,6 @@ function Comment({ comment, userId }) {
 						Authorization: "Bearer " + localStorage.getItem('token')
 					}
 				})
-			console.log(updatedComment);
 		} catch (error) {
 			console.error(error);
 		}
@@ -52,10 +51,10 @@ function Comment({ comment, userId }) {
 	return (
 		<> {!deleted ? (
 			<>
-				<div style={{ border: "solid black .1em", margin: ".5em", borderRadius: ".5em" }}>
+				<div style={{ border: "solid black .1em", margin: ".5em", padding: ".25em 1em", borderRadius: ".5em", width: "50%" }}>
 					{
 						!editing ? (
-							<p>{comment.content}</p>
+							<h4>{comment.content}</h4>
 						) : (
 							<>
 								<textarea

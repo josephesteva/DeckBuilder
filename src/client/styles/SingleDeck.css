@@ -1,1 +1,7 @@
 /* page where you view a persons deck and can comment, like, and follow */
+
+.singleDeck {
+	font-size:1.1em;
+	margin-left: 1em;
+}
+
