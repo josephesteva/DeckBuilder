@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
+import "../styles/Register.css";
 
 
 const Register = () => {
@@ -53,26 +54,34 @@ const Register = () => {
   }
 
   return (
-    <>
-      <h1>Sign Up!</h1>
+    <div className='register-form-container'>
       <form onSubmit={handleRegister}>
+        <h1>Join our trainers!</h1>
         {error && <div className="error-message">{error}</div>}
         <div>
-          <label>Username</label>
-          <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} required />
+          <label></label>
+          <input type="text" placeholder='Username' value={username} onChange={(e) => setUsername(e.target.value)} required />
         </div>
         <div>
-          <label>Email</label>
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+          <label></label>
+          <input type="email" placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value)} required />
         </div>
         <div>
-          <label>Password</label>
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+          <label></label>
+          <input type="password" placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)} required />
         </div>
         <button type="submit">Sign Up!</button>
         <button type="button">Cancel</button>
       </form>
-    </>
+      <div class="drops">
+    <div class="drop drop-1"></div>
+    <div class="drop drop-2"></div>
+    <div class="drop drop-3"></div>
+    <div class="drop drop-4"></div>
+    <div class="drop drop-5"></div>
+    <img src='/images/register-pokemon.png' className='register-pokemon'></img>
+    </div>
+    </div>
   )
 }
 

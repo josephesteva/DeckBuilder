@@ -53,7 +53,9 @@ const Login = () => {
   }
 
   return (
+    <div>
     <div className='background-color'>
+    </div>
     <div className='form-container'>
       <h1>Welcome back!</h1>
       <form onSubmit={handleLogin}>
@@ -77,6 +79,7 @@ const Login = () => {
     <div class="drop drop-4"></div>
     <div class="drop drop-5"></div>
     </div>
+      <img src='/images/login-pokemon.png' className='register-pokemon'></img>
     </div>
     </div>
   )
