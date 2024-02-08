@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import AdminModal from '../components/AdminModal';
 import "../styles/AdminPage.css";
+import { CgProfile } from "react-icons/cg";
 
 function AdminPage() {
   const [users, setUsers] = useState([]);
@@ -36,16 +37,12 @@ function AdminPage() {
 
   return (
     <div>
-      <h1>AdminPage</h1>
+      <h2 className="admin-heading">Admin Page</h2>
       <div className='users-container'>
         {users.map(user => (
-          <div key={user.id} className='user-item'>
-            <img 
-              src="/images/pokeball.jpg" 
-              alt="Default profile" onClick={() => handleThumbnailClick(user.id)} 
-              style={{cursor: 'pointer'}} 
-            />
+          <div key={user.id} className='user-item' onClick={() => handleThumbnailClick(user.id)}>
             <div className='user-info'>
+              <CgProfile size={128} color='#000080'/>
               <p>{user.username}</p>
             </div>
           </div>

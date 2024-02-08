@@ -57,10 +57,6 @@ const Cards = ({ selectedDeck, fetchDeckCards, token, userDeck }) => {
     card.superType.includes(superType)
   );
 
-  const handleCardClick = (cardName) => {
-    alert(cardName + " was clicked");
-  };
-
   //this function makes sure a card can be in a deck
   const checkCard = (cardName, superType) => {
 
@@ -154,9 +150,11 @@ const Cards = ({ selectedDeck, fetchDeckCards, token, userDeck }) => {
       </div>
       <div className="cards-container-cards">
         {filteredCards.map(card => (
-          <div key={card.id} className="card-cards" onClick={() => handleCardClick(card.name)} style={{ position: 'relative' }}>
+          <div key={card.id} className="card-cards" style={{ position: 'relative' }}>
             <img src={card.cardImage} alt={card.name} loading="lazy" />
-            <button className='add-button-cards' onClick={(event) => handleAddButtonClick(event, card.id, card.name, card.superType, card.mainType)}>Add</button>
+            <button 
+              className='add-button-cards' onClick={(event) => 
+              handleAddButtonClick(event, card.id, card.name, card.superType, card.mainType)}>Add</button>
           </div>
         ))}
       </div>
