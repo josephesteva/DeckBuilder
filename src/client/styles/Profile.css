@@ -1,0 +1,55 @@
+.profile-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.profile-card {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  width: 80%;
+  max-width: 600px;
+  height: 117%;
+  margin-top: 200px;
+}
+
+.profile-card h1, .profile-card h2, .profile-card ul, .profile-card li {
+  color: #035096;
+}
+
+.profile-card h1 {
+  font-family: "pokemon solid";
+  letter-spacing: 3px;
+}
+
+.profile-card ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.profile-card ul li {
+  margin-bottom: 5px;
+}
+
+/* .profile-card button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 12px;
+} */
+
+/* .profile-card button:hover {
+  background-color: #45a049;
+} */
