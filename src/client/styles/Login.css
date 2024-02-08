@@ -4,9 +4,9 @@
   width: 100%;
   font-family: 'Montserrat', sans-serif;
   position: absolute;
-  top: 0;
   z-index: -1;
-  left:0
+  left:0;
+  top: 0;
 }
 
 .form-container {
@@ -22,8 +22,9 @@
   text-align: center;
   position: relative;
   transition: all 0.2s ease-in-out;
-  top: 20%;
+  top: 90px;
   margin: 0 auto;
+  z-index: 2;
 }
 
 .form-container h1 {
