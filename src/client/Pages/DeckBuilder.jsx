@@ -6,6 +6,8 @@ import DeckBuilderDeck from '../components/DeckBuilderDeck';
 import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 import "../App.css";
+import "../styles/DeckBuilder.css";
+
 
 const DeckBuilder = () => {
   //stores all the users decks
@@ -117,7 +119,7 @@ const DeckBuilder = () => {
           <p>WARNING: Register an account if you want to save your decks</p>
         </>
       )}
-      <h2 className="deck-heading">Deck Builder</h2>
+      <h2 className="deckbuilder-heading">Deck Builder</h2>
 
       <DeckBuilderNav
         selectedDeck={selectedDeck}

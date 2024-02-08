@@ -1,0 +1,12 @@
+.deckbuilder-heading {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-family: "pokemon solid";
+    letter-spacing: 2px;
+    color: #FFD500;
+    text-shadow: 3px 3px 5px #035096;
+    -webkit-text-stroke: 2px #035096;
+    border: solid 5px white;
+    background-color: white;
+  }
