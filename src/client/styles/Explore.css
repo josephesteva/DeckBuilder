@@ -204,9 +204,9 @@
   .user-deck-container2 {
     position: absolute;
     top: .5%;
-    left: -20%;
+    left: -199%;
     transform: translateX(-50%);
-    width: 300px;
+    width: 870px;
     height: 290px;
     padding: 10px;
     text-align: center;

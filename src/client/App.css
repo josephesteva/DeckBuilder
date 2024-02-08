@@ -37,6 +37,7 @@
     max-width: 100%;
     height: auto;
     display: block;
+    width: 150px;
 }
 .add-button-cards{
   background-color: green;
