@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import UserFollow from "../components/UserFollow";
+import "../styles/Profile.css";
 
 export default function ProfileInfo() {
 	const [userInfo, setUserInfo] = useState(null);
@@ -35,42 +36,44 @@ export default function ProfileInfo() {
 	}
 
 
-	return (
-		<section>
-			<h1>{userInfo.username}'s Page</h1>
-			<h2>E-mail: {userInfo.email}</h2>
-			<div onClick={updateFollowers}>
-				<UserFollow id={userInfo.id} username={userInfo.username} />
-			</div>
-			<h2>Followers:</h2>
-			<ul>
-				{userInfo.followers.map((follower) => (
-					<li key={follower.id}>{follower.username}</li>
-				))}
-			</ul>
-			<h2>Following:</h2>
-			<ul>
-				{userInfo.following.map((followed) => (
-					<li key={followed.id}>{followed.username}</li>
-				))}
-			</ul>
-			<h2>Decks: </h2>
-			<ul>
-				{userDecks.map((deck) => (
-					<Link key={deck.id} to={`/deck/${deck.id}`}>
-						<li>{deck.name}</li>
-					</Link>
-				))}
-			</ul>
-			<h2>Comments: </h2>
-			<ul>
-				{userInfo.comments.map((comment) => (
-					<Link key={comment.id} to={`/deck/${comment.deckId}`}>
-						<li>{comment.content}</li>
-					</Link>
-				))}
-			</ul>
-			<button onClick={() => navigate(-1)}>Go Back</button>
-		</section>
-	);
-}
+  return (
+    <section className="profile-container">
+      <div className="profile-card">
+        <h1>{userInfo.username}'s Page</h1>
+        <h2>E-mail: {userInfo.email}</h2>
+        <div onClick={updateFollowers}>
+          <UserFollow id={userInfo.id} username={userInfo.username} />
+        </div>
+        <h2>Followers:</h2>
+        <ul>
+          {userInfo.followers.map((follower) => (
+            <li key={follower.id}>{follower.username}</li>
+          ))}
+        </ul>
+        <h2>Following:</h2>
+        <ul>
+          {userInfo.following.map((followed) => (
+            <li key={followed.id}>{followed.username}</li>
+          ))}
+        </ul>
+        <h2>Decks: </h2>
+        <ul>
+          {userDecks.map((deck) => (
+            <Link key={deck.id} to={`/deck/${deck.id}`}>
+              <li>{deck.name}</li>
+            </Link>
+          ))}
+        </ul>
+        <h2>Comments: </h2>
+        <ul>
+          {userInfo.comments.map((comment) => (
+            <Link key={comment.id} to={`/deck/${comment.deckId}`}>
+              <li>{comment.content}</li>
+            </Link>
+          ))}
+        </ul>
+        <button onClick={() => navigate(-1)}>Go Back</button>
+      </div>
+    </section>
+  );
+};
