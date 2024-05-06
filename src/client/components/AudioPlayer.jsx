@@ -23,7 +23,7 @@ const AudioPlayer = () => {
   };
 
   return (
-    <div>
+    <span>
       <button className="audio-container" onClick={toggleAudio}>
         {isPlaying ? (
           <div>
@@ -37,7 +37,7 @@ const AudioPlayer = () => {
           </div>
         )}
       </button>
-    </div>
+    </span>
   );
 };
 
