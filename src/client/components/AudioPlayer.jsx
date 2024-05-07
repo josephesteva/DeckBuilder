@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { MdMusicNote } from "react-icons/md";
 import { MdMusicOff } from "react-icons/md";
 import PokemonThemeGuitar from "/music/PokémonThemeGuitar.mp3";
+import "../styles/AudioPlayer.css";
 
 const AudioPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);

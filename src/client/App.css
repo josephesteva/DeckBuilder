@@ -64,12 +64,6 @@ body, html {
   align-items: center;
 }
 
-.deck-heading {
-  font-size: 24px;
-  margin-bottom: 10px;
-  text-align: center;
-}
-
 .card-container {
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -141,8 +135,7 @@ body, html {
   display: flex;
 }
 
-
-.flex-wrap {
+.wrap-view {
   flex-wrap: wrap;
 }
 
@@ -235,24 +228,6 @@ form input {
   border-radius: 15px;
   color: #035096;
   border: 2px solid #035096;
-}
-
-.audio-player {
-  font-size: larger;
-  color: #002bff;
-  background-color: whitesmoke;
-  border-radius: 50px;
-}
-
-.audio-container>div {
-  width: 90px;
-  display: flex;
-	gap: 20px;
-  border-radius: 10px;
-}
-
-.audio-container:after {
-  background: none;
 }
 
 
