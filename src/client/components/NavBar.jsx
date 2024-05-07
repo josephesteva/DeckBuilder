@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import AudioPlayer from "./AudioPlayer";
+import "../styles/NavBar.css";
 
 const NavBar = () => {
   const navigate = useNavigate();
@@ -44,12 +45,13 @@ const NavBar = () => {
           <AudioPlayer />
           <nav className="navbar">
             <button onClick={handleHomeClick}>Home</button>
+            <button onClick={handleExploreClick}>Explore Decks</button>
             {localStorage.getItem("token") ? (
               <>
-                <button onClick={handleLogoutClick}>Logout</button>
                 <button onClick={handleDeckBuilderClick}>Deck Builder</button>
                 <button onClick={handleAccountClick}>Account Page</button>
                 {localStorage.getItem("isAdmin") === "true" && <button onClick={handleAdminClick}>Admin</button>}
+                <button onClick={handleLogoutClick}>Logout</button>
               </>
             ) : (
               <>
@@ -57,9 +59,9 @@ const NavBar = () => {
                 <button onClick={handleRegisterClick}>Register</button>
               </>
             )}
-            <button onClick={handleExploreClick}>Explore</button>
           </nav>
         </div>
+        <div className="spacer"></div>
       </>
     );
   }

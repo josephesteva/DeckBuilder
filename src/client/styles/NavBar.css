@@ -1,0 +1,30 @@
+/* NAV BAR */
+
+.nav-holder {
+	position: fixed;
+	top: 2px;
+	left: 0;
+	right: 0;
+	z-index: 10;
+}
+
+.navbar {
+  display: flex;
+	justify-content: center;
+	margin-top: -32px;
+}
+
+.navbar button::before {
+  background: linear-gradient(45deg, #035096,#035096);
+  animation: glowing-button-85 5s linear infinite;
+  transition: opacity .3s ease-in-out;
+  background-size: 400%;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  border: 1px solid #035096;
+  
+}
+
+.spacer {
+	margin-bottom: 40px;
+}

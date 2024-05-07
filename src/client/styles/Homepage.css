@@ -18,7 +18,6 @@
     font-style: normal;
   }
   
-  
   /* Forest Background Styles */
   .forest-background {
     background: url('/images/forest-backround.jpg') center/cover fixed;
@@ -207,15 +206,6 @@
   }
   
   @keyframes bounce-in-top{0%{transform:translateY(-500px);animation-timing-function:ease-in;opacity:0}38%{transform:translateY(0);animation-timing-function:ease-out;opacity:1}55%{transform:translateY(-65px);animation-timing-function:ease-in}72%{transform:translateY(0);animation-timing-function:ease-out}81%{transform:translateY(-28px);animation-timing-function:ease-in}90%{transform:translateY(0);animation-timing-function:ease-out}95%{transform:translateY(-8px);animation-timing-function:ease-in}100%{transform:translateY(0);animation-timing-function:ease-out}}
-  
-  
-  
-  
-  a {
-    color: #FFD500;
-    text-decoration: none;
-  }
-  
   
   /* Small screens (up to 768px) */
   @media screen and (max-width: 768px) {
