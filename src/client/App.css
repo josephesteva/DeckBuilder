@@ -3,58 +3,18 @@ html{
   font-family: "Roboto","Arial",sans-serif;
 }
 
-.cards-container-cards {
-    display: flex;
-    flex-wrap: wrap;
-    overflow-x: auto;
-    max-height: 80vh;
-    border: 2px solid #dfe1e5;
-    justify-content: center;
-}
-
-.card-cards {
-    margin: 10px;
-}
-
-.card-cards img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    width: 150px;
-}
-.add-button-cards{
-  background-color: green;
-  opacity: 0.8;
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  cursor: pointer;
-  border-radius: 5px;
-  position: absolute;
-  bottom: 10px; 
-  right: 10px;
-}
-.add-button-cards:hover {
-  background-color: darkgreen;
-}
-
-.filter-bar-cards {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
 /* Home Page Styling */
 body {
   background-color: #c3dbfa;
 }
+
 body, html {
   margin: 0;
   padding: 0;
   height: 100%;
 }
 
-/* USER DECK STYLING (DECK BUILDER)  */
+/* USER DECK STYLING (DECK BUILDER and EXPLORE)  */
 
 .user-deck-container {
   display: flex;
@@ -69,8 +29,12 @@ body, html {
   border-radius: 8px;
   padding: 10px;
   display: grid;
-  justify-content: space-between;
+  justify-content: center;
   margin-bottom: 10px;
+}
+
+.card-container > * {
+	margin: auto;
 }
 
 .card-image {
@@ -78,75 +42,12 @@ body, html {
   height: auto;
 }
 
-
+/* Deck Builder Nav */
 .user-deck-nav{
   display: flex;
   justify-content: center;
   gap:10px;
 }
-
-.deck-select-container{
-  border: 1px solid #ddd;
-  min-width: 20%;
-}
-
-.deck-select-container select{
-  min-width: 80%;
-}
-.deck-add-container{
-  border: 1px solid #ddd;
-  min-width: 20%;
-}
-
-.delete-button-userdeck{
-  background-color: red;
-  color: white;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-  width:20%;
-}
-
-.delete-button-userdeck:hover {
-  background-color: darkred;
-}
-
-.create-deck-form input{
-  border: none;
-  background: none;
-  padding: 0;
-  margin: 10px 0px;
-  outline: none;
-  border-bottom: 1px solid black; 
-  display: block;
-  width: 100%;
-}
-
-.create-deck-form input:focus{
-  border-bottom: 2px solid blue; 
-}
-
-.create-deck-form button{
-  width: 100%;
-  text-align: left;
-}
-
-.select-container{
-  display: flex;
-}
-
-.wrap-view {
-  flex-wrap: wrap;
-}
-
-.deck-viewer {
-  font-size: 30px;
-  width: 100px;
-  border-radius: 10px;
-  background: linear-gradient(to right,#ff0000,#035096, #c3dbfa, #035096);
-  /* box-shadow: 3px 3px 3px #fffb00; */
-}
-
 
 /* CSS */
 button {

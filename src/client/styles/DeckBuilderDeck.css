@@ -1,0 +1,10 @@
+.deck-viewer {
+  font-size: 30px;
+  width: 100px;
+  border-radius: 10px;
+  background: linear-gradient(to right,#ff0000,#035096, #c3dbfa, #035096);
+}
+
+.wrap-view {
+  flex-wrap: wrap;
+}

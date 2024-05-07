@@ -3,6 +3,7 @@ import axios from "axios";
 import { useState } from "react";
 import { MdSwapVerticalCircle } from "react-icons/md";
 import { MdSwapHorizontalCircle } from "react-icons/md";
+import "../styles/DeckBuilderDeck.css";
 
 function DeckBuilderDeck({ userDeck, setUserDeck, selectedDeck, token }) {
   const [flexWrap, setFlexWrap] = useState(false);

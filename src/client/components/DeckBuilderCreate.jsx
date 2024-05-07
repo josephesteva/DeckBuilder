@@ -1,15 +1,15 @@
-import React from 'react'
-import { useState } from 'react';
-import axios from 'axios';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import React from "react";
+import { useState } from "react";
+import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "../styles/DeckBuilderCreate.css";
 
 function DeckBuilderCreate({ token, userId, setDecks, setSelectedDeck, fetchDeckCards }) {
-
   //input field for new deck name
-  const [newDeckName, setNewDeckName] = useState('');
+  const [newDeckName, setNewDeckName] = useState("");
   //input field for new deck description
-  const [newDeckDescription, setNewDeckDescription] = useState('');
+  const [newDeckDescription, setNewDeckDescription] = useState("");
 
   //This function creates a new empty deck
   const createNewDeck = (event) => {
@@ -18,33 +18,38 @@ function DeckBuilderCreate({ token, userId, setDecks, setSelectedDeck, fetchDeck
       toast.error("You must be logged in to create a deck");
       return;
     }
-    axios.post('api/decks', {
-      name: newDeckName,
-      description: newDeckDescription,
-      userId: userId,
-      numCards: 0
-    }, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
-      .then(response => {
+    axios
+      .post(
+        "api/decks",
+        {
+          name: newDeckName,
+          description: newDeckDescription,
+          userId: userId,
+          numCards: 0,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((response) => {
         const newDeck = response.data;
-        setDecks(prevDecks => [...prevDecks, newDeck]);
+        setDecks((prevDecks) => [...prevDecks, newDeck]);
         setSelectedDeck(newDeck);
-        setNewDeckName('');
-        setNewDeckDescription('');
+        setNewDeckName("");
+        setNewDeckDescription("");
         fetchDeckCards(newDeck.id);
         toast.success("Created new deck with the name" + newDeck.name);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
       });
   };
   return (
-    <div className='deck-add-container'>
+    <div className="deck-add-container">
       <h4>Create New Deck</h4>
-      <form className='create-deck-form' onSubmit={createNewDeck}>
+      <form className="create-deck-form" onSubmit={createNewDeck}>
         <input
           type="text"
           value={newDeckName}
@@ -64,8 +69,7 @@ function DeckBuilderCreate({ token, userId, setDecks, setSelectedDeck, fetchDeck
         <button type="submit">Create New Deck</button>
       </form>
     </div>
-
-  )
+  );
 }
 
-export default DeckBuilderCreate
+export default DeckBuilderCreate;

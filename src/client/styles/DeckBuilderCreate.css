@@ -1,0 +1,24 @@
+.deck-add-container{
+  border: 1px solid #ddd;
+  min-width: 20%;
+}
+
+.create-deck-form input{
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 10px 0px;
+  outline: none;
+  border-bottom: 1px solid black; 
+  display: block;
+  width: 100%;
+}
+
+.create-deck-form input:focus{
+  border-bottom: 2px solid blue; 
+}
+
+.create-deck-form button{
+  width: 200px;
+  text-align: left;
+}
