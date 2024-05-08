@@ -1,0 +1,13 @@
+h1 {
+	margin-top: 2em;
+}
+
+.follow-link {
+	display: block;
+	border: solid black 1px;
+	border-radius: 8px;
+	padding: 8px;
+	width: 10em;
+	overflow-wrap: break-word;
+	margin: 2px 5px;
+}
