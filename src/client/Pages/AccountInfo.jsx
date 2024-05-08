@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import Comment from "../components/Comment";
 import "../styles/AccountInfo.css";
 
 export default function AccountInfo() {
@@ -87,47 +88,7 @@ export default function AccountInfo() {
     <section>
       <h1>User: {userInfo.username}</h1>
       <h2>E-mail: {userInfo.email}</h2>
-      <h2>Followers:</h2>
-      <ul>
-        {userInfo.followers.map((follower) => {
-          return (
-            // <Link to={`/account/${follower.id}`}>
-            //   <p className="follow-card" key={follower.id}>
-            //     {follower.username}
-            //   </p>
-            // </Link>
-            <Link to={`/account/${follower.id}`} className="follow-link">
-              {follower.username}
-            </Link>
-          );
-        })}
-      </ul>
-      <h2>Following:</h2>
-      <ul className="following">
-        {userInfo.following.map((followed) => {
-          return (
-            <Link to={`/account/${followed.id}`} className="follow-link">
-              {followed.username}
-            </Link>
-          );
-        })}
-      </ul>
-      <h2>Decks: </h2>
-      <ul>
-        {userDecks.map((deck) => (
-          <Link to={`/deck/${deck.id}`}>
-            <li key={deck.id}>{deck.name}</li>
-          </Link>
-        ))}
-      </ul>
-      <h2>Comments: </h2>
-      <ul>
-        {userInfo.comments.map((comment) => (
-          <Link to={`/deck/${comment.deckId}`}>
-            <li key={comment.id}>{comment.content}</li>
-          </Link>
-        ))}
-      </ul>
+
       <button onClick={() => setShowUpdate(true)}>Update Info</button>
       {showUpdate && (
         <form onSubmit={handleUpdate}>
@@ -153,7 +114,48 @@ export default function AccountInfo() {
           <button onClick={() => setDeleteConfirm(false)}>Cancel</button>
         </>
       )}
-      <button onClick={() => navigate(-1)}>Go Back</button>
+      {/* <button onClick={() => navigate(-1)}>Go Back</button> */}
+
+      <h2>Decks: </h2>
+      <ul>
+        {userDecks.map((deck) => (
+          <Link to={`/deck/${deck.id}`} className="follow-link" key={deck.id}>
+            {deck.name}
+          </Link>
+        ))}
+      </ul>
+      <h2>Followers:</h2>
+      <ul>
+        {userInfo.followers.map((follower) => {
+          return (
+            <Link to={`/account/${follower.id}`} className="follow-link" key={follower.id}>
+              {follower.username}
+            </Link>
+          );
+        })}
+      </ul>
+      <h2>Following:</h2>
+      <ul className="following">
+        {userInfo.following.map((followed) => {
+          return (
+            <Link to={`/account/${followed.id}`} className="follow-link" key={followed.id}>
+              {followed.username}
+            </Link>
+          );
+        })}
+      </ul>
+      <h2>Deck Comments:</h2>
+      <ul>
+        {userInfo.comments.map((comment) => (
+          <Link to={`/deck/${comment.deckId}`} className="comment-link" key={comment.id}>
+            <h3>{comment.deck.name}</h3>
+            <p>{comment.content}</p>
+          </Link>
+        ))}
+        {/* {userInfo.comments.map((comment) => (
+          <Comment comment={comment} />
+        ))} */}
+      </ul>
     </section>
   );
 }
