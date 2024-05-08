@@ -17,11 +17,16 @@
   color: white;
   border: none;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 10px;
   width:30%;
 	padding: 10px 18px;
+	letter-spacing: 1px;
 }
 
-.delete-button-userdeck:hover {
-  background-color: darkred;
+.delete-button-userdeck:after{
+	background-color: rgb(243, 102, 102);
+}
+
+.delete-button-userdeck:hover:after{
+	background-color: red;
 }
