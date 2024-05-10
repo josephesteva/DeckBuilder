@@ -1,23 +1,44 @@
-h1 {
-	margin-top: 2em;
-}
-
-section {
+.account-container {
+	margin-top: 3em;
 	margin-left: 1.5em;
+	/* background-color: #498C8A; */
 }
 
-ul {
-	padding-left: 1.5em;
+.account-container h1, .account-container h2 {
+	/* color: #1E3888; */
+	/* color: #628B48; */
+}
+
+.account-container ul {
+	margin-left: -0.5em;
+}
+
+.follow-container {
+	display: flex;
+	gap: 10em;
+	/* background-color: #628B48; */
+	/* background-color: #102E4A; */
+}
+
+.follow-container>div {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .follow-link {
 	display: block;
-	border: solid black 1px;
+	border: 2px solid #a5ccec;
 	border-radius: 8px;
+	box-shadow: 2px 2px 3px;
 	padding: 8px;
 	width: 10em;
 	overflow-wrap: break-word;
-	margin: 2px 5px;
+	margin: 4px 5px;
+	background-color: rgb(232, 246, 247);
+	font-weight: 400;
+	color: #035096;
+	/* border:2px outset #5f9aca; */
 }
 
 .comment-link {

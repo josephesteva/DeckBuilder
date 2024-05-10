@@ -85,7 +85,7 @@ export default function AccountInfo() {
   }
 
   return (
-    <section>
+    <section className="account-container">
       <h1>User: {userInfo.username}</h1>
       <h2>E-mail: {userInfo.email}</h2>
 
@@ -124,26 +124,32 @@ export default function AccountInfo() {
           </Link>
         ))}
       </ul>
-      <h2>Followers:</h2>
-      <ul>
-        {userInfo.followers.map((follower) => {
-          return (
-            <Link to={`/account/${follower.id}`} className="follow-link" key={follower.id}>
-              {follower.username}
-            </Link>
-          );
-        })}
-      </ul>
-      <h2>Following:</h2>
-      <ul className="following">
-        {userInfo.following.map((followed) => {
-          return (
-            <Link to={`/account/${followed.id}`} className="follow-link" key={followed.id}>
-              {followed.username}
-            </Link>
-          );
-        })}
-      </ul>
+      <div className="follow-container">
+        <div>
+          <h2>Followers:</h2>
+          <ul>
+            {userInfo.followers.map((follower) => {
+              return (
+                <Link to={`/account/${follower.id}`} className="follow-link" key={follower.id}>
+                  {follower.username}
+                </Link>
+              );
+            })}
+          </ul>
+        </div>
+        <div>
+          <h2>Following:</h2>
+          <ul className="following">
+            {userInfo.following.map((followed) => {
+              return (
+                <Link to={`/account/${followed.id}`} className="follow-link" key={followed.id}>
+                  {followed.username}
+                </Link>
+              );
+            })}
+          </ul>
+        </div>
+      </div>
       <h2>Deck Comments:</h2>
       <ul>
         {userInfo.comments.map((comment) => (
