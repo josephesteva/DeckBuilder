@@ -49,7 +49,11 @@ router.get('/:id', async (req, res, next) => {
 			include: {
 				followers: true,
 				following: true,
-				comments: true,
+				comments: {
+					include: {
+						deck: true
+					}
+				},
 			},
 		})
 		res.status(200).send(user);

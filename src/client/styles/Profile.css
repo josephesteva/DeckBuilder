@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  /* height: 100vh; */
 }
 
 .profile-card {
@@ -12,9 +12,9 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(10px);
   width: 80%;
-  max-width: 600px;
-  height: 117%;
-  margin-top: 200px;
+  max-width: 1000px;
+  /* height: 117%; */
+  /* margin-top: 200px; */
 }
 
 .profile-card h1, .profile-card h2, .profile-card ul, .profile-card li {

@@ -11,6 +11,7 @@
 
 .account-container ul {
 	margin-left: -0.5em;
+  padding: 0;
 }
 
 .follow-container {
@@ -23,7 +24,7 @@
 .follow-container>div {
 	display: flex;
 	flex-direction: column;
-	align-items: center;
+	/* align-items: center; */
 }
 
 .follow-link {

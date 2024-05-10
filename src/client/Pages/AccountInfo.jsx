@@ -139,7 +139,7 @@ export default function AccountInfo() {
         </div>
         <div>
           <h2>Following:</h2>
-          <ul className="following">
+          <ul>
             {userInfo.following.map((followed) => {
               return (
                 <Link to={`/account/${followed.id}`} className="follow-link" key={followed.id}>
