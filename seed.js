@@ -51,13 +51,40 @@ async function main() {
 	console.log("admin seeded sucessfully! " + admin.username);
 
 	//decks
+
+	const deckNames = [
+		"Storm Surge",
+		"Mystic Mirage",
+		"Blaze Brigade",
+		"Verdant Vanguard",
+		"Shadow Shroud",
+		"Aqua Apex",
+		"Galactic Guardians",
+		"Celestial Circuit",
+		"Frostbite Fury",
+		"Ironclad Legion"
+	];
+
+	const deckDescriptions = [
+		"Unleashes a torrent of powerful electric and water-type attacks, overwhelming opponents with its relentless energy.",
+		"Shrouded in mystery, this deck employs illusions and mind-bending tactics to confuse and outmaneuver opponents.",
+		"Fueled by flames, this deck scorches the battlefield with its fiery Pokemon and relentless aggression.",
+		"Harnesses the power of nature, deploying an army of grass and bug-type Pokemon to dominate the battlefield.",
+		"Cloaked in darkness, this deck strikes from the shadows with ghost-type Pokemon and cunning strategies.",
+		"Rules the waves with its water-type Pokemon, creating a tidal wave of unstoppable force.",
+		"Protects the galaxy with an array of cosmic Pokemon, defending against any threat with celestial power.",
+		"Channels the energy of the stars, using psychic and fairy-type Pokemon to control the battlefield with ethereal grace.",
+		"Freezes opponents in their tracks with its ice-type Pokemon, delivering a chilling onslaught of icy attacks.",
+		"Forms an unbreakable line of defense with its steel-type Pokemon, standing firm against any opposition with unwavering resolve."
+	];
+
 	let decks = [];
 	for (let i = 0; i < NUM_USERS; i++) {
 		const deck = await prisma.deck.create({
 			data: {
-				name: "Deck " + (i + 1),
+				name: deckNames[i],
 				userId: users[i].id,
-				description: "user " + (i + 1) + " deck",
+				description: deckDescriptions[i],
 				numCards: 60,
 			},
 		})
