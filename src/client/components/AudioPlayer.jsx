@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { MdMusicNote } from "react-icons/md";
 import { MdMusicOff } from "react-icons/md";
 import PokemonThemeGuitar from "/music/PokémonThemeGuitar.mp3";
@@ -6,25 +6,20 @@ import "../styles/AudioPlayer.css";
 
 const AudioPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [audio, setAudio] = useState(new Audio(PokemonThemeGuitar));
-
-  // useEffect(() => {
-  //   setAudio((audio.loop = true));
-  // }, []);
-
-  console.log(audio);
+  const audioRef = useRef(null);
 
   const toggleAudio = () => {
     if (isPlaying) {
-      audio.pause();
+      audioRef.current.pause();
     } else {
-      audio.play();
+      audioRef.current.play();
     }
     setIsPlaying(!isPlaying);
   };
 
   return (
     <span>
+      <audio ref={audioRef} src="/music/PokémonThemeGuitar.mp3" loop />
       <button className="audio-container" onClick={toggleAudio}>
         {isPlaying ? (
           <div>
