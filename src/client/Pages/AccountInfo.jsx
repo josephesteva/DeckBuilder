@@ -118,46 +118,62 @@ export default function AccountInfo() {
 
       <h2>Decks: </h2>
       <ul>
-        {userDecks.map((deck) => (
-          <Link to={`/deck/${deck.id}`} className="follow-link" key={deck.id}>
-            {deck.name}
-          </Link>
-        ))}
+        {userDecks.length ? (
+          userDecks.map((deck) => (
+            <Link to={`/deck/${deck.id}`} className="follow-link" key={deck.id}>
+              {deck.name}
+            </Link>
+          ))
+        ) : (
+          <p className="follow-link">This user does not have any decks</p>
+        )}
       </ul>
       <div className="follow-container">
         <div>
           <h2>Followers:</h2>
           <ul>
-            {userInfo.followers.map((follower) => {
-              return (
-                <Link to={`/account/${follower.id}`} className="follow-link" key={follower.id}>
-                  {follower.username}
-                </Link>
-              );
-            })}
+            {userInfo.followers.length ? (
+              userInfo.followers.map((follower) => {
+                return (
+                  <Link to={`/account/${follower.id}`} className="follow-link" key={follower.id}>
+                    {follower.username}
+                  </Link>
+                );
+              })
+            ) : (
+              <p>User does not have any followers</p>
+            )}
           </ul>
         </div>
         <div>
           <h2>Following:</h2>
           <ul>
-            {userInfo.following.map((followed) => {
-              return (
-                <Link to={`/account/${followed.id}`} className="follow-link" key={followed.id}>
-                  {followed.username}
-                </Link>
-              );
-            })}
+            {userInfo.following.length ? (
+              userInfo.following.map((followed) => {
+                return (
+                  <Link to={`/account/${followed.id}`} className="follow-link" key={followed.id}>
+                    {followed.username}
+                  </Link>
+                );
+              })
+            ) : (
+              <p>User is not following any other users</p>
+            )}
           </ul>
         </div>
       </div>
       <h2>Deck Comments:</h2>
       <ul>
-        {userInfo.comments.map((comment) => (
-          <Link to={`/deck/${comment.deckId}`} className="comment-link" key={comment.id}>
-            <h3>{comment.deck.name}</h3>
-            <p>{comment.content}</p>
-          </Link>
-        ))}
+        {userInfo.comments.length ? (
+          userInfo.comments.map((comment) => (
+            <Link to={`/deck/${comment.deckId}`} className="comment-link" key={comment.id}>
+              <h3>{comment.deck.name}</h3>
+              <p>{comment.content}</p>
+            </Link>
+          ))
+        ) : (
+          <p>User has not commented on any decks</p>
+        )}
         {/* {userInfo.comments.map((comment) => (
           <Comment comment={comment} />
         ))} */}
