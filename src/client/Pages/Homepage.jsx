@@ -29,8 +29,12 @@ const HomePage = () => {
     // Function to scroll the Pokemon deck
     const scrollPokemonDeck = () => {
       const pokemonDeck = document.querySelector(".pokemon-deck");
+      let scrollDown;
       if (pokemonDeck) {
-        pokemonDeck.scrollTop += 1;
+        pokemonDeck.scrollTop += 2;
+        if (pokemonDeck.scrollHeight - pokemonDeck.scrollTop - pokemonDeck.clientHeight < 1) {
+          pokemonDeck.scrollTo({ top: 0 });
+        }
       }
     };
 
