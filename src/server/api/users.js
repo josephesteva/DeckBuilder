@@ -19,7 +19,12 @@ router.get('/current', verify, async (req, res, next) => {
 					include: {
 						deck: true
 					}
-				}
+				},
+				Like: {
+					include: {
+						deck: true
+					}
+				},
 			},
 		})
 		res.status(200).send(currentUser)

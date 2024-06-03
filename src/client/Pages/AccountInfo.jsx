@@ -128,6 +128,20 @@ export default function AccountInfo() {
           <p className="follow-link">This user does not have any decks</p>
         )}
       </ul>
+      <div className="">
+        <h2>Liked Decks:</h2>
+        <ul>
+          {userInfo.Like ? (
+            userInfo.Like.map((like) => (
+              <Link to={`/deck/${like.deck.id}`} className="follow-link" key={like.deck.id}>
+                {like.deck.name}
+              </Link>
+            ))
+          ) : (
+            <li>User has not liked any decks</li>
+          )}
+        </ul>
+      </div>
       <div className="follow-container">
         <div>
           <h2>Followers:</h2>
