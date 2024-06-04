@@ -14,11 +14,12 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import SingleDeck from "./Pages/SingleDeck";
 import AdminPage from "./Pages/AdminPage";
-import AudioPlayer from "./components/AudioPlayer";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <NavBar />
       <Routes>
         <Route path="/" element={<HomePage />} />

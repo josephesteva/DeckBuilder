@@ -198,23 +198,24 @@
   
   .user-deck-container2 {
     position: absolute;
-    top: .5%;
-    left: -199%;
-    transform: translateX(-50%);
-    width: 870px;
-    height: 290px;
+    top: 0; /*changed*/
+    left: 100%;
+    /* transform: translateX(-50%); */
+    width:70vw;
+    height: auto;/*changed*/
     padding: 10px;
-    text-align: center;
+    /* text-align: center; */
     z-index: -1;
     border-radius: 8px;
-    animation: slide-right 0.5s both;
+    /* animation: slide-right ; */
+		transition: all 1s ease-in;
     cursor: pointer;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display: flex;
     overflow-y: auto;
     max-height: 80vh;
     border: 2px solid #dfe1e5;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
   }
   
@@ -222,7 +223,7 @@
   .card-container2 {
     display: inline-block;
     margin: 5px;
-    animation: slide-right 0.5s both;
+    /* animation: slide-right 0.5s both; */
     width: 300px;
     z-index: 0;
     border: 1px solid #ddd;
