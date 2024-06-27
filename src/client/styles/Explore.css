@@ -226,7 +226,7 @@
     /* animation: slide-right 0.5s both; */
     width: 300px;
     z-index: 0;
-    border: 1px solid #ddd;
+    /* border: 1px solid #ddd; */
     border-radius: 8px;
     padding: 10px;
     display: grid;
