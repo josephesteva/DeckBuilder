@@ -13,6 +13,16 @@ const Cards = ({ selectedDeck, fetchDeckCards, token, userDeck }) => {
   const [superType, setSuperType] = useState("");
   const superTypes = ["Pokémon", "Energy", "Trainer"];
 
+  const [zoomedImage, setZoomedImage] = useState(null);
+
+  const openZoomedImage = (imageUrl) => {
+    setZoomedImage(imageUrl);
+  };
+
+  const closeZoomedImage = () => {
+    setZoomedImage(null);
+  };
+
   //we can also fetch these from api, but is it worth?
   const types = [
     "Colorless",
@@ -156,7 +166,12 @@ const Cards = ({ selectedDeck, fetchDeckCards, token, userDeck }) => {
       </div>
       <div className="cards-container-cards">
         {filteredCards.map((card) => (
-          <div key={card.id} className="card-cards" style={{ position: "relative" }}>
+          <div
+            key={card.id}
+            className="card-cards"
+            style={{ position: "relative" }}
+            onClick={() => setZoomedImage(card.cardImage)}
+          >
             <img src={card.cardImage} alt={card.name} loading="lazy" />
             <button
               className="add-button-cards"
@@ -166,6 +181,11 @@ const Cards = ({ selectedDeck, fetchDeckCards, token, userDeck }) => {
             </button>
           </div>
         ))}
+        {zoomedImage && (
+          <div className="zoomed-image-container" onClick={closeZoomedImage}>
+            <img src={zoomedImage} alt="zoomed-card" className="zoomed-image" />
+          </div>
+        )}
       </div>
     </div>
   );
