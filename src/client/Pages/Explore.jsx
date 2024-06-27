@@ -56,8 +56,8 @@ const Explore = () => {
 
   const handleDeckHide = () => {
     console.log("unhovered");
-    fetchDeckCards(null);
-    setSelectedDeck([]);
+    setDeckOfCards([]);
+    setSelectedDeck(null);
   };
 
   const filteredDecks = decks.filter((deck) => deck.name.toLowerCase().includes(search.toLowerCase()));
