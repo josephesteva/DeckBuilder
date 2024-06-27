@@ -12,7 +12,7 @@ const MAX_CARDS = 60; //Max cards in a deck
 const SALT_ROUNDS = 5;
 
 const randomNum = (max) => {
-	return Math.floor(Math.random() * max)
+	return Math.floor(Math.random() * (max + 1))
 }
 
 async function main() {
@@ -71,7 +71,7 @@ async function main() {
 		for (let j = 0; j < decks.length; j++) {
 			await prisma.comment.create({
 				data: {
-					content: seedData.deckComments[randomNum(seedData.deckComments.length)],
+					content: seedData.deckComments[randomNum(seedData.deckComments.length - 1)],
 					userId: users[i].id,
 					deckId: decks[j].id,
 				},
@@ -155,7 +155,7 @@ async function main() {
 	for (let i = 0; i < users.length; i++) {
 		for (let j = 0; j < users.length; j++) {
 			// check that user doesnt follow themself and give them a 50% follow chance
-			if (i !== j && randomNum(2) === 0) {
+			if (i !== j && randomNum(1) === 0) {
 				await prisma.user.update({
 					where: { id: users[i].id },
 					data: { following: { connect: { id: users[j].id } } },
@@ -164,6 +164,21 @@ async function main() {
 		}
 	}
 	console.log("following seeded sucessfully!");
+
+	// Each deck gets a random number of likes between 0 and the number of seeded users
+	for (i = 1; i < decks.length; i++) {
+		const likesNum = randomNum(users.length)
+		for (j = 1; j <= likesNum; j++) {
+			await prisma.like.create({
+				data: {
+					userId: j,
+					deckId: i
+				}
+			})
+		}
+	}
+	console.log("likes seeded sucessfully!");
+
 	console.log("Seeding was a success!")
 }
 
