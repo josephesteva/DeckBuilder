@@ -53,6 +53,9 @@
 	.child:nth-of-type(1) {
 		order: 2;
 		flex-basis: 45%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 	}
 	
 	.child:nth-of-type(2) {
@@ -107,18 +110,22 @@
   }
 
   /* TRY NOW BUTTON */
-  .try-now-button {
+  #try-now-button {
+		/* text-align: center; */
     background-color: #f8f8f8;
-		width: 100%;
-    padding: 5px 10px 15px;
+		width: 300px;
+		height: 80px;
+		margin-bottom: 10px;
+    padding: 10px 10px 15px;
     border: 2px solid #035096;
-		line-height: 150%;
+		line-height: 10%;
     font-family: 'Pokemon Solid', sans-serif;
-    font-size: 1.2em;
+    font-size: 2em;
     cursor: pointer;
+		display: block;
   }
   
-  .try-now-button:hover {
+  #try-now-button:hover {
     background-color: #E3350D;
     color: #fff;
   }

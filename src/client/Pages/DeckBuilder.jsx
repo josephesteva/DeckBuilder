@@ -121,7 +121,7 @@ const DeckBuilder = () => {
           <p>WARNING: Register an account if you want to save your decks</p>
         </>
       )}
-      <h2 className="deckbuilder-heading">Deck Builder</h2>
+      <h1 className="deckbuilder-heading">Deck Builder</h1>
 
       <DeckBuilderNav
         selectedDeck={selectedDeck}

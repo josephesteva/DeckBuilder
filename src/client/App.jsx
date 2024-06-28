@@ -1,7 +1,7 @@
 import "./App.css";
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import HomePage from "./Pages/Homepage";
+import SplashPage from "./Pages/SplashPage";
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import NavBar from "./components/NavBar";
@@ -22,7 +22,7 @@ function App() {
       <ScrollToTop />
       <NavBar />
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<SplashPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/account" element={<AccountInfo />} />

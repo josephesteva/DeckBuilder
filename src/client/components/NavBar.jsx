@@ -5,7 +5,7 @@ import "../styles/NavBar.css";
 
 const NavBar = () => {
   const navigate = useNavigate();
-  const handleHomeClick = () => {
+  const handleSplashClick = () => {
     navigate("/");
   };
   const handleLoginClick = () => {
@@ -44,7 +44,7 @@ const NavBar = () => {
         <div className="nav-holder">
           <AudioPlayer />
           <nav className="navbar">
-            <button onClick={handleHomeClick}>Home</button>
+            <button onClick={handleSplashClick}>Splash</button>
             <button onClick={handleExploreClick}>Explore Decks</button>
             {localStorage.getItem("token") ? (
               <>

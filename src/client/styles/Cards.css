@@ -18,6 +18,7 @@
 	max-height: 80vh;
 	border: 2px solid #dfe1e5;
 	justify-content: center;
+	overflow-y: auto;
 }
 
 .card-cards {

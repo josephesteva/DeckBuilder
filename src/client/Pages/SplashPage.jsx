@@ -1,9 +1,9 @@
-import "../styles/Homepage.css";
+import "../styles/SplashPage.css";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const HomePage = () => {
+const SplashPage = () => {
   const [showPortal, setShowPortal] = useState(false);
   const navigate = useNavigate();
 
@@ -79,6 +79,9 @@ const HomePage = () => {
         <div className="hero-section">
           <div className="child">
             <h1>Welcome to Your Pokémon TCG Deck Builder</h1>
+            <button id="try-now-button" onClick={() => handleTryNow()}>
+              Try Now
+            </button>
             <img src="/images/pokeball.jpg" alt="pokeball" className="pokeball"></img>
             <p className="hero-text">
               {" "}
@@ -120,4 +123,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default SplashPage;
