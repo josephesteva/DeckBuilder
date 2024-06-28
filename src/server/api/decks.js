@@ -5,22 +5,22 @@ const router = require('express').Router();
 const verify = require('../util.js');
 
 
-// GET gets all decks
+// GET 
+// gets all decks
 router.get('/', async (req, res, next) => {
 	try {
 		const decks = await prisma.deck.findMany({
 			include: {
-				user: true, 
+				user: true,
 				comments: true,
 				Like: true
-			  },
-			  orderBy: {
-					Like: {
-						_count: "desc"
-					}
+			},
+			orderBy: {
+				Like: {
+					_count: "desc"
 				}
-			});
-		
+			}
+		});
 		res.status(200).send(decks)
 	} catch (err) {
 		console.error(err);
@@ -43,7 +43,7 @@ router.get('/mydecks', verify, async (req, res, next) => {
 
 // gets a deck by deck id
 router.get('/:id', async (req, res, next) => {
-	const {id} = req.params;
+	const { id } = req.params;
 	try {
 		const deck = await prisma.deck.findUnique({
 			where: {
@@ -78,7 +78,7 @@ router.get('/user/:userid', async (req, res, next) => {
 // POST 
 // creates a new deck for the user assigned in the body
 router.post('/', async (req, res, next) => {
-	const {name, userId, description, numCards} = req.body;
+	const { name, userId, description, numCards } = req.body;
 	try {
 		const deck = await prisma.deck.create({
 			data: {
@@ -96,7 +96,7 @@ router.post('/', async (req, res, next) => {
 
 // creates a deck for the currently signed in user
 router.post('/mydeck', verify, async (req, res, next) => {
-	const {name, description} = req.body;
+	const { name, description } = req.body;
 	try {
 		const deck = await prisma.deck.create({
 			data: {
@@ -116,7 +116,7 @@ router.post('/mydeck', verify, async (req, res, next) => {
 // updates the information for a deck based on the body
 router.patch('/:id', verify, async (req, res, next) => {
 	const id = +req.params.id;
-	const {name, description} = req.body;
+	const { name, description } = req.body;
 	try {
 		const deck = await prisma.deck.update({
 			where: {
@@ -136,8 +136,8 @@ router.patch('/:id', verify, async (req, res, next) => {
 // DELETE
 // deletes a deck by deck id
 router.delete('/:id', async (req, res, next) => {
-	const {id} = req.params;
-	try{
+	const { id } = req.params;
+	try {
 		const deletedDeck = await prisma.deck.delete({
 			where: {
 				id: +id

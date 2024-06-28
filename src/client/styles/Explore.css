@@ -192,11 +192,15 @@
     background: rgba(255, 0, 0, 0.8);
     width: 100%;
     box-sizing: border-box;
-    text-align: center;
     z-index: 1;
     border-radius: 8px;
+		padding-bottom: 10px;
+    text-align: center;
   }
-  
+
+	.deck-info>div {
+		font-size: 20px;
+	}
   .user-deck-container2 {
     position: absolute;
     top: 0; /*changed*/
@@ -252,6 +256,14 @@
     align-items: flex-end;
     justify-content: space-evenly;
   }
+
+	.icon-container>p {
+		color: black;
+		font-size: 24px;
+		margin-left: -15px;
+		margin-right: 20px;
+		padding: 5px;
+	}
   
   a {
     color: black;

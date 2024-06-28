@@ -25,7 +25,6 @@ const ExploreContent = () => {
             <h2 style="font-family: 'pokemon solid'">Hey Trainers!!</h2>
             <p>Be sure to explore trainer decks</p>
             <p>Leave a like & Follow your Favorites</p>
-            <p>Stay tuned for exciting updates, events, and battles!</p>
             `;
     }
     if (window.scrollY > secondScrollThreshold) {
@@ -55,7 +54,7 @@ const ExploreContent = () => {
           <h2 style={{ fontFamily: "pokemon solid" }}>Hey Trainers!!</h2>
           <p>Be sure to explore trainer decks</p>
           <p>Leave a like & Follow your Favorites</p>
-          <p>Stay tuned for exciting updates events, and battles!</p>
+          {/* <p>Stay tuned for exciting updates events, and battles!</p> */}
         </div>
         <img
           src="/images/Pikachu-Transparent-Background.png"
