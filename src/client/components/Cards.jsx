@@ -136,7 +136,7 @@ const Cards = ({ selectedDeck, fetchDeckCards, token, userDeck }) => {
         </div>
       </div>
       <div className="filter-bar-cards">
-        <select onChange={(e) => handleSuperTypeChange(e.target.value)}>
+        <select className="dropdown" onChange={(e) => handleSuperTypeChange(e.target.value)}>
           <option value="">All Super Types</option>
           {superTypes.map((superType, index) => (
             <option key={index} value={superType}>
@@ -146,7 +146,7 @@ const Cards = ({ selectedDeck, fetchDeckCards, token, userDeck }) => {
         </select>
 
         {superType !== "Trainer" && superType !== "Energy" && (
-          <select onChange={(e) => setType(e.target.value)}>
+          <select className="dropdown" onChange={(e) => setType(e.target.value)}>
             <option value="">All Types</option>
             {types.map((type, index) => (
               <option key={index} value={type}>
@@ -155,7 +155,7 @@ const Cards = ({ selectedDeck, fetchDeckCards, token, userDeck }) => {
             ))}
           </select>
         )}
-        <select onChange={(e) => setSetName(e.target.value)}>
+        <select className="dropdown" onChange={(e) => setSetName(e.target.value)}>
           <option value="">All Sets</option>
           {setNames.map((setName, index) => (
             <option key={index} value={setName}>

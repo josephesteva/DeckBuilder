@@ -1,3 +1,16 @@
+.dropdown {
+	font-size: 18px;
+	padding: 10px;
+	border-radius: 8px;
+	color: white;
+	background: gray;
+	margin: 5px 10px;
+}
+
+/* .dropdown:focus {
+	border-radius: 8px 8px 0 0;
+} */
+
 .cards-container-cards {
 	display: flex;
 	flex-wrap: wrap;
