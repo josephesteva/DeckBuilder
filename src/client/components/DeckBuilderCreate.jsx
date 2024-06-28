@@ -47,8 +47,8 @@ function DeckBuilderCreate({ token, userId, setDecks, setSelectedDeck, fetchDeck
       });
   };
   return (
-    <div className="deck-add-container">
-      <h4>Create New Deck</h4>
+    <div className="create-deck-container">
+      <h4 className="create-deck-header">Create New Deck</h4>
       <form className="create-deck-form" onSubmit={createNewDeck}>
         <input
           type="text"
@@ -58,7 +58,8 @@ function DeckBuilderCreate({ token, userId, setDecks, setSelectedDeck, fetchDeck
           required
         />
 
-        <input
+        <textarea
+          id="create-deck-description"
           type="text"
           value={newDeckDescription}
           onChange={(e) => setNewDeckDescription(e.target.value)}

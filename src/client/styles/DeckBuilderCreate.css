@@ -1,20 +1,42 @@
-.deck-add-container{
+/* .create-deck-container{
   border: 1px solid #ddd;
   min-width: 20%;
+} */
+
+.create-deck-container {
+text-align: center;
+}
+.create-deck-header {
+	font-size: 24px;
+	color: #035096
 }
 
-.create-deck-form input{
-  border: none;
+.create-deck-form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.create-deck-form input, .create-deck-form textarea{
   background: none;
-  padding: 0;
+	font-weight: 600;
+	width: 260px;
+  border: none;
+  padding: 10px;
   margin: 10px 0px;
   outline: none;
-  border-bottom: 1px solid black; 
+	border: 1px solid black;
+  border-bottom: 2px solid black; 
   display: block;
-  width: 100%;
 }
 
-.create-deck-form input:focus{
+#create-deck-description {
+	width: 400px;
+	height: 100px;
+}
+
+.create-deck-form input:focus, .create-deck-form textarea{
+	border: 1px solid blue;
   border-bottom: 2px solid blue; 
 }
 
