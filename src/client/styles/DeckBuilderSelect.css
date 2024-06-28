@@ -1,7 +1,23 @@
 .deck-select-container{
 	padding: 0 20px;
-  border: 1px solid #ddd;
+  /* border: 1px solid #ddd; */
   min-width: 20%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.select-deck-header {
+	font-size: 24px;
+	color: #035096
+}
+
+.select-deck-info {
+	display: flex;
+	gap: 20px;
+	color:#035096;
+	font-size: 18px;
+	font-weight: 600;
 }
 
 .deck-select-container select{

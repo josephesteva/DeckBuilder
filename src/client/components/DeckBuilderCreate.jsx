@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../styles/DeckBuilderCreate.css";
 
-function DeckBuilderCreate({ token, userId, setDecks, setSelectedDeck, fetchDeckCards }) {
+function DeckBuilderCreate({ token, userId, setDecks, setSelectedDeck, fetchDeckCards, setIsCreatingDeck }) {
   //input field for new deck name
   const [newDeckName, setNewDeckName] = useState("");
   //input field for new deck description
@@ -45,6 +45,7 @@ function DeckBuilderCreate({ token, userId, setDecks, setSelectedDeck, fetchDeck
       .catch((error) => {
         console.error(error);
       });
+    setIsCreatingDeck(false);
   };
   return (
     <div className="create-deck-container">
@@ -66,8 +67,12 @@ function DeckBuilderCreate({ token, userId, setDecks, setSelectedDeck, fetchDeck
           placeholder="Deck Description"
           required
         />
-
-        <button type="submit">Create New Deck</button>
+        <div>
+          <button type="submit">Create New Deck</button>
+          <button id="discard" onClick={() => setIsCreatingDeck(false)}>
+            Discard
+          </button>
+        </div>
       </form>
     </div>
   );

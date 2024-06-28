@@ -57,23 +57,25 @@ function DeckBuilderSelect({
     <div>
       {decks.length > 0 && (
         <div className="deck-select-container">
-          <h4>Selected Deck</h4>
-          <p>
-            {" "}
-            {selectedDeck ? `${selectedDeck.name} by ${userName}` : "No deck selected"} ({userDeck.length} / 60)
-          </p>
-          <br></br>
-          <div className="select-container">
-            <select value={selectedDeck ? selectedDeck.id : ""} onChange={handleDeckChange}>
-              {decks.map((deck) => (
-                <option key={deck.id} value={deck.id}>
-                  {deck.name}
-                </option>
-              ))}
-            </select>
-            <button onClick={deleteDeck} className="delete-button-userdeck">
-              X
-            </button>
+          <h4 className="select-deck-header">Selected Deck</h4>
+          <div className="select-deck-info">
+            <p>
+              {" "}
+              {selectedDeck ? `${selectedDeck.name} by ${userName}` : "No deck selected"} ({userDeck.length} / 60)
+            </p>
+            <br></br>
+            <div className="select-container">
+              <select className="dropdown" value={selectedDeck ? selectedDeck.id : ""} onChange={handleDeckChange}>
+                {decks.map((deck) => (
+                  <option key={deck.id} value={deck.id}>
+                    {deck.name}
+                  </option>
+                ))}
+              </select>
+              <button onClick={deleteDeck} className="delete-button-userdeck">
+                X
+              </button>
+            </div>
           </div>
         </div>
       )}

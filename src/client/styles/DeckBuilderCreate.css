@@ -44,3 +44,7 @@ text-align: center;
   width: 200px;
   text-align: left;
 }
+
+#discard {
+	width: 120px;
+}
